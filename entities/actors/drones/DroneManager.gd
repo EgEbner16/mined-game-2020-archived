@@ -1,17 +1,11 @@
 extends Node
 
+var drone_power_usage: float = 0.0
+var drone_coolant_usage: float = 0.0
+	
+
 class_name DroneManager
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

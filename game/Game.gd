@@ -13,7 +13,9 @@ func _process(delta):
 	hud.capital_value = resource_manager.capital
 	hud.material_value = resource_manager.material
 	hud.power_value = resource_manager.power
+	hud.power_usage_value = resource_manager.power_usage
 	hud.coolant_value = resource_manager.coolant
+	hud.coolant_usage_value = resource_manager.coolant_usage
 	var working_drones: int = 0
 	for drone in get_tree().get_nodes_in_group('drones'):
 		if drone.working:

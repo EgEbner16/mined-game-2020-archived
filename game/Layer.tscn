@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/old mined/Tilemaps/mined_alpha_graphics.png" type="Texture" id=1]
 [ext_resource path="res://game/Layer.gd" type="Script" id=2]
-[ext_resource path="res://assets/old mined/Icons/dig_icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tilesets/fog_tile_32x32.png" type="Texture" id=3]
 [ext_resource path="res://assets/old mined/Tilemaps/mined_alpha_graphics_edges_update.png" type="Texture" id=4]
 [ext_resource path="res://game/tiles/TileManager.tscn" type="PackedScene" id=5]
 
@@ -278,7 +278,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/z_index = 0
 
 [sub_resource type="TileSet" id=7]
-0/name = "dig_icon.png 0"
+0/name = "fog_tile_32x32.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -292,48 +292,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
-1/name = "dig_icon.png 1"
-1/texture = ExtResource( 3 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 32, 0, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-2/name = "dig_icon.png 2"
-2/texture = ExtResource( 3 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 64, 0, 32, 32 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "dig_icon.png 3"
-3/texture = ExtResource( 3 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 96, 0, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
 
 [node name="Layer" type="Node2D"]
 script = ExtResource( 2 )
@@ -353,6 +311,12 @@ cell_quadrant_size = 32
 format = 1
 
 [node name="DigTileMap" type="TileMap" parent="."]
+tile_set = SubResource( 7 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+format = 1
+
+[node name="FogTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 7 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32

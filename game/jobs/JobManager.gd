@@ -8,7 +8,7 @@ var job_location_list: Dictionary
 
 var job_search_delay: float = 0.05
 var job_search_timer: float = 0.0
-var job_success_limit: int = 5
+var job_success_limit: int = 10
 
 func _ready():
 	pass # Replace with function body.
@@ -93,6 +93,5 @@ func _process(delta):
 							job_found = true
 							job_success += 1
 							break
-			if not job_found or job_success >= 5:
-				print('not found' + str(job_success_limit))
+			if not job_found or job_success >= job_success_limit:
 				break

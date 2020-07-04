@@ -134,6 +134,7 @@ config/tile_size=32
 config/base_size=Vector2( 15, 15 )
 config/world_size=Vector2( 240, 240 )
 config/world_layers=1
+config/starting_capital=20000
 
 [input]
 
