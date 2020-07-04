@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/320789__reznik-krkovicka__horn-01.wav-bab53c454910da41e80b5c6b0dd3a188.sample"
+
+[deps]
+
+source_file="res://assets/old mined/Sound/320789__reznik-krkovicka__horn-01.wav"
+dest_files=[ "res://.import/320789__reznik-krkovicka__horn-01.wav-bab53c454910da41e80b5c6b0dd3a188.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

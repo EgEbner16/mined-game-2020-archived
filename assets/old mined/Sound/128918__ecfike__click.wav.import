@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/128918__ecfike__click.wav-f3d5e29fc6635397e39bde35856bed37.sample"
+
+[deps]
+
+source_file="res://assets/old mined/Sound/128918__ecfike__click.wav"
+dest_files=[ "res://.import/128918__ecfike__click.wav-f3d5e29fc6635397e39bde35856bed37.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

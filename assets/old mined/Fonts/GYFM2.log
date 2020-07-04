@@ -1,0 +1,6 @@
+GYFM2.exe Information: 0 : Version: 2.7.0.0
+SyncControlsToFontDetails-IN
+SyncControlsToFontDetails-OUT
+UpdateWindow-IN
+System.Object CreateInstance(System.RuntimeType, Boolean, Boolean, Boolean ByRef, System.RuntimeMethodHandleInternal ByRef, Boolean ByRef),Void UpdateWindow(),DrawToBitmap(Arial,Regular,72,<~>,~,500,1000,0,0,0,0)
+UpdateWindow-OUT

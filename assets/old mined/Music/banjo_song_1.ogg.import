@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/banjo_song_1.ogg-885983f0b23f1222038f2d6686797495.oggstr"
+
+[deps]
+
+source_file="res://assets/old mined/Music/banjo_song_1.ogg"
+dest_files=[ "res://.import/banjo_song_1.ogg-885983f0b23f1222038f2d6686797495.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

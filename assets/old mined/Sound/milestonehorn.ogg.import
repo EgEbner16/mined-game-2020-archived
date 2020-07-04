@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/milestonehorn.ogg-72faca30263bc10854a282497ea98634.oggstr"
+
+[deps]
+
+source_file="res://assets/old mined/Sound/milestonehorn.ogg"
+dest_files=[ "res://.import/milestonehorn.ogg-72faca30263bc10854a282497ea98634.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

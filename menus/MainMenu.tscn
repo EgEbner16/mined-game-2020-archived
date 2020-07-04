@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/old mined/Junk/maxresdefault.jpg" type="Texture" id=1]
+[ext_resource path="res://resources/menu_item_styleboxflat.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/mainfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://resources/menu_item_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menus/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://resources/menu_item_hover_styleboxflat.tres" type="StyleBox" id=6]
+[ext_resource path="res://resources/menu_item_pressed_styleboxflat.tres" type="StyleBox" id=7]
+[ext_resource path="res://resources/menu_item_focus_styleboxflat.tres" type="StyleBox" id=8]
+[ext_resource path="res://resources/menu_item_disabled_styleboxflat.tres" type="StyleBox" id=9]
+
+[node name="MainMenu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 5 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GameTitle" type="Label" parent="."]
+margin_left = 60.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "MINED"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1223.0
+margin_bottom = 689.0
+alignment = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 973.0
+margin_right = 1223.0
+margin_bottom = 689.0
+custom_constants/separation = 32
+alignment = 2
+
+[node name="Campaign" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 349.0
+margin_right = 250.0
+margin_bottom = 410.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+disabled = true
+text = "campaign"
+
+[node name="Sandbox" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 442.0
+margin_right = 250.0
+margin_bottom = 503.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+text = "sandbox"
+
+[node name="Options" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 535.0
+margin_right = 250.0
+margin_bottom = 596.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+disabled = true
+text = "options"
+
+[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 628.0
+margin_right = 250.0
+margin_bottom = 689.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+text = "exit"
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Campaign" to="." method="_on_Campaign_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Sandbox" to="." method="_on_Sandbox_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

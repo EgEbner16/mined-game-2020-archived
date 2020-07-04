@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PersistableFontDetails xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Letterset>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:?!-_~#"'&amp;()[]|`\/@°+=*$£€&lt;&gt;%</Letterset>
+  <AdjustHeight>0</AdjustHeight>
+  <AdjustWidth>0</AdjustWidth>
+  <SampleText>The quick brown fox jumped over the lazy dog.</SampleText>
+  <ShiftHorz>0</ShiftHorz>
+  <ShiftVert>0</ShiftVert>
+  <ShowGrid>true</ShowGrid>
+  <ShowBoundary>false</ShowBoundary>
+  <Size>72</Size>
+  <StrikeOut>false</StrikeOut>
+  <Underline>false</Underline>
+  <IsFill>true</IsFill>
+  <IsOutlineOne>true</IsOutlineOne>
+  <IsOutlineTwo>true</IsOutlineTwo>
+  <IsShadow>false</IsShadow>
+  <OutlineOneWidth>4</OutlineOneWidth>
+  <OutlineTwoWidth>8</OutlineTwoWidth>
+  <ShadowWidth>8</ShadowWidth>
+  <ShadowOffsetX>4</ShadowOffsetX>
+  <ShadowOffsetY>4</ShadowOffsetY>
+  <FontStyleDisplayName>Regular</FontStyleDisplayName>
+  <Height>70</Height>
+  <Width>64</Width>
+  <FontFamilyName>Sector 017</FontFamilyName>
+  <FontStyleName>Normal</FontStyleName>
+  <FontStretchName>Normal</FontStretchName>
+  <FontWeightName>Normal</FontWeightName>
+  <FillColourName>#FFFFFFFF</FillColourName>
+  <OutlineOneColourName>#32FFFFFF</OutlineOneColourName>
+  <OutlineTwoColourName>#32FFFFFF</OutlineTwoColourName>
+  <ShadowColourName>#80000000</ShadowColourName>
+  <SampleBackgroundColourName>#FF000000</SampleBackgroundColourName>
+</PersistableFontDetails>

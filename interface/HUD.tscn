@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://interface/HUD.gd" type="Script" id=2]
+[ext_resource path="res://interface/HUDItem.tscn" type="PackedScene" id=5]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBar" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+margin_bottom = 32.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftSide" type="HBoxContainer" parent="Control/TopBar"]
+anchor_right = 1.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DroneHUDItem" parent="Control/TopBar/LeftSide" instance=ExtResource( 5 )]
+
+[node name="Title" parent="Control/TopBar/LeftSide/DroneHUDItem" index="0"]
+margin_left = 35.0
+margin_right = 81.0
+text = "Drones"
+
+[node name="JobHUDItem" parent="Control/TopBar/LeftSide" instance=ExtResource( 5 )]
+margin_left = 133.0
+margin_right = 250.0
+
+[node name="Title" parent="Control/TopBar/LeftSide/JobHUDItem" index="0"]
+margin_left = 43.0
+margin_right = 73.0
+text = "Jobs"
+
+[node name="EquipmentHUDItem" parent="Control/TopBar/LeftSide" instance=ExtResource( 5 )]
+margin_left = 266.0
+margin_right = 383.0
+
+[node name="Title" parent="Control/TopBar/LeftSide/EquipmentHUDItem" index="0"]
+margin_left = 24.0
+margin_right = 92.0
+text = "Equipment"
+
+[node name="RightSide" type="HBoxContainer" parent="Control/TopBar"]
+anchor_right = 1.0
+custom_constants/separation = 16
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CapitalHUDItem" parent="Control/TopBar/RightSide" instance=ExtResource( 5 )]
+margin_left = 764.0
+margin_right = 881.0
+
+[node name="Title" parent="Control/TopBar/RightSide/CapitalHUDItem" index="0"]
+margin_left = 37.0
+margin_right = 80.0
+text = "Capital"
+
+[node name="MaterialHUDItem" parent="Control/TopBar/RightSide" instance=ExtResource( 5 )]
+margin_left = 897.0
+margin_right = 1014.0
+
+[node name="Title" parent="Control/TopBar/RightSide/MaterialHUDItem" index="0"]
+margin_left = 31.0
+margin_right = 85.0
+text = "Material"
+
+[node name="PowerHUDItem" parent="Control/TopBar/RightSide" instance=ExtResource( 5 )]
+margin_left = 1030.0
+margin_right = 1147.0
+
+[node name="Title" parent="Control/TopBar/RightSide/PowerHUDItem" index="0"]
+margin_left = 37.0
+margin_right = 79.0
+text = "Power"
+
+[node name="CoolantHUDItem" parent="Control/TopBar/RightSide" instance=ExtResource( 5 )]
+margin_left = 1163.0
+margin_right = 1280.0
+
+[node name="Title" parent="Control/TopBar/RightSide/CoolantHUDItem" index="0"]
+margin_left = 34.0
+margin_right = 82.0
+text = "Coolant"
+
+[editable path="Control/TopBar/LeftSide/DroneHUDItem"]
+
+[editable path="Control/TopBar/LeftSide/JobHUDItem"]
+
+[editable path="Control/TopBar/LeftSide/EquipmentHUDItem"]
+
+[editable path="Control/TopBar/RightSide/CapitalHUDItem"]
+
+[editable path="Control/TopBar/RightSide/MaterialHUDItem"]
+
+[editable path="Control/TopBar/RightSide/PowerHUDItem"]
+
+[editable path="Control/TopBar/RightSide/CoolantHUDItem"]

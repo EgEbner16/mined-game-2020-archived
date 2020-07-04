@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menus/OptionsMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/interface/kenny_ui/PNG/grey_panel.png" type="Texture" id=2]
+[ext_resource path="res://resources/menu_item_font.tres" type="DynamicFont" id=3]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+margin_right = 1280.0
+margin_bottom = 720.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="ColorRect/HBoxContainer"]
+margin_left = 516.0
+margin_right = 763.0
+margin_bottom = 972.0
+custom_constants/margin_top = 200
+custom_constants/margin_bottom = 400
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/HBoxContainer/MarginContainer2"]
+margin_top = 200.0
+margin_right = 247.0
+margin_bottom = 572.0
+texture = ExtResource( 2 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/MarginContainer2"]
+margin_top = 200.0
+margin_right = 247.0
+margin_bottom = 572.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 227.0
+margin_bottom = 352.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_right = 207.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0.560784, 0.00784314, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 207.0
+margin_bottom = 92.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Volume"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 207.0
+margin_bottom = 132.0
+alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 75.0
+margin_right = 87.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 91.0
+margin_top = 3.0
+margin_right = 115.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "100"
+
+[node name="Button2" type="Button" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 119.0
+margin_right = 131.0
+margin_bottom = 20.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 152.0
+margin_right = 207.0
+margin_bottom = 192.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 44.0
+margin_top = 13.0
+margin_right = 82.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Music"
+
+[node name="CheckButton" type="CheckButton" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 86.0
+margin_right = 162.0
+margin_bottom = 40.0
+align = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 212.0
+margin_right = 207.0
+margin_bottom = 252.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 34.0
+margin_top = 13.0
+margin_right = 92.0
+margin_bottom = 27.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sound FX"
+
+[node name="CheckButton" type="CheckButton" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 96.0
+margin_right = 172.0
+margin_bottom = 40.0
+
+[node name="Close" type="Button" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 272.0
+margin_right = 207.0
+margin_bottom = 292.0
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitGame" type="Button" parent="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+margin_top = 312.0
+margin_right = 207.0
+margin_bottom = 332.0
+text = "Exit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/Close" to="." method="_on_Close_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ExitGame" to="." method="_on_ExitGame_pressed"]
