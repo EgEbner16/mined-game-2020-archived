@@ -116,7 +116,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Chaos"
+config/name="Mined"
+config/description="Planetary mining game."
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
