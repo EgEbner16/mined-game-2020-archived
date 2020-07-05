@@ -14,6 +14,9 @@ onready var navigation_2d: Navigation2D = $Navigation2D
 onready var terrain_tile_map: TileMap = $Navigation2D/TerrainTileMap
 onready var shadow_tile_map: TileMap = $ShadowTileMap
 onready var dig_tile_map: TileMap = $DigTileMap
+onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
+onready var drone_manager: DroneManager = get_node('/root/Game/World/DroneManager')
+
 
 func _ready():
 	tile_manager.create_random_layer(world_size)
@@ -25,6 +28,7 @@ func _ready():
 			for y in range(base_top_y, base_top_y + base_size.y):
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
+		equipment_manager.create_equipment('mining_core', number, tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
 				
 	
 func get_navigation_path(start: Vector2, end: Vector2):

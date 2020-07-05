@@ -53,6 +53,12 @@ func update_tile(tile_location: Vector2) -> void:
 		get_parent().shadow_tile_map.set_cellv(tile_location, 0)
 		get_parent().shadow_tile_map.update_bitmask_area(tile_location)
 
+func world_to_map(world_location: Vector2) -> Vector2:
+	return get_parent().terrain_tile_map.world_to_map(world_location)
+
+func map_to_world(map_location: Vector2) -> Vector2:
+	return get_parent().terrain_tile_map.map_to_world(map_location)
+
 func get_accessibility(tile_location: Vector2) -> Dictionary:
 	var accessibility: Dictionary = {
 		'north': false,

@@ -10,6 +10,6 @@ script = ExtResource( 2 )
 
 [node name="JobManager" parent="." instance=ExtResource( 1 )]
 
-[node name="EquipmentManager" parent="." instance=ExtResource( 3 )]
-
 [node name="DroneManager" parent="." instance=ExtResource( 4 )]
+
+[node name="EquipmentManager" parent="." instance=ExtResource( 3 )]

@@ -5,9 +5,13 @@ class_name MiningDrone
 var working = false
 var digging = false
 var digging_timer = 0.0
-var digging_speed = 5.0
+var digging_speed = 10.0
 var job_node_path = null
 var job_position = null
+
+func _ready():
+	power_usage = 5
+	coolant_usage = 2
 
 func _process(delta):
 	position = state.position
@@ -20,6 +24,7 @@ func _process(delta):
 				if digging_timer > digging_speed:
 					var layer = get_parent()
 					layer.tile_manager.set_tile_index(job.tile_location, 1)
+					get_node('/root/Game/ResourceManager').gain_material(1000)
 					clear_to_idle()
 				
 			elif working and state_manager.current_state == 'idle':

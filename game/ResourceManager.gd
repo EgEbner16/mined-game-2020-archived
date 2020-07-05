@@ -44,7 +44,7 @@ func calculate_coolant() -> void:
 
 func _on_Timer_timeout():
 	capital -= capital_usage
+	capital_usage = 0.0
 	material -= material_usage
-	calculate_power()
-	calculate_coolant()
+	material_usage = 0.0
 

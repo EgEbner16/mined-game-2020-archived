@@ -1,12 +1,13 @@
 extends Node2D
 
-const MINING_DRONE = preload("res://entities/actors/drones/MiningDrone.tscn")
 const POPUP = preload("res://interface/Popup.tscn")
 const LAYER = preload("res://game/Layer.tscn")
 const JOB = preload("res://game/jobs/Job.tscn")
 
-onready var current_active_layer = 0
+onready var current_active_layer: int = 0
 onready var job_manager: JobManager = $JobManager
+onready var drone_manager: DroneManager = $DroneManager
+onready var equipment_manager: EquipmentManager = $EquipmentManager
 
 var world_size = ProjectSettings.get_setting('game/config/world_size')
 var world_tile_size = ProjectSettings.get_setting('game/config/tile_size')
@@ -29,11 +30,7 @@ func _process(delta):
 		active_layer.tile_manager.set_tile_index(active_layer.terrain_tile_map.world_to_map(get_global_mouse_position()), 1)
 
 	if Input.is_action_just_released("action_command"):
-		var mining_drone = MINING_DRONE.instance()
-		mining_drone.add_to_group('drones')
-		mining_drone.add_to_group('mining_drones')
-		mining_drone.position = get_global_mouse_position()
-		active_layer.add_child(mining_drone)
+		drone_manager.create_drone('mining', current_active_layer, get_global_mouse_position())
 		
 	if Input.is_action_pressed("action_primary"):
 		if(active_layer.set_dig_tile(get_global_mouse_position())):

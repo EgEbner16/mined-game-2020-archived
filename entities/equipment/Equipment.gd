@@ -2,18 +2,21 @@ extends Node2D
 
 class_name Equipment
 
+var capital_usage: float = 0.0
+var capital_production: float = 0.0
+
+var material_usage: float = 0.0
+var material_production: float = 0.0
+
+var power_usage: float = 0.0
+var power_production: float = 0.0
+
+var coolant_usage: float = 0.0
+var coolant_production: float = 0.0
+
 onready var entity = $Entity
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -2,6 +2,7 @@ extends Node2D
 
 onready var hud = $HUD
 onready var resource_manager: ResourceManager = $ResourceManager
+onready var world = $World
 
 func _ready():
 	var options_menu = load("res://menus/OptionsMenu.tscn")
@@ -24,5 +25,6 @@ func _process(delta):
 	hud.drones_working = working_drones
 	hud.equipment = get_tree().get_nodes_in_group('equipment').size()
 	hud.jobs = get_tree().get_nodes_in_group('jobs').size()
+	hud.layer_number = world.current_active_layer
 	if Input.is_action_just_released("display_options"):
 		$OptionsMenu.open()

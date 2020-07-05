@@ -53,6 +53,15 @@ margin_left = 24.0
 margin_right = 92.0
 text = "Equipment"
 
+[node name="LayerHUDItem" parent="Control/TopBar/LeftSide" instance=ExtResource( 5 )]
+margin_left = 399.0
+margin_right = 516.0
+
+[node name="Title" parent="Control/TopBar/LeftSide/LayerHUDItem" index="0"]
+margin_left = 40.0
+margin_right = 77.0
+text = "Layer"
+
 [node name="RightSide" type="HBoxContainer" parent="Control/TopBar"]
 anchor_right = 1.0
 custom_constants/separation = 16
@@ -102,6 +111,8 @@ text = "Coolant"
 [editable path="Control/TopBar/LeftSide/JobHUDItem"]
 
 [editable path="Control/TopBar/LeftSide/EquipmentHUDItem"]
+
+[editable path="Control/TopBar/LeftSide/LayerHUDItem"]
 
 [editable path="Control/TopBar/RightSide/CapitalHUDItem"]
 
