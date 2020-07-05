@@ -29,8 +29,8 @@ func _ready():
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
 		equipment_manager.create_equipment('mining_core', number, tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
-				
-	
+
+
 func get_navigation_path(start: Vector2, end: Vector2):
 	var path = navigation_2d.get_simple_path(start, end)
 	return path

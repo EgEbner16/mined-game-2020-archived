@@ -23,17 +23,17 @@ func create_tile_job(world_location: Vector2, layer: Layer):
 	add_child(job)
 	job_location_list[job.get_path()] = job.world_location_offset
 	print(job_location_list[job.get_path()])
-	
+
 func remove_tile_job(world_location: Vector2, layer: Layer):
 	var tile_location = layer.dig_tile_map.world_to_map(world_location)
 	get_node('dig_l%s_x%s_y%s' % [layer.number, tile_location.x, tile_location.y]).queue_free()
-	
+
 func create_equipment_job(equipment: Equipment):
 	pass
 
 func clean_up_jobs():
 	pass
-	
+
 func get_closest_job_node_paths(world_location: Vector2) -> Dictionary:
 	var job_distance_list: Dictionary
 	for job in job_location_list:

@@ -20,7 +20,7 @@ onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceMan
 
 func _ready():
 	pass
-	
+
 func create_equipment(type: String, layer: int, world_location: Vector2) -> void:
 	var mining_core = MINING_CORE.instance()
 	mining_core.add_to_group('equipment')

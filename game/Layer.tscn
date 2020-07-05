@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/tilesets/fog_tile_32x32.png" type="Texture" id=3]
 [ext_resource path="res://assets/old mined/Tilemaps/mined_alpha_graphics_edges_update.png" type="Texture" id=4]
 [ext_resource path="res://game/tiles/TileManager.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/old mined/Icons/dig_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tilesets/dig_tile_32x32.png" type="Texture" id=6]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -279,7 +279,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/z_index = 0
 
 [sub_resource type="TileSet" id=7]
-0/name = "dig_icon.png 0"
+0/name = "dig_tile_32x32.png 0"
 0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )

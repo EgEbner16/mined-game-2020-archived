@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/actors/drones/MiningDrone.gd"
 }, {
+"base": "Object",
+"class": "ResourceHandler",
+"language": "GDScript",
+"path": "res://game/ResourceHandler.gd"
+}, {
 "base": "Node",
 "class": "ResourceManager",
 "language": "GDScript",
@@ -84,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/actors/StateMoving.gd"
 }, {
-"base": "Resource",
+"base": "Object",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://game/tiles/Tile.gd"
@@ -105,6 +110,7 @@ _global_script_class_icons={
 "Layer": "",
 "Main": "",
 "MiningDrone": "",
+"ResourceHandler": "",
 "ResourceManager": "",
 "State": "",
 "StateIdle": "",

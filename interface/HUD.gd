@@ -42,13 +42,13 @@ func _process(delta):
 		if capital_value - capital_display <= HUD_LERP_THRESHOLD and capital_value - capital_display >= HUD_LERP_THRESHOLD * -1:
 			capital_display = capital_value
 		capital_hud_value.text = str(int(capital_display))
-		
+
 	if material_value != material_display:
 		material_display = lerp(material_display, material_value, HUD_UPDATE_SPEED * delta)
 		if material_value - material_display <= HUD_LERP_THRESHOLD and material_value - material_display >= HUD_LERP_THRESHOLD * -1:
 			material_display = material_value
 		material_hud_value.text = str(int(material_display))
-		
+
 	if power_value != power_display:
 		power_display = lerp(power_display, power_value, HUD_UPDATE_SPEED * delta)
 		if power_value - power_display <= HUD_LERP_THRESHOLD and power_value - power_display >= HUD_LERP_THRESHOLD * -1:
@@ -57,7 +57,7 @@ func _process(delta):
 		power_hud_value.text = '%smw %s%%' % [int(power_display), int((power_usage_value / power_display) * 100)]
 	else:
 		power_hud_value.text = '%smw %s%%' % [int(power_display), int(0)]
-		
+
 	if coolant_value != coolant_display:
 		coolant_display = lerp(coolant_display, coolant_value, HUD_UPDATE_SPEED * delta)
 		if coolant_value - coolant_display <= HUD_LERP_THRESHOLD and coolant_value - coolant_display >= HUD_LERP_THRESHOLD * -1:
@@ -66,7 +66,7 @@ func _process(delta):
 		coolant_hud_value.text = '%st %s%%' % [int(coolant_display), int((coolant_usage_value / coolant_display) * 100)]
 	else:
 		coolant_hud_value.text = '%st %s%%' % [int(coolant_display), int(0)]
-		
+
 	drone_hud_value.text = str(drones) + ' / ' + str(drones_working)
 	job_hud_value.text = str(jobs)
 	equipment_hud_value.text = str(equipment)

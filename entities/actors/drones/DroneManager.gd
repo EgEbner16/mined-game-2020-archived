@@ -6,7 +6,7 @@ const MINING_DRONE = preload("res://entities/actors/drones/MiningDrone.tscn")
 
 var power_usage: float = 0.0
 var coolant_usage: float = 0.0
-	
+
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 
 func _ready():

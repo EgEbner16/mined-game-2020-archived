@@ -16,7 +16,7 @@ var coolant_production: float = 0.0
 
 onready var entity = $Entity
 
-var state: State 
+var state: State
 var state_manager: StateManager
 
 var path = PoolVector2Array() setget set_path
@@ -25,7 +25,7 @@ func _process(delta):
 
 	if state.new_state == 'idle':
 		change_state('idle')
-		
+
 	if state.new_state == 'moving':
 		change_state('moving')
 

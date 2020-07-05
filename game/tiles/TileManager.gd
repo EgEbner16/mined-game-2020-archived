@@ -29,10 +29,10 @@ func _ready():
 
 func create_tile(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]] = Tile.new(tile_location, index)
-	
+
 func create_random_tile(tile_location: Vector2) -> void:
 	create_tile(tile_location, randi() % 10 + 4)
-	
+
 func create_random_layer(world_size: Vector2) -> void:
 	for x in range(world_size.x):
 		for y in range(world_size.y):
@@ -42,7 +42,7 @@ func create_random_layer(world_size: Vector2) -> void:
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index = index
 	update_tile(tile_location)
-	
+
 func get_tile_index(tile_location: Vector2) -> int:
 	return tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index
 
@@ -67,21 +67,21 @@ func get_accessibility(tile_location: Vector2) -> Dictionary:
 		'west': false,
 	}
 
-	#North Check	
+	#North Check
 	if tile_location.y > 0:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y - 1]].index]['navigation']:
 			accessibility['north'] = true
-	
+
 	#East Check
 	if tile_location.x < world_size.x:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x + 1, tile_location.y]].index]['navigation']:
 			accessibility['east'] = true
 
-	#South Check	
+	#South Check
 	if tile_location.y < world_size.y:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y + 1]].index]['navigation']:
 			accessibility['south'] = true
-	
+
 	#West Check
 	if tile_location.x > 0:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x - 1, tile_location.y]].index]['navigation']:

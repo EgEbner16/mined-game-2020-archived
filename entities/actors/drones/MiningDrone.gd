@@ -15,8 +15,8 @@ func _ready():
 
 func _process(delta):
 	position = state.position
-	
-	if job_node_path:		
+
+	if job_node_path:
 		if has_node(job_node_path):
 			if digging:
 				var job = get_node(job_node_path)
@@ -26,7 +26,7 @@ func _process(delta):
 					layer.tile_manager.set_tile_index(job.tile_location, 1)
 					get_node('/root/Game/ResourceManager').gain_material(1000)
 					clear_to_idle()
-				
+
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
 					var job = get_node(job_node_path)
@@ -44,11 +44,11 @@ func _process(delta):
 						print('Job is on another layer')
 		else:
 			clear_to_idle()
-			
+
 func clear_to_idle() -> void:
 	if has_node(job_node_path):
 		var job = get_node(job_node_path)
-		job.queue_free()		
+		job.queue_free()
 	job_node_path = null
 	job_position = null
 	digging_timer = 0.0

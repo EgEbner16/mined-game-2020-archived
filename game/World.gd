@@ -31,11 +31,11 @@ func _process(delta):
 
 	if Input.is_action_just_released("action_command"):
 		drone_manager.create_drone('mining', current_active_layer, get_global_mouse_position())
-		
+
 	if Input.is_action_pressed("action_primary"):
 		if(active_layer.set_dig_tile(get_global_mouse_position())):
 			job_manager.create_tile_job(get_global_mouse_position(), active_layer)
-	
+
 	if Input.is_action_pressed("action_cancel"):
 		if(active_layer.unset_dig_tile(get_global_mouse_position())):
 			job_manager.remove_tile_job(get_global_mouse_position(), active_layer)

@@ -36,7 +36,7 @@ func gain_material(amount: float) -> void:
 
 func calculate_power() -> void:
 	power = 1679
-	power_usage = 1345	
+	power_usage = 1345
 
 func calculate_coolant() -> void:
 	coolant = 673
