@@ -17,6 +17,7 @@ var coolant_usage: float = 0.0
 var coolant_production: float = 0.0
 
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
+onready var resource_handler: ResourceHandler = ResourceHandler.new()
 
 func _ready():
 	pass
@@ -30,6 +31,7 @@ func create_equipment(type: String, layer: int, world_location: Vector2) -> void
 
 
 func _on_Timer_timeout():
+	resource_handler.reset()
 	power_usage = 0.0
 	power_production = 0.0
 	coolant_usage = 0.0

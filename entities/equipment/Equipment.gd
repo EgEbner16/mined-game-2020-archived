@@ -14,9 +14,11 @@ var power_production: float = 0.0
 var coolant_usage: float = 0.0
 var coolant_production: float = 0.0
 
-onready var entity = $Entity
+onready var resource_handler: ResourceHandler = ResourceHandler.new()
+
+onready var entity: Entity = $Entity
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
