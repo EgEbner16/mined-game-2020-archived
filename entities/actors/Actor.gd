@@ -2,19 +2,9 @@ extends KinematicBody2D
 
 class_name Actor
 
-var capital_usage: float = 0.0
-var capital_production: float = 0.0
-
-var material_usage: float = 0.0
-var material_production: float = 0.0
-
-var power_usage: float = 0.0
-var power_production: float = 0.0
-
-var coolant_usage: float = 0.0
-var coolant_production: float = 0.0
-
 onready var entity = $Entity
+
+onready var resource_handler: ResourceHandler = ResourceHandler.new()
 
 var state: State
 var state_manager: StateManager

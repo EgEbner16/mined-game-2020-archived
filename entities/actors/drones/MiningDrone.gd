@@ -10,8 +10,8 @@ var job_node_path = null
 var job_position = null
 
 func _ready():
-	power_usage = 5
-	coolant_usage = 2
+	resource_handler.power_usage = 5
+	resource_handler.coolant_usage = 2
 
 func _process(delta):
 	position = state.position
