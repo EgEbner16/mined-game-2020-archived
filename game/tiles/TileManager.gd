@@ -37,7 +37,6 @@ func create_random_layer(world_size: Vector2) -> void:
 	for x in range(world_size.x):
 		for y in range(world_size.y):
 			create_random_tile(Vector2(x, y))
-			get_parent().dig_tile_map.set_cellv(Vector2(x, y), -1)
 
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index = index
@@ -49,6 +48,7 @@ func get_tile_index(tile_location: Vector2) -> int:
 func update_tile(tile_location: Vector2) -> void:
 	get_parent().terrain_tile_map.set_cellv(tile_location, tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index)
 	get_parent().dig_tile_map.set_cellv(tile_location, -1)
+	get_parent().dig_tile_map.update_bitmask_area(tile_location)
 	if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index]['navigation']:
 		get_parent().shadow_tile_map.set_cellv(tile_location, 0)
 		get_parent().shadow_tile_map.update_bitmask_area(tile_location)

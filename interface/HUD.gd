@@ -54,7 +54,10 @@ func _process(delta):
 		if power_value - power_display <= HUD_LERP_THRESHOLD and power_value - power_display >= HUD_LERP_THRESHOLD * -1:
 			power_display = power_value
 	if power_usage_value != 0 and power_display != 0:
-		power_hud_value.text = '%smw %s%%' % [int(power_display), int((power_usage_value / power_display) * 100)]
+		var power_usage_percentage: int = int((power_usage_value / power_display) * 100)
+		power_hud_value.text = '%smw %s%%' % [int(power_display), power_usage_percentage]
+		if power_usage_percentage >= 100:
+			power_hud_value.set("custom_colors/font_color",Color(200,0,0,255))
 	else:
 		power_hud_value.text = '%smw %s%%' % [int(power_display), int(0)]
 
