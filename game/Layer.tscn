@@ -278,7 +278,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=8]
+[sub_resource type="TileSet" id=7]
 0/name = "fog_tile_32x32.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -294,7 +294,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=7]
+[sub_resource type="TileSet" id=8]
 0/name = "mined_alpha_graphics_digging.png 0"
 0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
@@ -337,13 +337,13 @@ cell_quadrant_size = 32
 format = 1
 
 [node name="FogTileMap" type="TileMap" parent="."]
-tile_set = SubResource( 8 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 format = 1
 
 [node name="DigTileMap" type="TileMap" parent="."]
-tile_set = SubResource( 7 )
+tile_set = SubResource( 8 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 format = 1
