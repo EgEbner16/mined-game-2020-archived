@@ -1,17 +1,20 @@
-extends "res://entities/actors/Actor.gd"
+extends Actor
 
 class_name MiningDrone
 
-var working = false
 var digging = false
 var digging_timer = 0.0
 var digging_speed = 10.0
 var job_node_path = null
 var job_position = null
 
-func _ready():
+func _init():
+	resource_handler.capital_cost = 1500
 	resource_handler.power_usage = 5
 	resource_handler.coolant_usage = 2
+
+func _ready():
+	pass
 
 func _process(delta):
 	position = state.position

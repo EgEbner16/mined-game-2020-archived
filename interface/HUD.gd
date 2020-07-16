@@ -28,6 +28,26 @@ onready var material_hud_value = $Control/TopBar/RightSide/MaterialHUDItem/Value
 onready var power_hud_value = $Control/TopBar/RightSide/PowerHUDItem/Value
 onready var coolant_hud_value = $Control/TopBar/RightSide/CoolantHUDItem/Value
 
+onready var options_menu = $OptionsMenu
+onready var equipment_interface = $EquipmentInterface
+onready var drone_interface = $DroneInterface
+
+func number_format(number, currency=false):
+	number = str(number)
+	var size = number.length()
+	var string = ''
+
+	if currency:
+		string = '$'
+
+	for i in range(size):
+			if((size - i) % 3 == 0 and i > 0):
+				string = str(string,",", number[i])
+			else:
+				string = str(string,number[i])
+
+	return string
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	capital_hud_value.text = str(capital_display)
@@ -41,13 +61,13 @@ func _process(delta):
 		capital_display = lerp(capital_display, capital_value, HUD_UPDATE_SPEED * delta)
 		if capital_value - capital_display <= HUD_LERP_THRESHOLD and capital_value - capital_display >= HUD_LERP_THRESHOLD * -1:
 			capital_display = capital_value
-		capital_hud_value.text = str(int(capital_display))
+		capital_hud_value.text = number_format(int(capital_display), true)
 
 	if material_value != material_display:
 		material_display = lerp(material_display, material_value, HUD_UPDATE_SPEED * delta)
 		if material_value - material_display <= HUD_LERP_THRESHOLD and material_value - material_display >= HUD_LERP_THRESHOLD * -1:
 			material_display = material_value
-		material_hud_value.text = str(int(material_display))
+		material_hud_value.text = number_format(int(material_display))
 
 	if power_value != power_display:
 		power_display = lerp(power_display, power_value, HUD_UPDATE_SPEED * delta)
@@ -55,20 +75,20 @@ func _process(delta):
 			power_display = power_value
 	if power_usage_value != 0 and power_display != 0:
 		var power_usage_percentage: int = int((power_usage_value / power_display) * 100)
-		power_hud_value.text = '%smw %s%%' % [int(power_display), power_usage_percentage]
+		power_hud_value.text = '%smw %s%%' % [number_format(int(power_display)), power_usage_percentage]
 		if power_usage_percentage >= 100:
 			power_hud_value.set("custom_colors/font_color",Color(200,0,0,255))
 	else:
-		power_hud_value.text = '%smw %s%%' % [int(power_display), int(0)]
+		power_hud_value.text = '%smw %s%%' % [number_format(int(power_display)), int(0)]
 
 	if coolant_value != coolant_display:
 		coolant_display = lerp(coolant_display, coolant_value, HUD_UPDATE_SPEED * delta)
 		if coolant_value - coolant_display <= HUD_LERP_THRESHOLD and coolant_value - coolant_display >= HUD_LERP_THRESHOLD * -1:
 			coolant_display = coolant_value
 	if coolant_usage_value != 0 and coolant_display != 0:
-		coolant_hud_value.text = '%st %s%%' % [int(coolant_display), int((coolant_usage_value / coolant_display) * 100)]
+		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), int((coolant_usage_value / coolant_display) * 100)]
 	else:
-		coolant_hud_value.text = '%st %s%%' % [int(coolant_display), int(0)]
+		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), int(0)]
 
 	drone_hud_value.text = str(drones) + ' / ' + str(drones_working)
 	job_hud_value.text = str(jobs)

@@ -3,8 +3,8 @@
 [ext_resource path="res://game/Game.gd" type="Script" id=1]
 [ext_resource path="res://game/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/World.tscn" type="PackedScene" id=3]
-[ext_resource path="res://interface/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/ResourceManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://interface/InterfaceManager.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,6 +13,6 @@ script = ExtResource( 1 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
-
 [node name="ResourceManager" parent="." instance=ExtResource( 5 )]
+
+[node name="InterfaceManager" parent="." instance=ExtResource( 6 )]

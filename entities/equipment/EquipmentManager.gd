@@ -15,6 +15,7 @@ func create_equipment(type: String, layer: int, world_location: Vector2) -> void
 	var mining_core = MINING_CORE.instance()
 	mining_core.add_to_group('equipment')
 	mining_core.add_to_group('core_equipment')
+	mining_core.name = 'mining_core'
 	mining_core.position = world_location
 	get_node('/root/Game/World/Layer_%s' % layer).add_child(mining_core)
 

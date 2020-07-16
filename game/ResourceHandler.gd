@@ -5,6 +5,7 @@ class_name ResourceHandler
 var capital: float = 0.0
 var capital_usage: float = 0.0
 var capital_production: float = 0.0
+var capital_cost: float = 0.0
 
 var material: float = 0.0
 var material_usage: float = 0.0
@@ -105,6 +106,7 @@ func reset():
 	capital = 0.0
 	capital_usage = 0.0
 	capital_production = 0.0
+	capital_cost = 0.0
 
 	material = 0.0
 	material_usage = 0.0

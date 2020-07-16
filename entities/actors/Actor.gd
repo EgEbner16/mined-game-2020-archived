@@ -4,7 +4,9 @@ class_name Actor
 
 onready var entity = $Entity
 
-onready var resource_handler: ResourceHandler = ResourceHandler.new()
+var working = false
+
+var resource_handler: ResourceHandler = ResourceHandler.new()
 
 var state: State
 var state_manager: StateManager

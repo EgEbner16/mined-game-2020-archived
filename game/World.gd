@@ -1,6 +1,5 @@
 extends Node2D
 
-const POPUP = preload("res://interface/Popup.tscn")
 const LAYER = preload("res://game/Layer.tscn")
 const JOB = preload("res://game/jobs/Job.tscn")
 
@@ -25,12 +24,6 @@ func _ready():
 
 func _process(delta):
 	var active_layer: Layer = get_node('Layer_%s' % current_active_layer)
-
-	if Input.is_action_pressed("debug_mine_tile"):
-		active_layer.tile_manager.set_tile_index(active_layer.terrain_tile_map.world_to_map(get_global_mouse_position()), 1)
-
-	if Input.is_action_just_released("action_command"):
-		drone_manager.create_drone('mining', current_active_layer, get_global_mouse_position())
 
 	if Input.is_action_pressed("action_primary"):
 		if(active_layer.set_dig_tile(get_global_mouse_position())):

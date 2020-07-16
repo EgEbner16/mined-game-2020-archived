@@ -34,34 +34,34 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	
+
 	if position.x <  viewport_x_limit:
 		position.x =  viewport_x_limit
-	
+
 	if position.y < viewport_y_limit:
 		position.y = viewport_y_limit
-	
+
 	if position.x >= world_width_px - viewport_x_limit:
 		position.x = world_width_px - viewport_x_limit
-	
+
 	if position.y >= world_height_px - viewport_y_limit:
 		position.y = world_height_px - viewport_y_limit
-		
+
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("scroll_right") - Input.get_action_strength("scroll_left")
 	input_vector.y = Input.get_action_strength("scroll_down") - Input.get_action_strength("scroll_up")
 	input_vector = input_vector.normalized()
-	
+
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-		
+
 	camera.zoom.x = lerp(camera.zoom.x, zoom_level, ZOOM_SPEED * delta)
 	camera.zoom.y = lerp(camera.zoom.y, zoom_level, ZOOM_SPEED * delta)
-	
+
 	zoom_level = clamp(zoom_level, ZOOM_MIN, ZOOM_MAX)
-	
+
 	move_and_collide(velocity)
 
 func _input(event):

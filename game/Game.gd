@@ -1,14 +1,14 @@
 extends Node2D
 
-onready var hud = $HUD
+onready var hud = $InterfaceManager/HUD
+
 onready var resource_manager: ResourceManager = $ResourceManager
 onready var world = $World
 
-func _ready():
-	var options_menu = load("res://menus/OptionsMenu.tscn")
-	add_child(options_menu.instance())
-#	$Camera.position = ProjectSettings.get_setting("game/config/world_size") / 2
 
+func _ready():
+	pass
+#	$Camera.position = ProjectSettings.get_setting("game/config/world_size") / 2
 
 func _process(delta):
 	hud.capital_value = resource_manager.resource_handler.capital
@@ -26,5 +26,3 @@ func _process(delta):
 	hud.equipment = get_tree().get_nodes_in_group('equipment').size()
 	hud.jobs = get_tree().get_nodes_in_group('jobs').size()
 	hud.layer_number = world.current_active_layer
-	if Input.is_action_just_released("display_options"):
-		$OptionsMenu.open()
