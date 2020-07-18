@@ -21,7 +21,7 @@ func _process(delta):
 	if state.new_state == 'moving':
 		change_state('moving')
 
-	$Sprite.look_at(state.looking_point)
+	$AnimatedSprite.look_at(state.looking_point)
 
 func _ready():
 	state_manager = StateManager.new()
