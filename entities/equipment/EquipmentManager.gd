@@ -9,8 +9,13 @@ onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceMan
 onready var resource_handler: ResourceHandler = ResourceHandler.new()
 
 var equipment: Dictionary = {
+	'collector': Collector,
+	'distributor': Distributor,
 	'mining_core': MiningCore,
 	'generator': Generator,
+	'matter_reactor': MatterReactor,
+	'pump': Pump,
+	'scanner': Scanner,
 }
 
 func _init():

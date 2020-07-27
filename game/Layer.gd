@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Layer
+class_name WorldLayer
 
 var world_size = ProjectSettings.get_setting("game/config/world_size")
 var world_center = world_size / 2

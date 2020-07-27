@@ -13,7 +13,7 @@ var job_success_limit: int = 10
 func _ready():
 	pass # Replace with function body.
 
-func create_tile_job(world_location: Vector2, layer: Layer):
+func create_tile_job(world_location: Vector2, layer: WorldLayer):
 	var job: Job = JOB.instance()
 	job.add_to_group('jobs')
 	job.tile_location = layer.dig_tile_map.world_to_map(world_location)
@@ -24,7 +24,7 @@ func create_tile_job(world_location: Vector2, layer: Layer):
 	job_location_list[job.get_path()] = job.world_location_offset
 #	print(job_location_list[job.get_path()])
 
-func remove_tile_job(world_location: Vector2, layer: Layer):
+func remove_tile_job(world_location: Vector2, layer: WorldLayer):
 	var tile_location = layer.dig_tile_map.world_to_map(world_location)
 	get_node('dig_l%s_x%s_y%s' % [layer.number, tile_location.x, tile_location.y]).queue_free()
 

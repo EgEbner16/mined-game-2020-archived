@@ -28,7 +28,7 @@ func _ready():
 	# Connects the whistle to creating a new path
 
 func _process(delta):
-	var active_layer: Layer = get_node('Layer_%s' % current_active_layer)
+	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
 
 	if Input.is_action_pressed("action_primary") and interface_manager.interface_state == 'game':
 		if(active_layer.set_dig_tile(get_global_mouse_position())):

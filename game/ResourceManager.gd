@@ -2,9 +2,9 @@ extends Node
 
 class_name ResourceManager
 
-onready var resource_handler: ResourceHandler = ResourceHandler.new()
+var resource_handler: ResourceHandler = ResourceHandler.new()
 
-func _ready():
+func _init():
 	resource_handler.capital = ProjectSettings.get_setting('game/config/starting_capital')
 
 func use_capital(amount: float) -> bool:

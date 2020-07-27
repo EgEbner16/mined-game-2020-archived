@@ -1,16 +1,8 @@
 extends Equipment
 
+class_name Distributor
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _init():
+	resource_handler.power_usage = 5
+	resource_handler.coolant_usage = 20
+	resource_handler.capital_cost = 1000

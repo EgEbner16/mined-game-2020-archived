@@ -6,7 +6,7 @@ onready var world: GameWorld = get_node('/root/Game/World')
 
 var state_active = false
 var valid_placement = false
-var active_layer: Layer
+var active_layer: WorldLayer
 
 func _ready():
 	hide()
