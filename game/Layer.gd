@@ -5,6 +5,7 @@ class_name Layer
 var world_size = ProjectSettings.get_setting("game/config/world_size")
 var world_center = world_size / 2
 var base_size = ProjectSettings.get_setting("game/config/base_size")
+var tile_size = ProjectSettings.get_setting("game/config/tile_size")
 var base_left_x = int(world_center.x - base_size.x / 2)
 var base_top_y = int(world_center.y - base_size.y / 2)
 var number: int = 0
@@ -28,7 +29,6 @@ func _ready():
 			for y in range(base_top_y, base_top_y + base_size.y):
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
-		equipment_manager.create_equipment('mining_core', number, tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
 
 
 func get_navigation_path(start: Vector2, end: Vector2):

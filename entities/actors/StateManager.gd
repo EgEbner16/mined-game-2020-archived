@@ -10,7 +10,7 @@ func _init():
 		"idle": StateIdle,
 		"moving": StateMoving,
 	}
-	
+
 func get_state(state_name):
 	if states.has(state_name):
 		current_state = state_name

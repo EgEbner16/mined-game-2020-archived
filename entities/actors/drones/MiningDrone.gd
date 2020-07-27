@@ -35,16 +35,17 @@ func _process(delta):
 					var job = get_node(job_node_path)
 					var layer = get_parent()
 					if job.layer_number == layer.number:
-						print ('Job is on same layer')
+#						print ('Job is on same layer')
 						if layer.terrain_tile_map.world_to_map(position) == job.get_work_tile_location(job_position):
 							print('Currently at Job')
 							self.state.looking_point = job.world_location_offset
 							digging = true
 						else:
-							print('Need to Move to Job')
+#							print('Need to Move to Job')
 							set_path(layer.get_navigation_path(position, job.get_work_world_location(job_position)))
 					else:
-						print('Job is on another layer')
+						pass
+#						print('Job is on another layer')
 		else:
 			clear_to_idle()
 

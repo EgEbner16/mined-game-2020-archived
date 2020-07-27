@@ -1,16 +1,8 @@
 extends Equipment
 
+class_name Generator
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	resource_handler.power_production = 100
+	resource_handler.coolant_usage = 20
+	resource_handler.material_cost = 5000

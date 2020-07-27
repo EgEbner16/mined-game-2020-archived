@@ -11,13 +11,13 @@ func _ready():
 
 func open():
 	$ColorRect.show()
-	print('open')
+#	print('open')
 	self.set_process(true)
 	state_active = true
 
 func close():
 	$ColorRect.hide()
-	print('close')
+#	print('close')
 	state_active = false
 	self.set_process(false)
 

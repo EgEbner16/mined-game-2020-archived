@@ -66,3 +66,9 @@ margin_top = 431.0
 margin_right = 129.0
 margin_bottom = 451.0
 text = "Scanner"
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyCollectorEquipment" to="." method="_on_BuyCollectorEquipment_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyDistributorEquipment" to="." method="_on_BuyDistributorEquipment_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyGeneratorEquipment" to="." method="_on_BuyGeneratorEquipment_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyMatterReactorEquipment" to="." method="_on_BuyMatterReactorEquipment_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyPumpEquipment" to="." method="_on_BuyPumpEquipment_pressed"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/BuyScannerEquipment" to="." method="_on_BuyScannerEquipment_pressed"]

@@ -26,7 +26,7 @@ func _process(delta):
 func _ready():
 	state_manager = StateManager.new()
 	change_state("idle")
-	print('Actor Ready')
+#	print('Actor Ready')
 
 func set_path(value):
 	path = value

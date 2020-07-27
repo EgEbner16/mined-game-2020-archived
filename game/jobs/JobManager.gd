@@ -22,7 +22,7 @@ func create_tile_job(world_location: Vector2, layer: Layer):
 	job.layer_number = layer.number
 	add_child(job)
 	job_location_list[job.get_path()] = job.world_location_offset
-	print(job_location_list[job.get_path()])
+#	print(job_location_list[job.get_path()])
 
 func remove_tile_job(world_location: Vector2, layer: Layer):
 	var tile_location = layer.dig_tile_map.world_to_map(world_location)

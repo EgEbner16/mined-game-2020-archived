@@ -1,9 +1,11 @@
 extends Node2D
 
+class_name Game
+
 onready var hud = $InterfaceManager/HUD
 
 onready var resource_manager: ResourceManager = $ResourceManager
-onready var world = $World
+onready var world: GameWorld = $World
 
 
 func _ready():
