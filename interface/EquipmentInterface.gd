@@ -15,10 +15,12 @@ func place_equipment():
 	equipment_placement.show()
 
 func _on_BuyCollectorEquipment_pressed():
+	equipment_name_selected = 'collector'
 	place_equipment()
 
 
 func _on_BuyDistributorEquipment_pressed():
+	equipment_name_selected = 'distributor'
 	place_equipment()
 
 
@@ -28,16 +30,20 @@ func _on_BuyGeneratorEquipment_pressed():
 
 
 func _on_BuyMatterReactorEquipment_pressed():
+	equipment_name_selected = 'matter_reactor'
 	place_equipment()
 
 
 func _on_BuyPumpEquipment_pressed():
+	equipment_name_selected = 'pump'
 	place_equipment()
 
 
 func _on_BuyScannerEquipment_pressed():
+	equipment_name_selected = 'scanner'
 	place_equipment()
 
 func _input(event):
 	if Input.is_action_just_released("action_primary") and interface_manager.interface_state == 'equipment' and equipment_placement.is_valid():
-		equipment_manager.create_equipment(equipment_name_selected, equipment_placement.active_layer.number, equipment_placement.position)
+		if equipment_manager.create_equipment(equipment_name_selected, equipment_placement.active_layer.number, equipment_placement.position):
+			equipment_placement.hide()

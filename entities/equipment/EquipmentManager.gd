@@ -4,6 +4,11 @@ class_name EquipmentManager
 
 const MINING_CORE = preload("res://entities/equipment/MiningCore.tscn")
 const GENERATOR = preload("res://entities/equipment/Generator.tscn")
+const COLLECTOR = preload("res://entities/equipment/Collector.tscn")
+const MATTER_REACTOR = preload("res://entities/equipment/MatterReactor.tscn")
+const DISTRIBUTOR = preload("res://entities/equipment/Distributor.tscn")
+const PUMP  = preload("res://entities/equipment/Pump.tscn")
+const SCANNER = preload("res://entities/equipment/Scanner.tscn")
 
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 onready var resource_handler: ResourceHandler = ResourceHandler.new()
@@ -24,15 +29,55 @@ func _init():
 func _ready():
 	pass
 
-func create_equipment(equipment_name: String, layer: int, world_location: Vector2) -> void:
+func create_equipment(equipment_name: String, layer: int, world_location: Vector2) -> bool:
 	var active_layer = get_parent().get_node('Layer_%s' % layer)
 	if equipment.has(equipment_name):
 		if equipment_name == 'mining_core':
 			if create_mining_core(layer, world_location):
 				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
-		if equipment_name == 'generator':
+				return true
+			else:
+				return false
+		elif equipment_name == 'generator':
 			if create_generator(layer, world_location):
 				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'collector':
+			if create_collector(layer, world_location):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'distributor':
+			if create_distributor(layer, world_location):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'matter_reactor':
+			if create_matter_reactor(layer, world_location):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'pump':
+			if create_pump(layer, world_location):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'scanner':
+			if create_scanner(layer, world_location):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		else:
+			return false
+	else:
+		return false
 
 func create_mining_core(layer: int, world_location: Vector2) ->  bool:
 	var mining_core = MINING_CORE.instance()
@@ -47,7 +92,6 @@ func create_mining_core(layer: int, world_location: Vector2) ->  bool:
 		return false
 
 func create_generator(layer: int, world_location: Vector2) -> bool:
-	print('Building Generator at %s' % world_location)
 	var generator = GENERATOR.instance()
 	if resource_manager.use_capital(generator.resource_handler.capital_cost):
 		generator.add_to_group('equipment')
@@ -55,6 +99,66 @@ func create_generator(layer: int, world_location: Vector2) -> bool:
 		generator.name = 'generator'
 		generator.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer).add_child(generator)
+		return true
+	else:
+		return false
+
+func create_collector(layer: int, world_location: Vector2) -> bool:
+	var collector = COLLECTOR.instance()
+	if resource_manager.use_capital(collector.resource_handler.capital_cost):
+		collector.add_to_group('equipment')
+		collector.add_to_group('power_equipment')
+		collector.name = 'collector'
+		collector.position = world_location
+		get_node('/root/Game/World/Layer_%s' % layer).add_child(collector)
+		return true
+	else:
+		return false
+
+func create_distributor(layer: int, world_location: Vector2) -> bool:
+	var distributor = DISTRIBUTOR.instance()
+	if resource_manager.use_capital(distributor.resource_handler.capital_cost):
+		distributor.add_to_group('equipment')
+		distributor.add_to_group('power_equipment')
+		distributor.name = 'distributor'
+		distributor.position = world_location
+		get_node('/root/Game/World/Layer_%s' % layer).add_child(distributor)
+		return true
+	else:
+		return false
+
+func create_matter_reactor(layer: int, world_location: Vector2) -> bool:
+	var matter_reactor = MATTER_REACTOR.instance()
+	if resource_manager.use_capital(matter_reactor.resource_handler.capital_cost):
+		matter_reactor.add_to_group('equipment')
+		matter_reactor.add_to_group('power_equipment')
+		matter_reactor.name = 'matter_reactor'
+		matter_reactor.position = world_location
+		get_node('/root/Game/World/Layer_%s' % layer).add_child(matter_reactor)
+		return true
+	else:
+		return false
+
+func create_pump(layer: int, world_location: Vector2) -> bool:
+	var pump = PUMP.instance()
+	if resource_manager.use_capital(pump.resource_handler.capital_cost):
+		pump.add_to_group('equipment')
+		pump.add_to_group('coolant_equipment')
+		pump.name = 'pump'
+		pump.position = world_location
+		get_node('/root/Game/World/Layer_%s' % layer).add_child(pump)
+		return true
+	else:
+		return false
+
+func create_scanner(layer: int, world_location: Vector2) -> bool:
+	var scanner = SCANNER.instance()
+	if resource_manager.use_capital(scanner.resource_handler.capital_cost):
+		scanner.add_to_group('equipment')
+		scanner.add_to_group('power_equipment')
+		scanner.name = 'scanner'
+		scanner.position = world_location
+		get_node('/root/Game/World/Layer_%s' % layer).add_child(scanner)
 		return true
 	else:
 		return false
