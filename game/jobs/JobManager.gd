@@ -16,6 +16,7 @@ func _ready():
 func create_tile_job(world_location: Vector2, layer: WorldLayer):
 	var job: Job = JOB.instance()
 	job.add_to_group('jobs')
+	job.set_type('digging')
 	job.tile_location = layer.dig_tile_map.world_to_map(world_location)
 	job.world_location = layer.dig_tile_map.map_to_world(job.tile_location)
 	job.name = 'dig_l%s_x%s_y%s' % [layer.number, job.tile_location.x, job.tile_location.y]
@@ -29,6 +30,15 @@ func remove_tile_job(world_location: Vector2, layer: WorldLayer):
 	get_node('dig_l%s_x%s_y%s' % [layer.number, tile_location.x, tile_location.y]).queue_free()
 
 func create_equipment_job(equipment: Equipment):
+	pass
+
+func remove_equipment_job(equipment: Equipment):
+	pass
+	
+func create_material_job(material: Material):
+	pass
+	
+func remove_material_job(material: Material):
 	pass
 
 func clean_up_jobs():

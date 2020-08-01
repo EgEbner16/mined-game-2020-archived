@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var resource_handler: ResourceHandler = ResourceHandler.new()
+var resource_handler: ResourceHandler = ResourceHandler.new()
 
 func set_color(color: String) -> void:
 	if color == 'red':
