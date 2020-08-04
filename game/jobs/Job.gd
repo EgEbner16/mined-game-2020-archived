@@ -25,17 +25,38 @@ var world_location_offset: Vector2 = Vector2.ZERO
 var tile_size: int = ProjectSettings.get_setting('game/config/tile_size')
 var tile_offset: int = tile_size / 2
 var layer_number: int
+var object_node_path: String
 
 var type_choices: Dictionary = {
-		'diggin': 'Digging Material',
+		'digging': 'Digging Material',
 		'material': 'Transport Material',
 		'equipment': 'Building Equipment',
+		'service': 'Service Equipmet or Drone',
 	}
 
 var type: String
 
 func _ready():
 	world_location_offset = Vector2(world_location.x + tile_offset, world_location.y + tile_offset)
+
+func setup(world_location: Vector2, layer, type: String) -> void:
+	self.add_to_group('jobs')
+	self.add_to_group('%s_jobs' % type)
+	self.set_type(type)
+	self.tile_location = layer.dig_tile_map.world_to_map(world_location)
+	self.layer_number = layer.number
+	if self.type == 'digging':
+		self.name = 'digging_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
+		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
+	if self.type == 'material':
+		self.name = 'material_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
+		self.world_location = world_location
+	if self.type == 'equipment':
+		self.name = 'equipment_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
+		self.world_location = world_location
+	if self.type == 'service':
+		self.name = 'service_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
+		self.world_location = world_location
 
 func set_type(type: String):
 	if type_choices.has(type):
@@ -44,13 +65,13 @@ func set_type(type: String):
 func get_work_tile_location(position: String) -> Vector2:
 	if position == 'north':
 		return Vector2(tile_location.x, tile_location.y - 1)
-	elif position == 'east':
+	if position == 'east':
 		return Vector2(tile_location.x + 1, tile_location.y)
-	elif position == 'south':
+	if position == 'south':
 		return Vector2(tile_location.x, tile_location.y + 1)
-	elif position == 'west':
+	if position == 'west':
 		return Vector2(tile_location.x - 1, tile_location.y)
-	elif position == 'center':
+	if position == 'center':
 		return tile_location
 	else:
 		return tile_location
@@ -58,16 +79,18 @@ func get_work_tile_location(position: String) -> Vector2:
 func get_work_world_location(position: String) -> Vector2:
 	if position == 'north':
 		return Vector2(world_location.x + tile_offset,  world_location.y - 8)
-	elif position == 'east':
+	if position == 'east':
 		return Vector2(world_location.x + tile_size + 8, world_location.y + tile_offset)
-	elif position == 'south':
+	if position == 'south':
 		return Vector2(world_location.x + tile_offset, world_location.y + tile_size + 8)
-	elif position == 'west':
+	if position == 'west':
 		return Vector2(world_location.x - 8, world_location.y + tile_offset)
-	elif position == 'center':
+	if position == 'center':
 		return world_location
 	else:
 		return world_location
 
 func _exit_tree():
-	get_parent().job_location_list.erase(self.get_path())
+		get_parent().job_location_list[self.type].erase(self.get_path())
+
+

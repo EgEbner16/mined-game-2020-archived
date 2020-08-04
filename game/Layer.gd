@@ -37,7 +37,7 @@ func get_navigation_path(start: Vector2, end: Vector2):
 
 func set_dig_tile(world_location: Vector2) -> bool:
 	var tile = dig_tile_map.world_to_map(world_location)
-	if dig_tile_map.get_cellv(tile) == -1 and terrain_tile_map.get_cellv(tile) >= 4 and terrain_tile_map.get_cellv(tile) <= 15 :
+	if dig_tile_map.get_cellv(tile) == -1 and terrain_tile_map.get_cellv(tile) >= 4 and terrain_tile_map.get_cellv(tile) < 15 :
 		dig_tile_map.set_cellv(tile, 0)
 		dig_tile_map.update_bitmask_area(tile)
 		return true

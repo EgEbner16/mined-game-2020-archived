@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name GameMaterial
+
 var resource_handler: ResourceHandler = ResourceHandler.new()
 
 func set_color(color: String) -> void:

@@ -2,11 +2,11 @@ extends Actor
 
 class_name MiningDrone
 
+onready var material_manager: MaterialManager = get_node('/root/Game/World/MaterialManager')
+
 var digging = false
 var digging_timer = 0.0
 var digging_speed = 10.0
-var job_node_path = null
-var job_position = null
 
 func _init():
 	resource_handler.capital_cost = 1500
@@ -27,7 +27,8 @@ func _process(delta):
 				if digging_timer > digging_speed:
 					var layer = get_parent()
 					layer.tile_manager.set_tile_index(job.tile_location, 1)
-					get_node('/root/Game/ResourceManager').gain_material(1000)
+					material_manager.create_material(self.position, layer)
+#					get_node('/root/Game/ResourceManager').gain_material(1000)
 					clear_to_idle()
 
 			elif working and state_manager.current_state == 'idle':
@@ -37,7 +38,7 @@ func _process(delta):
 					if job.layer_number == layer.number:
 #						print ('Job is on same layer')
 						if layer.terrain_tile_map.world_to_map(position) == job.get_work_tile_location(job_position):
-							print('Currently at Job')
+							print('Mining Drone Arrived at Job')
 							self.state.looking_point = job.world_location_offset
 							digging = true
 						else:

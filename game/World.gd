@@ -32,8 +32,8 @@ func _process(delta):
 
 	if Input.is_action_pressed("action_primary") and interface_manager.interface_state == 'game':
 		if(active_layer.set_dig_tile(get_global_mouse_position())):
-			job_manager.create_tile_job(get_global_mouse_position(), active_layer)
+			job_manager.create_job(get_global_mouse_position(), active_layer, 'digging')
 
 	if Input.is_action_pressed("action_cancel") and interface_manager.interface_state == 'game':
 		if(active_layer.unset_dig_tile(get_global_mouse_position())):
-			job_manager.remove_tile_job(get_global_mouse_position(), active_layer)
+			job_manager.remove_job(get_global_mouse_position(), active_layer, 'digging')

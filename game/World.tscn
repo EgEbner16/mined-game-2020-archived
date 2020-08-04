@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/jobs/JobManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/World.gd" type="Script" id=2]
 [ext_resource path="res://entities/equipment/EquipmentManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/actors/drones/DroneManager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/material/MaterialManager.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -13,3 +14,5 @@ script = ExtResource( 2 )
 [node name="DroneManager" parent="." instance=ExtResource( 4 )]
 
 [node name="EquipmentManager" parent="." instance=ExtResource( 3 )]
+
+[node name="MaterialManager" parent="." instance=ExtResource( 5 )]

@@ -12,5 +12,6 @@ limit_smoothed = true
 smoothing_enabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.294118 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )

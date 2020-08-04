@@ -6,6 +6,9 @@ onready var entity = $Entity
 
 var working = false
 
+var job_node_path = null
+var job_position = null
+
 var resource_handler: ResourceHandler = ResourceHandler.new()
 
 var state: State
