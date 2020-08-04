@@ -2,7 +2,7 @@ extends Node2D
 
 class_name State
 
-var speed = 200.0
+var speed = 150.0
 var looking_point: Vector2
 var path: PoolVector2Array
 var change_state

@@ -114,7 +114,7 @@ func _process(delta):
 					for job_path in job_path_list:
 						var job = get_node(job_path_list[job_path])
 						if not job.assigned_units['center']:
-							print('Logist Drone Found')
+#							print('Logist Drone Found')
 							logistic_drone.job_node_path = job.get_path()
 							logistic_drone.job_position = 'center'
 							logistic_drone.working = true

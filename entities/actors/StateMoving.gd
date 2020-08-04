@@ -5,7 +5,7 @@ class_name StateMoving
 func _ready():
 	self.path = entity.path
 
-func _process(delta):
+func _physics_process(delta):
 	var move_distance = self.speed * delta
 	move_along_path(move_distance)
 
@@ -30,6 +30,8 @@ func move_along_path(distance):
 				distance = 0.0
 
 			starting_point = path[0]
+			position = path[0]
 			path.remove(0)
+			break
 	else:
 		self.new_state = 'idle'

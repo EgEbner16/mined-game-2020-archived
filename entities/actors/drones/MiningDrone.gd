@@ -38,7 +38,7 @@ func _process(delta):
 					if job.layer_number == layer.number:
 #						print ('Job is on same layer')
 						if layer.terrain_tile_map.world_to_map(position) == job.get_work_tile_location(job_position):
-							print('Mining Drone Arrived at Job')
+#							print('Mining Drone Arrived at Job')
 							self.state.looking_point = job.world_location_offset
 							digging = true
 						else:
