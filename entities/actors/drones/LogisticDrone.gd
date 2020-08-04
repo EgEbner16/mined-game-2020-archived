@@ -19,14 +19,12 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if carrying_load:
-				if position.distance_to(drop_off_location) <= 20.0:
+				if position.distance_to(drop_off_location) <= 3.0:
 					print('Logistic Drone at Drop off Point')
 					var job = get_node(job_node_path)
 					get_node('/root/Game/ResourceManager').gain_material(resource_handler.material)
 					resource_handler.material = 0
 					clear_to_idle()
-				else:
-					var layer = get_parent()
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
