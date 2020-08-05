@@ -86,6 +86,7 @@ func create_mining_core(layer: int, world_location: Vector2) ->  bool:
 		mining_core.add_to_group('core_equipment')
 		mining_core.name = 'mining_core'
 		mining_core.position = world_location
+		mining_core.set_constructed()
 		get_node('/root/Game/World/Layer_%s' % layer).add_child(mining_core)
 		return true
 	else:
