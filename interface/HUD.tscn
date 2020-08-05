@@ -35,6 +35,9 @@ margin_left = 35.0
 margin_right = 81.0
 text = "Drones"
 
+[node name="Value" parent="Control/TopBar/LeftSide/DroneHUDItem" index="1"]
+custom_colors/font_color = Color( 0, 0.784314, 0.0117647, 1 )
+
 [node name="JobHUDItem" parent="Control/TopBar/LeftSide" instance=ExtResource( 5 )]
 margin_left = 133.0
 margin_right = 250.0

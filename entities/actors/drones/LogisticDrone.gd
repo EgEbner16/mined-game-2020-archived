@@ -20,7 +20,7 @@ func _process(delta):
 		if has_node(job_node_path):
 			if carrying_load:
 				if position.distance_to(drop_off_location) <= 3.0:
-					print('Logistic Drone at Drop off Point %s' % self.name)
+#					print('Logistic Drone at Drop off Point %s' % self.name)
 					var job = get_node(job_node_path)
 					get_node('/root/Game/ResourceManager').gain_material(resource_handler.material)
 					resource_handler.material = 0

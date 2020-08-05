@@ -77,7 +77,9 @@ func _process(delta):
 		var power_usage_percentage: int = int((power_usage_value / power_display) * 100)
 		power_hud_value.text = '%smw %s%%' % [number_format(int(power_display)), power_usage_percentage]
 		if power_usage_percentage >= 100:
-			power_hud_value.set("custom_colors/font_color",Color(200,0,0,255))
+			power_hud_value.set("custom_colors/font_color",Color(0.8,0,0,1.0))
+		else:
+			power_hud_value.set("custom_colors/font_color",Color(0,0.8,0,1.0))
 	else:
 		power_hud_value.text = '%smw %s%%' % [number_format(int(power_display)), int(0)]
 
@@ -86,7 +88,12 @@ func _process(delta):
 		if coolant_value - coolant_display <= HUD_LERP_THRESHOLD and coolant_value - coolant_display >= HUD_LERP_THRESHOLD * -1:
 			coolant_display = coolant_value
 	if coolant_usage_value != 0 and coolant_display != 0:
-		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), int((coolant_usage_value / coolant_display) * 100)]
+		var coolant_usage_percentage: int = int((coolant_usage_value / coolant_display) * 100)
+		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), coolant_usage_percentage]
+		if coolant_usage_percentage >= 100:
+			coolant_hud_value.set("custom_colors/font_color",Color(0.8,0,0,1.0))
+		else:
+			coolant_hud_value.set("custom_colors/font_color",Color(0,0.8,0,1.0))
 	else:
 		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), int(0)]
 

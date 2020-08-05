@@ -46,17 +46,17 @@ func setup(world_location: Vector2, layer, type: String) -> void:
 	self.tile_location = layer.dig_tile_map.world_to_map(world_location)
 	self.layer_number = layer.number
 	if self.type == 'digging':
-		self.name = 'digging_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
 		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
+		self.name = 'digging_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
 	if self.type == 'material':
+		self.world_location = world_location
 		self.name = 'material_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
-		self.world_location = world_location
 	if self.type == 'equipment':
-		self.name = 'equipment_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
-		self.world_location = world_location
+		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
+		self.name = 'equipment_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
 	if self.type == 'service':
-		self.name = 'service_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
 		self.world_location = world_location
+		self.name = 'service_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
 
 func set_type(type: String):
 	if type_choices.has(type):
