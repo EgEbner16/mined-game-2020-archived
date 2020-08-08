@@ -4,18 +4,18 @@ class_name Tile
 
 var location: Vector2 = Vector2.ZERO
 var health: float = 0.0
+var mass: float = 0.0
 var index: int = 0
 
 func _init(tile_location: Vector2, tile_index: int):
 	self.location = tile_location
 	self.index = tile_index
-	self.health = tile_index * 10.0
+	self.health = tile_index * tile_index * 100.0
+	self.mass = tile_index * tile_index * 100.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func remove_health(amount: float):
+	self.health -= amount
+#	print('Tile %s has %s health' % [location, health])

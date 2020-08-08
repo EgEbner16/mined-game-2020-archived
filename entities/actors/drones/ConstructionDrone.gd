@@ -26,7 +26,7 @@ func _process(delta):
 					equipment.constructed += (constructing_power * delta)
 				else:
 					equipment.constructed = 100.0
-					print('Done!!!')
+#					print('Done!!!')
 					clear_to_idle()
 
 			elif working and state_manager.current_state == 'idle':

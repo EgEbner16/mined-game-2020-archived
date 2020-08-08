@@ -8,7 +8,7 @@ var job_location_list: Dictionary
 
 var job_search_delay: float = 0.05
 var job_search_timer: float = 0.0
-var job_success_limit: int = 20
+var job_success_limit: int = 10
 
 func _init():
 	self.job_location_list['digging'] = Dictionary()
@@ -56,6 +56,7 @@ func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Di
 	return job_closest_list
 
 func job_accessibility(job, drone):
+	print('%s Accessibility Check' % drone.name)
 	job.accessibility = get_node('/root/Game/World/Layer_%s' % job.layer_number).tile_manager.get_accessibility(job.tile_location)
 	if job.accessibility['north'] or job.accessibility['east'] or job.accessibility['south'] or job.accessibility['west']:
 		if job_direction(job, drone, 'north'):
@@ -78,31 +79,83 @@ func job_direction(job, drone, direction: String) -> bool:
 		return false
 
 
-func _process(delta):
-	job_search_timer += delta
-	var job_found: bool = true
-	var job_success: int = 0
-	if job_search_timer > job_search_delay:
-		job_search_timer = 0.0
+#func _process(delta):
+#	job_search_timer += delta
+#	var job_found: bool = true
+#	var job_success: int = 0
+#	var process_jobs = true
+#	if job_search_timer > job_search_delay and process_jobs:
+#		job_search_timer = 0.0
+#
+#		if get_tree().get_nodes_in_group("digging_jobs").size() > 0:
+#			for mining_drone in get_tree().get_nodes_in_group('mining_drones'):
+#				if not mining_drone.working:
+#					job_found = false
+#					var job_path_list = get_closest_job_node_paths(mining_drone.position, 'digging')
+#					for job_path in job_path_list:
+#						var job = get_node(job_path_list[job_path])
+#						if job_accessibility(job, mining_drone):
+#							job_found = true
+#							job_success += 1
+#							break
+#				if not job_found or job_success >= job_success_limit:
+#					print('Mining Success %s' % job_success)
+#					break
+#
+#		if get_tree().get_nodes_in_group("material_jobs").size() > 0:
+#			for logistic_drone in get_tree().get_nodes_in_group('logistic_drones'):
+#				if not logistic_drone.working:
+#					job_found = false
+#					var job_path_list = get_closest_job_node_paths(logistic_drone.position, 'material')
+#					for job_path in job_path_list:
+#						var job = get_node(job_path_list[job_path])
+#						if not job.assigned_units['center']:
+#							logistic_drone.job_node_path = job.get_path()
+#							logistic_drone.job_position = 'center'
+#							logistic_drone.working = true
+#							job.assigned_units['center'] = logistic_drone
+#							job_found = true
+#							job_success += 1
+#							break
+#				if not job_found or job_success >= job_success_limit:
+#					print('Logistic Success %s' % job_success)
+#					break
+#
+#		if get_tree().get_nodes_in_group("equipment_jobs").size() > 0:
+#			for construction_drone in get_tree().get_nodes_in_group('construction_drones'):
+#				if not construction_drone.working:
+#					job_found = false
+#					var job_path_list = get_closest_job_node_paths(construction_drone.position, 'equipment')
+#					for job_path in job_path_list:
+#						var job = get_node(job_path_list[job_path])
+#						if job_accessibility(job, construction_drone):
+#							job_found = true
+#							job_success += 1
+#							break
+#				if not job_found or job_success >= job_success_limit:
+#					print('Construction Success %s' % job_success)
+#					break
 
+func _physics_process(delta):
+	var job_found: bool = false
+
+	if not job_found:
 		if get_tree().get_nodes_in_group("digging_jobs").size() > 0:
 			for mining_drone in get_tree().get_nodes_in_group('mining_drones'):
 				if not mining_drone.working:
-					job_found = false
 					var job_path_list = get_closest_job_node_paths(mining_drone.position, 'digging')
 					for job_path in job_path_list:
 						var job = get_node(job_path_list[job_path])
 						if job_accessibility(job, mining_drone):
 							job_found = true
-							job_success += 1
 							break
-				if not job_found or job_success >= job_success_limit:
+				if job_found:
 					break
 
+	if not job_found:
 		if get_tree().get_nodes_in_group("material_jobs").size() > 0:
 			for logistic_drone in get_tree().get_nodes_in_group('logistic_drones'):
 				if not logistic_drone.working:
-					job_found = false
 					var job_path_list = get_closest_job_node_paths(logistic_drone.position, 'material')
 					for job_path in job_path_list:
 						var job = get_node(job_path_list[job_path])
@@ -112,22 +165,20 @@ func _process(delta):
 							logistic_drone.working = true
 							job.assigned_units['center'] = logistic_drone
 							job_found = true
-							job_success += 1
 							break
-				if not job_found or job_success >= job_success_limit:
+				if job_found:
 					break
 
+	if not job_found:
 		if get_tree().get_nodes_in_group("equipment_jobs").size() > 0:
 			for construction_drone in get_tree().get_nodes_in_group('construction_drones'):
 				if not construction_drone.working:
-					job_found = false
 					var job_path_list = get_closest_job_node_paths(construction_drone.position, 'equipment')
 					for job_path in job_path_list:
 						var job = get_node(job_path_list[job_path])
 						if job_accessibility(job, construction_drone):
 							job_found = true
-							job_success += 1
 							break
-				if not job_found or job_success >= job_success_limit:
+				if job_found:
 					break
 

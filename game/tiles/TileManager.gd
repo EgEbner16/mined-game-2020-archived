@@ -27,16 +27,88 @@ func _ready():
 		15: {'type': 'Blank', 'navigation': false},
 	}
 
+func damage_tile(tile_location: Vector2, amount) -> void:
+	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].remove_health(amount)
+
+func destroy_tile(tile_location: Vector2) -> bool:
+	if tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].health <= 0:
+		set_tile_index(tile_location, 1)
+		return true
+	else:
+		return false
+
 func create_tile(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]] = Tile.new(tile_location, index)
 
 func create_random_tile(tile_location: Vector2) -> void:
 	create_tile(tile_location, randi() % 10 + 4)
 
+func create_random_mass_tile(tile_location: Vector2) -> void:
+	if randi() % 4 == 1:
+		create_tile(tile_location, 5)
+	else:
+		create_tile(tile_location, 4)
+
+func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
+	var low_material: int
+	var high_material: int
+
+	if tier == 1:
+		low_material = 6
+		high_material = 7
+	if tier == 2:
+		low_material = 8
+		high_material = 9
+	if tier == 3:
+		low_material = 10
+		high_material = 11
+	if tier == 4:
+		low_material = 12
+		high_material = 13
+
+	var vein_min_x = tile_location.x - int(size / 2)
+	if vein_min_x < 0:
+		vein_min_x = 0
+	var vein_min_y = tile_location.y - int(size / 2)
+	if vein_min_y < 0:
+		vein_min_y = 0
+	var vein_max_x = tile_location.x + int(size / 2)
+	if vein_max_x > self.world_size.x:
+		vein_max_x = self.world_size.x
+	var vein_max_y = tile_location.y + int(size / 2)
+	if vein_max_y > self.world_size.y:
+		vein_max_y = self.world_size.y
+
+	for x in range(vein_min_x, vein_max_x):
+		for y in range(vein_min_y, vein_max_y):
+			if randi() % 4 == 1:
+				create_tile(Vector2(x, y), high_material)
+			elif randi() % 3 == 1:
+				create_tile(Vector2(x, y), low_material)
+			elif randi() % 2 == 1:
+				create_tile(Vector2(x, y), 5)
+
 func create_random_layer(world_size: Vector2) -> void:
+	var world_center = world_size / 2
+	var vein_avoid_size = 20
+	var vein_avoid_min_x = int(world_center.x - vein_avoid_size)
+	var vein_avoid_min_y = int(world_center.y - vein_avoid_size)
+	var vein_avoid_max_x = int(world_center.x + vein_avoid_size)
+	var vein_avoid_max_y = int(world_center.y + vein_avoid_size)
 	for x in range(world_size.x):
 		for y in range(world_size.y):
-			create_random_tile(Vector2(x, y))
+			create_random_mass_tile(Vector2(x, y))
+			if x in range(vein_avoid_min_x, vein_avoid_max_x) and y in range(vein_avoid_min_y, vein_avoid_max_y):
+				create_random_mass_tile(Vector2(x, y))
+			else:
+				if randi() % 2000 == 1:
+					create_vein(Vector2(x, y), 4, randi() % 8 + 4)
+				elif randi() % 1500 == 1:
+					create_vein(Vector2(x, y), 3, randi() % 10 + 5)
+				elif randi() % 1000 == 1:
+					create_vein(Vector2(x, y), 2, randi() % 12 + 6)
+				elif randi() % 500 == 1:
+					create_vein(Vector2(x, y), 1, randi() % 15 + 10)
 
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index = index

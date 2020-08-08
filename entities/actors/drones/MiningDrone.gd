@@ -5,8 +5,9 @@ class_name MiningDrone
 onready var material_manager: MaterialManager = get_node('/root/Game/World/MaterialManager')
 
 var digging = false
+var digging_power = 100.00
 var digging_timer = 0.0
-var digging_speed = 10.0
+var digging_speed = 4.0
 
 func _init():
 	resource_handler.capital_cost = 1500
@@ -25,11 +26,11 @@ func _process(delta):
 				var job = get_node(job_node_path)
 				digging_timer += delta
 				if digging_timer > digging_speed:
-					var layer = get_parent()
-					layer.tile_manager.set_tile_index(job.tile_location, 1)
-					material_manager.create_material(self.position, layer)
-#					get_node('/root/Game/ResourceManager').gain_material(1000)
-					clear_to_idle()
+					layer.tile_manager.damage_tile(job.tile_location, digging_power)
+					digging_timer = 0.0
+					material_manager.create_material(self.position, layer, digging_power * 10)
+					if layer.tile_manager.destroy_tile(job.tile_location):
+						clear_to_idle()
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
