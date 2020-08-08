@@ -7,11 +7,11 @@ var drop_off_location: Vector2
 
 func _init():
 	resource_handler.capital_cost = 500
-	resource_handler.power_usage = 5
-	resource_handler.coolant_usage = 2
+	base_resource_handler.power_usage = 5
+	base_resource_handler.coolant_usage = 2
 
 func _ready():
-	pass
+	self.drone = true
 
 func _process(delta):
 	position = state.position

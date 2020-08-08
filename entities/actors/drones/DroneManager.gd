@@ -10,8 +10,6 @@ const LOGISTIC_DRONE = preload("res://entities/actors/drones/LogisticDrone.tscn"
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 onready var resource_handler: ResourceHandler = ResourceHandler.new()
 
-
-
 func _ready():
 	pass # Replace with function body.
 

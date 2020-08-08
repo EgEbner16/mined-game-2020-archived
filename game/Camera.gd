@@ -5,7 +5,7 @@ const MAX_SPEED = 40.0
 const FRICTION = 10.0
 const ZOOM_SPEED = 10.0
 const ZOOM_MARGIN = 0.1
-const ZOOM_MIN = 0.5
+const ZOOM_MIN = 1.0
 const ZOOM_MAX = 2.0
 
 var velocity = Vector2.ZERO

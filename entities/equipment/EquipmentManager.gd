@@ -30,6 +30,31 @@ func _init():
 func _ready():
 	pass
 
+func get_closest_equipment(world_location: Vector2, layer, type: String):
+	if self.equipment.has(type):
+		var equipment_distance_list: Dictionary
+		for equipment in layer.get_nodes_in_group('%s_equipment' % type):
+			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path
+		var distance_array: Array = equipment_distance_list.keys()
+		distance_array.sort()
+		var equipment_closest_list: Dictionary
+		for distance in distance_array:
+			equipment_closest_list[distance] = equipment_distance_list[distance]
+			print(equipment_distance_list[distance])
+		return equipment_closest_list
+
+func get_distance_to_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true) -> float:
+	var distance: float = 2000.00
+	if self.equipment.has(type):
+		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
+			if equipment.entity.on or not equipment_is_on:
+				var distance_to_equipment: float = world_location.distance_to(equipment.position)
+				if distance_to_equipment < distance:
+					distance = distance_to_equipment
+		return distance
+	else:
+		return distance
+
 func create_equipment(equipment_name: String, layer: int, world_location: Vector2) -> bool:
 	var active_layer = get_parent().get_node('Layer_%s' % layer)
 	if equipment.has(equipment_name):
@@ -85,6 +110,7 @@ func create_mining_core(world_location: Vector2, layer) ->  bool:
 	if resource_manager.use_capital(mining_core.resource_handler.capital_cost):
 		mining_core.add_to_group('equipment')
 		mining_core.add_to_group('core_equipment')
+		mining_core.add_to_group('distributor_equipment')
 		mining_core.name = 'mining_core'
 		mining_core.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(mining_core)
@@ -123,7 +149,7 @@ func create_distributor(world_location: Vector2, layer) -> bool:
 	var distributor = DISTRIBUTOR.instance()
 	if resource_manager.use_capital(distributor.resource_handler.capital_cost):
 		distributor.add_to_group('equipment')
-		distributor.add_to_group('power_equipment')
+		distributor.add_to_group('distributor_equipment')
 		distributor.name = 'distributor'
 		distributor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(distributor)
