@@ -6,9 +6,9 @@ const JOB = preload("res://game/jobs/Job.tscn")
 
 var job_location_list: Dictionary
 
-var job_search_delay: float = 0.05
+var job_search_delay: float = 0.1
 var job_search_timer: float = 0.0
-var job_success_limit: int = 10
+var job_success_limit: int = 1
 
 func _init():
 	self.job_location_list['digging'] = Dictionary()
@@ -56,16 +56,19 @@ func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Di
 	return job_closest_list
 
 func job_accessibility(job, drone):
-	print('%s Accessibility Check' % drone.name)
-	job.accessibility = get_node('/root/Game/World/Layer_%s' % job.layer_number).tile_manager.get_accessibility(job.tile_location)
-	if job.accessibility['north'] or job.accessibility['east'] or job.accessibility['south'] or job.accessibility['west']:
+#	print('%s Accessibility Check' % drone.name)
+	job.accessibility = drone.layer.tile_manager.get_accessibility(job.tile_location)
+	if job.accessibility['north']:
 		if job_direction(job, drone, 'north'):
 			return true
-		elif job_direction(job, drone, 'east'):
+	elif job.accessibility['east']:
+		if job_direction(job, drone, 'east'):
 			return true
-		elif job_direction(job, drone, 'south'):
+	elif job.accessibility['south']:
+		if job_direction(job, drone, 'south'):
 			return true
-		elif job_direction(job, drone, 'west'):
+	elif job.accessibility['west']:
+		if job_direction(job, drone, 'west'):
 			return true
 
 func job_direction(job, drone, direction: String) -> bool:
@@ -89,7 +92,7 @@ func _process(delta):
 
 		if get_tree().get_nodes_in_group("digging_jobs").size() > 0:
 			for mining_drone in get_tree().get_nodes_in_group('mining_drones'):
-				if not mining_drone.working:
+				if not mining_drone.working and mining_drone.check_map_key():
 					job_found = false
 					var job_path_list = get_closest_job_node_paths(mining_drone.position, 'digging')
 					for job_path in job_path_list:
@@ -99,7 +102,7 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Mining Success %s' % job_success)
+#					print('Mining Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("material_jobs").size() > 0:
@@ -118,7 +121,7 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Logistic Success %s' % job_success)
+#					print('Logistic Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("equipment_jobs").size() > 0:
@@ -133,5 +136,5 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Construction Success %s' % job_success)
+#					print('Construction Success %s' % job_success)
 					break

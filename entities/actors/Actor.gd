@@ -8,6 +8,7 @@ var working = false
 
 var job_node_path = null
 var job_position = null
+var job_map_key: int = 0
 
 var resource_handler: ResourceHandler = ResourceHandler.new()
 var base_resource_handler: ResourceHandler = ResourceHandler.new()
@@ -37,6 +38,14 @@ func _ready():
 	state_manager = StateManager.new()
 	change_state("idle")
 #	print('Actor Ready')
+
+func check_map_key() -> bool:
+	if layer.tile_manager.map_key != job_map_key:
+		job_map_key = layer.tile_manager.map_key
+		return true
+	else:
+		job_map_key = layer.tile_manager.map_key
+		return false
 
 func set_path(value):
 	path = value

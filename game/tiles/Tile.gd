@@ -7,6 +7,14 @@ var health: float = 0.0
 var mass: float = 0.0
 var index: int = 0
 
+var accessibility: Dictionary = {
+	'north': false,
+	'east': false,
+	'south': false,
+	'west': false,
+	'center': false,
+}
+
 func _init(tile_location: Vector2, tile_index: int):
 	self.location = tile_location
 	self.index = tile_index

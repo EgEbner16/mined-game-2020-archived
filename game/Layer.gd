@@ -40,6 +40,7 @@ func set_dig_tile(world_location: Vector2) -> bool:
 	if dig_tile_map.get_cellv(tile) == -1 and terrain_tile_map.get_cellv(tile) >= 4 and terrain_tile_map.get_cellv(tile) < 15 :
 		dig_tile_map.set_cellv(tile, 0)
 		dig_tile_map.update_bitmask_area(tile)
+		tile_manager.change_map_key()
 		return true
 	else:
 		return false
@@ -49,6 +50,7 @@ func unset_dig_tile(world_location: Vector2) -> bool:
 	if dig_tile_map.get_cellv(tile) == 0:
 		dig_tile_map.set_cellv(tile, -1)
 		dig_tile_map.update_bitmask_area(tile)
+		tile_manager.change_map_key()
 		return true
 	else:
 		return false

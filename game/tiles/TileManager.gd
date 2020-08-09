@@ -7,7 +7,10 @@ var tile_map: Dictionary
 
 var world_size: Vector2 = ProjectSettings.get_setting('game/config/world_size')
 
+var map_key: int
+
 func _ready():
+	print(map_key)
 	index_information = {
 		0: {'type': 'Ground', 'navigation': true},
 		1: {'type': 'Mined Ground', 'navigation': true},
@@ -134,6 +137,11 @@ func update_tile(tile_location: Vector2) -> void:
 	if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index]['navigation']:
 		get_parent().shadow_tile_map.set_cellv(tile_location, 0)
 		get_parent().shadow_tile_map.update_bitmask_area(tile_location)
+	update_tile_area_accessibility(tile_location)
+	change_map_key()
+
+func change_map_key() -> void:
+	self.map_key = randi()
 
 func world_to_map(world_location: Vector2) -> Vector2:
 	return get_parent().terrain_tile_map.world_to_map(world_location)
@@ -141,32 +149,91 @@ func world_to_map(world_location: Vector2) -> Vector2:
 func map_to_world(map_location: Vector2) -> Vector2:
 	return get_parent().terrain_tile_map.map_to_world(map_location)
 
-func get_accessibility(tile_location: Vector2) -> Dictionary:
-	var accessibility: Dictionary = {
-		'north': false,
-		'east': false,
-		'south': false,
-		'west': false,
-	}
+func update_map_accessibility() -> void:
+	for x in range(world_size.x):
+		for y in range(world_size.y):
+			update_tile_accessibility(Vector2(x, y))
 
+func update_tile_area_accessibility(tile_location: Vector2) -> void:
+	#North
+	if tile_location.y > 0:
+		update_tile_accessibility(Vector2(tile_location.x, tile_location.y - 1))
+	#East
+	if tile_location.x < world_size.x - 1:
+		update_tile_accessibility(Vector2(tile_location.x + 1, tile_location.y))
+	#South
+	if tile_location.y < world_size.y - 1:
+		update_tile_accessibility(Vector2(tile_location.x, tile_location.y + 1))
+	#West
+	if tile_location.x > 0:
+		update_tile_accessibility(Vector2(tile_location.x - 1, tile_location.y))
+	#Center
+	update_tile_accessibility(tile_location)
+
+func update_tile_accessibility(tile_location: Vector2) -> void:
 	#North Check
 	if tile_location.y > 0:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y - 1]].index]['navigation']:
-			accessibility['north'] = true
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['north'] = true
+		else:
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['north'] = false
 
 	#East Check
-	if tile_location.x < world_size.x:
+	if tile_location.x < world_size.x - 1:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x + 1, tile_location.y]].index]['navigation']:
-			accessibility['east'] = true
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['east'] = true
+		else:
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['east'] = false
 
 	#South Check
-	if tile_location.y < world_size.y:
+	if tile_location.y < world_size.y - 1:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y + 1]].index]['navigation']:
-			accessibility['south'] = true
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['south'] = true
+		else:
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['south'] = false
 
 	#West Check
 	if tile_location.x > 0:
 		if index_information[tile_map['x%s_y%s' % [tile_location.x - 1, tile_location.y]].index]['navigation']:
-			accessibility['west'] = true
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['west'] = true
+		else:
+			tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['west'] = false
 
-	return accessibility
+	#Center Check
+	if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].index]['navigation']:
+		tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['center'] = true
+	else:
+		tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['center'] = false
+
+func get_accessibility(tile_location: Vector2) -> Dictionary:
+	return tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility
+
+#func get_accessibility(tile_location: Vector2) -> Dictionary:
+#	var accessibility: Dictionary = {
+#		'north': false,
+#		'east': false,
+#		'south': false,
+#		'west': false,
+#	}
+#
+#	#North Check
+#	if tile_location.y > 0:
+#		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y - 1]].index]['navigation']:
+#			accessibility['north'] = true
+#
+#	#East Check
+#	if tile_location.x < world_size.x:
+#		if index_information[tile_map['x%s_y%s' % [tile_location.x + 1, tile_location.y]].index]['navigation']:
+#			accessibility['east'] = true
+#
+#	#South Check
+#	if tile_location.y < world_size.y:
+#		if index_information[tile_map['x%s_y%s' % [tile_location.x, tile_location.y + 1]].index]['navigation']:
+#			accessibility['south'] = true
+#
+#	#West Check
+#	if tile_location.x > 0:
+#		if index_information[tile_map['x%s_y%s' % [tile_location.x - 1, tile_location.y]].index]['navigation']:
+#			accessibility['west'] = true
+#
+#	return accessibility
