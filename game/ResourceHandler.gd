@@ -13,6 +13,7 @@ var material_production: float = 0.0
 
 var power: float = 0.0
 var power_usage: float = 0.0
+var power_usage_percentage: float = 0.0
 var power_production: float = 0.0
 
 var power_usage_pool: Dictionary
@@ -20,6 +21,7 @@ var power_production_pool: Dictionary
 
 var coolant: float = 0.0
 var coolant_usage: float = 0.0
+var coolant_usage_percentage: float = 0.0
 var coolant_production: float = 0.0
 
 var coolant_usage_pool: Dictionary
@@ -81,6 +83,7 @@ func calculate_power_and_coolant():
 
 	power = 0.0
 	power_usage = 0.0
+	power_usage_percentage = 0.0
 	power_production = 0.0
 
 	for key in power_usage_pool:
@@ -90,8 +93,11 @@ func calculate_power_and_coolant():
 		power += power_production_pool[key]
 		power_production += power_production_pool[key]
 
+	power_usage_percentage = (power_usage / power) * 100
+
 	coolant = 0.0
 	coolant_usage = 0.0
+	coolant_usage_percentage = 0.0
 	coolant_production = 0.0
 
 	for key in coolant_usage_pool:
@@ -101,6 +107,7 @@ func calculate_power_and_coolant():
 		coolant += coolant_production_pool[key]
 		coolant_production += coolant_production_pool[key]
 
+	coolant_usage_percentage = (coolant_usage / coolant) * 100
 
 func reset():
 	capital = 0.0

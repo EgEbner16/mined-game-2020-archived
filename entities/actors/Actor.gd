@@ -10,6 +10,9 @@ var job_node_path = null
 var job_position = null
 var job_map_key: int = 0
 
+var power_usage_percentage = 0.0
+var coolant_usage_percentage = 0.0
+
 var resource_handler: ResourceHandler = ResourceHandler.new()
 var base_resource_handler: ResourceHandler = ResourceHandler.new()
 
@@ -18,13 +21,14 @@ var drone_distance_to_distributor: float = 0.0
 
 onready var layer = get_parent()
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
+onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 
 var state: State
 var state_manager: StateManager
 
 var path = PoolVector2Array() setget set_path
 
-func _process(delta):
+func _physics_process(delta):
 
 	if state.new_state == 'idle':
 		change_state('idle')

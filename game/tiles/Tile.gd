@@ -2,6 +2,8 @@ extends Object
 
 class_name Tile
 
+var tile_data: TileData = TileData.new()
+
 var location: Vector2 = Vector2.ZERO
 var health: float = 0.0
 var mass: float = 0.0
@@ -15,15 +17,13 @@ var accessibility: Dictionary = {
 	'center': false,
 }
 
-func _init(tile_location: Vector2, tile_index: int):
+func _init(tile_location: Vector2, tile_data: TileData):
 	self.location = tile_location
-	self.index = tile_index
-	self.health = tile_index * tile_index * 100.0
-	self.mass = tile_index * tile_index * 100.0
+	self.tile_data.copy(tile_data)
 
 func _ready():
 	pass
 
 func remove_health(amount: float):
-	self.health -= amount
+	self.tile_data.health -= amount
 #	print('Tile %s has %s health' % [location, health])

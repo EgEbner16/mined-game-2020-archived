@@ -6,4 +6,4 @@ export var durability: float = 100.0
 export var on: bool = false
 
 func _ready():
-	pass # Replace with function body.
+	pass
