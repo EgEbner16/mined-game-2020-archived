@@ -34,7 +34,7 @@ func get_closest_equipment(world_location: Vector2, layer, type: String):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path()
+			equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest: String
@@ -45,7 +45,7 @@ func get_closest_equipment_list(world_location: Vector2, layer, type: String):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path()
+			equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest_list: Dictionary
@@ -59,7 +59,7 @@ func get_distance_to_closest_equipment(world_location: Vector2, layer, type: Str
 	if self.equipment.has(type):
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
 			if equipment.entity.on or not equipment_is_on:
-				var distance_to_equipment: float = world_location.distance_to(equipment.position)
+				var distance_to_equipment: float = world_location.distance_squared_to(equipment.position)
 				if distance_to_equipment < distance:
 					distance = distance_to_equipment
 		return distance

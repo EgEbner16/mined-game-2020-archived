@@ -45,7 +45,7 @@ func clean_up_jobs():
 func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Dictionary:
 	var job_distance_list: Dictionary
 	for job in job_location_list[job_type]:
-		job_distance_list[world_location.distance_to(job_location_list[job_type][job])] = job
+		job_distance_list[world_location.distance_squared_to(job_location_list[job_type][job])] = job
 #		print(world_location.distance_to(job_location_list[job]))
 	var distance_array: Array = job_distance_list.keys()
 	distance_array.sort()
