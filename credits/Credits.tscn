@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://credits/Credits.gd" type="Script" id=1]
+[ext_resource path="res://resources/mainfont.tres" type="DynamicFont" id=2]
+
+[node name="GodotCredits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTitle" type="Label" parent="."]
+margin_right = 883.0
+margin_bottom = 220.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+text = "MINED"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsContainer" type="Control" parent="."]
+anchor_left = 0.68
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line" type="Label" parent="CreditsContainer"]
+anchor_right = 1.0
+margin_top = 1080.0
+margin_bottom = 1094.0
+size_flags_horizontal = 3
+text = "Credits line"
+align = 1

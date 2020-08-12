@@ -43,8 +43,25 @@ func _process(delta):
 		$NinePatchRect.modulate = Color(0, 1, 0)
 	else:
 		$NinePatchRect.modulate = Color(1, 0, 0)
-	if active_layer.tile_manager.tile_is_empty(active_layer.tile_manager.world_to_map(get_global_mouse_position())):
-		valid_placement = true
-	else:
+	var tile_location: Vector2 = active_layer.tile_manager.world_to_map(get_global_mouse_position())
+	if not active_layer.tile_manager.tile_is_empty(tile_location):
 		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x - 1, tile_location.y - 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x, tile_location.y - 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x + 1, tile_location.y - 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x + 1, tile_location.y)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x + 1, tile_location.y + 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x, tile_location.y + 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x - 1, tile_location.y + 1)):
+		valid_placement = false
+	elif not active_layer.tile_manager.tile_is_empty(Vector2(tile_location.x - 1, tile_location.y)):
+		valid_placement = false
+	else:
+		valid_placement = true
 	self.position = active_layer.tile_manager.world_to_map(get_global_mouse_position()) * active_layer.tile_size

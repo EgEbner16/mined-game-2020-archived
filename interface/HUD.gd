@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+class_name HUD
+
 const HUD_UPDATE_SPEED = 5
 const HUD_LERP_THRESHOLD = 10
 
@@ -105,3 +107,4 @@ func _process(delta):
 	else:
 		layer_hud_value.text = str(layer_number)
 	pass
+

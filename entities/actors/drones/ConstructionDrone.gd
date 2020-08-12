@@ -6,7 +6,7 @@ var constructing = false
 var constructing_power = 1.0
 
 func _init():
-	resource_handler.capital_cost = 5000
+	resource_handler.capital_cost = 3000
 	base_resource_handler.power_usage = 5
 	base_resource_handler.coolant_usage = 2
 

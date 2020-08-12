@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://interface/HUDBottom.gd" type="Script" id=1]
+
+[node name="HUDBottom" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="LeftHBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.007
+anchor_top = 0.96
+anchor_right = 0.5
+anchor_bottom = 0.99
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DroneMenuButton" type="Button" parent="LeftHBoxContainer"]
+margin_right = 81.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0, 0.784314, 0.0117647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.784314, 0.0117647, 1 )
+text = "Drones (Q)"
+
+[node name="EquipmentMenuButton" type="Button" parent="LeftHBoxContainer"]
+margin_left = 89.0
+margin_right = 189.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0, 0.784314, 0.0117647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.784314, 0.0117647, 1 )
+text = "Equipment (E)"
+
+[node name="RightHBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.96
+anchor_right = 0.993
+anchor_bottom = 0.99
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialMenuButton" type="Button" parent="RightHBoxContainer"]
+margin_left = 552.0
+margin_right = 631.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0, 0.784314, 0.0117647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.784314, 0.0117647, 1 )
+text = "Tutorial (T)"
+[connection signal="pressed" from="LeftHBoxContainer/DroneMenuButton" to="." method="_on_DroneMenuButton_pressed"]
+[connection signal="pressed" from="LeftHBoxContainer/EquipmentMenuButton" to="." method="_on_EquipmentMenuButton_pressed"]
+[connection signal="pressed" from="RightHBoxContainer/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]

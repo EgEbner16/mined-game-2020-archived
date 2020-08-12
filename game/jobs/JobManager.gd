@@ -61,13 +61,13 @@ func job_accessibility(job, drone):
 	if job.accessibility['north']:
 		if job_direction(job, drone, 'north'):
 			return true
-	elif job.accessibility['east']:
+	if job.accessibility['east']:
 		if job_direction(job, drone, 'east'):
 			return true
-	elif job.accessibility['south']:
+	if job.accessibility['south']:
 		if job_direction(job, drone, 'south'):
 			return true
-	elif job.accessibility['west']:
+	if job.accessibility['west']:
 		if job_direction(job, drone, 'west'):
 			return true
 

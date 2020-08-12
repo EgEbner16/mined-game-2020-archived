@@ -33,8 +33,19 @@ func _ready():
 func get_closest_equipment(world_location: Vector2, layer, type: String):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
-		for equipment in layer.get_nodes_in_group('%s_equipment' % type):
-			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path
+		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
+			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path()
+		var distance_array: Array = equipment_distance_list.keys()
+		distance_array.sort()
+		var equipment_closest: String
+		equipment_closest = equipment_distance_list[distance_array[0]]
+		return equipment_closest
+
+func get_closest_equipment_list(world_location: Vector2, layer, type: String):
+	if self.equipment.has(type):
+		var equipment_distance_list: Dictionary
+		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
+			equipment_distance_list[world_location.distance_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest_list: Dictionary
@@ -111,6 +122,7 @@ func create_mining_core(world_location: Vector2, layer) ->  bool:
 		mining_core.add_to_group('equipment')
 		mining_core.add_to_group('core_equipment')
 		mining_core.add_to_group('distributor_equipment')
+		mining_core.add_to_group('collector_equipment')
 		mining_core.name = 'mining_core'
 		mining_core.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(mining_core)
@@ -136,7 +148,7 @@ func create_collector(world_location: Vector2, layer) -> bool:
 	var collector = COLLECTOR.instance()
 	if resource_manager.use_capital(collector.resource_handler.capital_cost):
 		collector.add_to_group('equipment')
-		collector.add_to_group('power_equipment')
+		collector.add_to_group('collector_equipment')
 		collector.name = 'collector'
 		collector.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(collector)

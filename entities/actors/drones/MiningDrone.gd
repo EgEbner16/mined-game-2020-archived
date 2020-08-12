@@ -11,7 +11,7 @@ var digging_speed = 4.0
 var base_digging_speed = 4.0
 
 func _init():
-	self.resource_handler.capital_cost = 1500
+	self.resource_handler.capital_cost = 4000
 	self.base_resource_handler.power_usage = 5
 	self.base_resource_handler.coolant_usage = 2
 

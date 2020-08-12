@@ -52,13 +52,13 @@ __meta__ = {
 margin_left = 973.0
 margin_right = 1223.0
 margin_bottom = 689.0
-custom_constants/separation = 32
+custom_constants/separation = 16
 alignment = 2
 
 [node name="Campaign" type="Button" parent="HBoxContainer/VBoxContainer"]
-margin_top = 349.0
+margin_top = 243.0
 margin_right = 250.0
-margin_bottom = 410.0
+margin_bottom = 304.0
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 8 )
@@ -67,12 +67,12 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
 disabled = true
-text = "campaign"
+text = "CAMPAIGN"
 
 [node name="Sandbox" type="Button" parent="HBoxContainer/VBoxContainer"]
-margin_top = 442.0
+margin_top = 320.0
 margin_right = 250.0
-margin_bottom = 503.0
+margin_bottom = 381.0
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 8 )
@@ -82,10 +82,10 @@ custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
 text = "sandbox"
 
-[node name="Options" type="Button" parent="HBoxContainer/VBoxContainer"]
-margin_top = 535.0
+[node name="Tutorial" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 397.0
 margin_right = 250.0
-margin_bottom = 596.0
+margin_bottom = 458.0
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 8 )
@@ -94,7 +94,34 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
 disabled = true
-text = "options"
+text = "TUTORIAL"
+
+[node name="Options" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 474.0
+margin_right = 250.0
+margin_bottom = 535.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+disabled = true
+text = "OPTIONS"
+
+[node name="Credits" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 551.0
+margin_right = 250.0
+margin_bottom = 612.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
+text = "CREDITS"
 
 [node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer"]
 margin_top = 628.0
@@ -107,8 +134,10 @@ custom_styles/disabled = ExtResource( 9 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.564706, 1, 0.54902, 1 )
-text = "exit"
+text = "EXIT"
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Campaign" to="." method="_on_Campaign_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Sandbox" to="." method="_on_Sandbox_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Tutorial" to="." method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

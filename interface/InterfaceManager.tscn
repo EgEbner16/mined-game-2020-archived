@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://interface/InterfaceManager.gd" type="Script" id=1]
 [ext_resource path="res://interface/DroneInterface.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://interface/EquipmentInterface.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interface/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/EquipmentPlacement.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interface/HUDBottom.tscn" type="PackedScene" id=7]
+[ext_resource path="res://interface/TutorialInterface.tscn" type="PackedScene" id=8]
 
 [node name="InterfaceManager" type="Node"]
 script = ExtResource( 1 )
@@ -15,6 +17,10 @@ script = ExtResource( 1 )
 [node name="DroneInterface" parent="." instance=ExtResource( 2 )]
 
 [node name="EquipmentInterface" parent="." instance=ExtResource( 4 )]
+
+[node name="TutorialInterface" parent="." instance=ExtResource( 8 )]
+
+[node name="HUDBottom" parent="." instance=ExtResource( 7 )]
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 3 )]
 

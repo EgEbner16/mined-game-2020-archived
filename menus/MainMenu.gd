@@ -7,14 +7,24 @@ func _ready():
 func _on_Campaign_pressed():
 	get_tree().change_scene("res://game/Game.tscn")
 
+func _on_Tutorial_pressed():
+	pass # Replace with function body.
+
 func _on_Sandbox_pressed():
-	get_tree().change_scene("res://game/Game.tscn")
+	get_tree().change_scene("res://menus/Loading.tscn")
 
 func _on_Options_pressed():
 	$OptionsMenu.open()
 
+func _on_Credits_pressed():
+	get_tree().change_scene("res://credits/Credits.tscn")
+
 func _on_Exit_pressed():
 	get_tree().quit()
+
+
+
+
 
 
 

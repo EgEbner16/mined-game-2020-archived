@@ -6,7 +6,7 @@ var carrying_load = false
 var drop_off_location: Vector2
 
 func _init():
-	resource_handler.capital_cost = 500
+	resource_handler.capital_cost = 2000
 	base_resource_handler.power_usage = 5
 	base_resource_handler.coolant_usage = 2
 
@@ -39,8 +39,10 @@ func _process(delta):
 								resource_handler.material = material.resource_handler.material
 #								print('Material Job with %s!!!' % material.resource_handler.material)
 								material.queue_free()
+								var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector'))
+								print(closest_collector.name)
 								var mining_core = get_node('/root/Game/World/Layer_0/mining_core/')
-								drop_off_location = mining_core.position
+								drop_off_location = closest_collector.position
 								set_path(layer.get_navigation_path(position, drop_off_location))
 								carrying_load = true
 						else:

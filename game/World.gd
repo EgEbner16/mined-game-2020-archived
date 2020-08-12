@@ -30,10 +30,19 @@ func _ready():
 func _process(delta):
 	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
 
-	if Input.is_action_pressed("action_primary") and interface_manager.interface_state == 'game':
+	if Input.is_action_pressed("action_primary") and interface_manager.interface_state == 'game' and mouse_check():
 		if(active_layer.set_dig_tile(get_global_mouse_position())):
 			job_manager.create_job(get_global_mouse_position(), active_layer, 'digging')
 
 	if Input.is_action_pressed("action_cancel") and interface_manager.interface_state == 'game':
 		if(active_layer.unset_dig_tile(get_global_mouse_position())):
 			job_manager.remove_job(get_global_mouse_position(), active_layer, 'digging')
+
+#stop mouse clicks over the bottom bar buttons
+func mouse_check() -> bool:
+	if get_viewport().get_mouse_position().x < 210 and get_viewport().get_mouse_position().y > 680:
+		return false
+	elif get_viewport().get_mouse_position().x > 1180 and get_viewport().get_mouse_position().y > 680:
+		return false
+	else:
+		return true
