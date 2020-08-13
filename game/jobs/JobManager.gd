@@ -8,7 +8,7 @@ var job_location_list: Dictionary
 
 var job_search_delay: float = 0.1
 var job_search_timer: float = 0.0
-var job_success_limit: int = 1
+var job_success_limit: int = 30
 
 func _init():
 	self.job_location_list['digging'] = Dictionary()
@@ -137,4 +137,23 @@ func _process(delta):
 							break
 				if not job_found or job_success >= job_success_limit:
 #					print('Construction Success %s' % job_success)
+					break
+
+		if get_tree().get_nodes_in_group("service_jobs").size() > 0:
+			for service_drone in get_tree().get_nodes_in_group('service_drones'):
+				if not service_drone.working:
+					job_found = false
+					var job_path_list = get_closest_job_node_paths(service_drone.position, 'service')
+					for job_path in job_path_list:
+						var job = get_node(job_path_list[job_path])
+						if not job.assigned_units['center']:
+							service_drone.job_node_path = job.get_path()
+							service_drone.job_position = 'center'
+							service_drone.working = true
+							job.assigned_units['center'] = service_drone
+							job_found = true
+							job_success += 1
+							break
+				if not job_found or job_success >= job_success_limit:
+#					print('Service Success %s' % job_success)
 					break

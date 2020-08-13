@@ -11,6 +11,10 @@ func _physics_process(delta):
 		move_distance = (self.speed - (self.entity.resource_manager.resource_handler.power_usage_percentage - 100)) * delta
 	else:
 		move_distance = self.speed * delta
+
+	if move_distance < (self.speed * delta * 0.2):
+		move_distance = self.speed * delta * 0.2
+
 	move_along_path(move_distance)
 
 func move_along_path(distance):

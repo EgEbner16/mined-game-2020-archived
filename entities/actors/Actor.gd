@@ -10,6 +10,8 @@ var job_node_path = null
 var job_position = null
 var job_map_key: int = 0
 
+var being_repaired: bool = false
+
 var power_usage_percentage = 0.0
 var coolant_usage_percentage = 0.0
 
@@ -21,6 +23,7 @@ var drone_distance_to_distributor: float = 0.0
 
 onready var layer = get_parent()
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
+onready var job_manager: JobManager = get_node('/root/Game/World/JobManager')
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 
 var state: State
@@ -68,6 +71,10 @@ func change_state(new_state_name):
 func change_layer(layer_number: int):
 	pass
 
+func repair():
+	self.entity.durability = 100.0
+	self.being_repaired = false
+
 func _on_Timer_timeout():
 	if drone:
 		self.drone_distance_to_distributor = equipment_manager.get_distance_to_closest_equipment(self.position, layer, 'distributor')
@@ -78,5 +85,8 @@ func _on_Timer_timeout():
 			multiplyer = 1.0 + ((drone_distance_to_distributor - free_distance) / free_distance)
 		resource_handler.power_usage = base_resource_handler.power_usage * multiplyer
 		resource_handler.coolant_usage = base_resource_handler.coolant_usage * multiplyer
+		if self.entity.need_repair() and not being_repaired:
+			job_manager.create_job(self.position, self.layer, 'service', self.get_path())
+			being_repaired = true
 #		print('Power Usage: %s' % resource_handler.power_usage)
 

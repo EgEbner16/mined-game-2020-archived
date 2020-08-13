@@ -32,7 +32,7 @@ func _process(delta):
 					if job.layer_number == self.layer.number:
 #						print ('Job is on same layer %s' % position.distance_to(job.get_work_world_location(job_position)))
 						if position.distance_to(job.get_work_world_location(job_position)) <= 16.0:
-#							print('Logistic Drone Arrived at Job')
+							#print('Logistic Drone Arrived at Job')
 							self.state.looking_point = job.world_location_offset
 							if job.type == 'material':
 								var material = get_node(job.object_node_path)
@@ -40,8 +40,7 @@ func _process(delta):
 #								print('Material Job with %s!!!' % material.resource_handler.material)
 								material.queue_free()
 								var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector'))
-								print(closest_collector.name)
-								var mining_core = get_node('/root/Game/World/Layer_0/mining_core/')
+#								print(closest_collector.name)
 								drop_off_location = closest_collector.position
 								set_path(layer.get_navigation_path(position, drop_off_location))
 								carrying_load = true

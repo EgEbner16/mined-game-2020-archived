@@ -16,16 +16,16 @@ func _ready():
 		1: TileData.new(1, 'Mined Ground', true, 0, 0, 0),
 		2: TileData.new(2, 'Compacted Ground', true, 0, 0, 0),
 		3: TileData.new(3, 'Renforced Ground', true, 0, 0, 0),
-		4: TileData.new(4, 'Mass', false, 200, 1, 10),
-		5: TileData.new(5, 'Solid Mass', false, 1000, 2, 15),
-		6: TileData.new(6, 'Low Value Tier 1', false, 2000, 4, 20),
-		7: TileData.new(7, 'High Value Tier 1', false, 4000, 6, 25),
-		8: TileData.new(8, 'Low Value Tier 2', false, 6000, 8, 30),
-		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 35),
-		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 40),
-		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 45),
+		4: TileData.new(4, 'Mass', false, 100, 1, 5),
+		5: TileData.new(5, 'Solid Mass', false, 1000, 2, 10),
+		6: TileData.new(6, 'Low Value Tier 1', false, 2000, 4, 15),
+		7: TileData.new(7, 'High Value Tier 1', false, 4000, 6, 20),
+		8: TileData.new(8, 'Low Value Tier 2', false, 6000, 8, 25),
+		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 30),
+		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 35),
+		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 40),
 		12: TileData.new(12, 'Low Value Tier 4', false, 20000, 24, 50),
-		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 55),
+		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 60),
 		14: TileData.new(14, 'Water', false, 0, 0, 0),
 		15: TileData.new(15, 'Blank', false, 0, 0, 0),
 	}
@@ -151,14 +151,17 @@ func tile_is_empty(tile_location: Vector2) -> bool:
 	else:
 		return false
 
-func update_tile(tile_location: Vector2) -> void:
+func update_tile(tile_location: Vector2, update_area: bool = true) -> void:
 	get_parent().terrain_tile_map.set_cellv(tile_location, tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data.tile_index)
 	get_parent().dig_tile_map.set_cellv(tile_location, -1)
 	get_parent().dig_tile_map.update_bitmask_area(tile_location)
 	if tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data.navigation:
 		get_parent().shadow_tile_map.set_cellv(tile_location, 0)
 		get_parent().shadow_tile_map.update_bitmask_area(tile_location)
-	update_tile_area_accessibility(tile_location)
+	if update_area:
+		update_tile_area_accessibility(tile_location)
+	else:
+		update_tile_accessibility(tile_location)
 	change_map_key()
 
 func change_map_key() -> void:

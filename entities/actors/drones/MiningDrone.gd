@@ -17,6 +17,7 @@ func _init():
 
 func _ready():
 	self.drone = true
+	$DiggingParticles.set_emitting(false)
 
 func _process(delta):
 	position = state.position
@@ -24,19 +25,27 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if digging:
+				if not $DiggingParticles.is_emitting() and digging_timer >= 0.2:
+					$DiggingParticles.rotation_degrees = $AnimatedSprite.rotation_degrees
+					$DiggingParticles.set_emitting(true)
 				if self.resource_manager.resource_handler.coolant_usage_percentage > 100:
 					self.digging_speed = self.base_digging_speed * (self.resource_manager.resource_handler.coolant_usage_percentage / 100)
 				else:
 					self.digging_speed = self.base_digging_speed
 				var job = get_node(job_node_path)
 				digging_timer += delta
-				if digging_timer > digging_speed:
+#				print($AnimatedSprite.rotation_degrees)
+				if digging_timer >= digging_speed:
+					$DiggingSound.play()
+					$DiggingBurstParticles.rotation_degrees = $AnimatedSprite.rotation_degrees
+					$DiggingBurstParticles.restart()
 					var job_tile_data = layer.tile_manager.get_tile_data(job.tile_location)
 					self.base_resource_handler.coolant_usage = 2 + job_tile_data.digging_coolant_required
 					layer.tile_manager.damage_tile(job.tile_location, digging_power)
 					digging_timer = 0.0
 					material_manager.create_material(self.position, layer, digging_power * job_tile_data.material_per_health)
 					if layer.tile_manager.destroy_tile(job.tile_location):
+						$DiggingParticles.set_emitting(false)
 						clear_to_idle()
 
 			elif working and state_manager.current_state == 'idle':
@@ -66,6 +75,7 @@ func clear_to_idle() -> void:
 	job_position = null
 	digging_timer = 0.0
 	digging_speed = base_digging_speed
+	$DiggingParticles.set_emitting(false)
 	digging = false
 	working = false
 	self.base_resource_handler.coolant_usage = 2

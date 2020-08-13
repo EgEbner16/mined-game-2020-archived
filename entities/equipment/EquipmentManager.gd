@@ -51,7 +51,7 @@ func get_closest_equipment_list(world_location: Vector2, layer, type: String):
 		var equipment_closest_list: Dictionary
 		for distance in distance_array:
 			equipment_closest_list[distance] = equipment_distance_list[distance]
-			print(equipment_distance_list[distance])
+#			print(equipment_distance_list[distance])
 		return equipment_closest_list
 
 func get_distance_to_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true) -> float:

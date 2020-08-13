@@ -23,7 +23,7 @@ func _ready():
 	tile_manager.create_random_layer(world_size)
 	for x in range(world_size.x):
 		for y in range(world_size.y):
-			tile_manager.update_tile(Vector2(x, y))
+			tile_manager.update_tile(Vector2(x, y), false)
 	if number == 0:
 		for x in range(base_left_x, base_left_x + base_size.x):
 			for y in range(base_top_y, base_top_y + base_size.y):
