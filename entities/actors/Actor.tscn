@@ -3,14 +3,14 @@
 [ext_resource path="res://entities/actors/Actor.gd" type="Script" id=1]
 [ext_resource path="res://entities/Entity.tscn" type="PackedScene" id=2]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.00338983, 0.8, 1 )
 colors = PoolColorArray( 0.784314, 0.784314, 0, 1, 0.784314, 0.784314, 0, 0.588235, 0.784314, 0.784314, 0, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
@@ -22,7 +22,7 @@ angle = 360.0
 angle_random = 1.0
 scale = 3.0
 scale_random = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
 
@@ -42,7 +42,7 @@ show_behind_parent = true
 amount = 60
 lifetime = 3.0
 local_coords = false
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )

@@ -30,22 +30,24 @@ func _init():
 func _ready():
 	pass
 
-func get_closest_equipment(world_location: Vector2, layer, type: String):
+func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
+			if equipment.entity.on or not equipment_is_on:
+				equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest: String
 		equipment_closest = equipment_distance_list[distance_array[0]]
 		return equipment_closest
 
-func get_closest_equipment_list(world_location: Vector2, layer, type: String):
+func get_closest_equipment_list(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
+			if equipment.entity.on or not equipment_is_on:
+				equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest_list: Dictionary

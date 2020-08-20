@@ -46,4 +46,5 @@ func _on_BuyScannerEquipment_pressed():
 func _input(event):
 	if Input.is_action_just_released("action_primary") and interface_manager.interface_state == 'equipment' and equipment_placement.is_valid():
 		if equipment_manager.create_equipment(equipment_name_selected, equipment_placement.active_layer.number, equipment_placement.position):
-			equipment_placement.hide()
+			if not Input.is_action_pressed("keep_equipment_placement"):
+				equipment_placement.hide()

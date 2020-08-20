@@ -7,8 +7,8 @@ onready var material_manager: MaterialManager = get_node('/root/Game/World/Mater
 var digging = false
 var digging_power = 100.00
 var digging_timer = 0.0
-var digging_speed = 4.0
-var base_digging_speed = 4.0
+var digging_speed = 2.0
+var base_digging_speed = 2.0
 
 func _init():
 	self.resource_handler.capital_cost = 4000
@@ -25,7 +25,8 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if digging:
-				if not $DiggingParticles.is_emitting() and digging_timer >= 0.2:
+				if not $DiggingParticles.is_emitting():
+					$AnimatedSprite.look_at(self.state.looking_point)
 					$DiggingParticles.rotation_degrees = $AnimatedSprite.rotation_degrees
 					$DiggingParticles.set_emitting(true)
 				if self.resource_manager.resource_handler.coolant_usage_percentage > 100:

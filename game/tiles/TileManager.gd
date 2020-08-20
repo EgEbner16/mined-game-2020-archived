@@ -6,6 +6,7 @@ var tile_data_index: Dictionary
 var tile_map: Dictionary
 
 var world_size: Vector2 = ProjectSettings.get_setting('game/config/world_size')
+var base_size: Vector2 = ProjectSettings.get_setting('game/config/base_size')
 
 var map_key: int
 
@@ -16,16 +17,16 @@ func _ready():
 		1: TileData.new(1, 'Mined Ground', true, 0, 0, 0),
 		2: TileData.new(2, 'Compacted Ground', true, 0, 0, 0),
 		3: TileData.new(3, 'Renforced Ground', true, 0, 0, 0),
-		4: TileData.new(4, 'Mass', false, 100, 1, 5),
-		5: TileData.new(5, 'Solid Mass', false, 1000, 2, 10),
-		6: TileData.new(6, 'Low Value Tier 1', false, 2000, 4, 15),
-		7: TileData.new(7, 'High Value Tier 1', false, 4000, 6, 20),
-		8: TileData.new(8, 'Low Value Tier 2', false, 6000, 8, 25),
-		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 30),
-		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 35),
-		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 40),
-		12: TileData.new(12, 'Low Value Tier 4', false, 20000, 24, 50),
-		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 60),
+		4: TileData.new(4, 'Mass', false, 100, 2, 2),
+		5: TileData.new(5, 'Solid Mass', false, 1000, 2, 4),
+		6: TileData.new(6, 'Low Value Tier 1', false, 2000, 4, 6),
+		7: TileData.new(7, 'High Value Tier 1', false, 4000, 6, 8),
+		8: TileData.new(8, 'Low Value Tier 2', false, 6000, 8, 10),
+		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 12),
+		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 14),
+		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 16),
+		12: TileData.new(12, 'Low Value Tier 4', false, 20000, 24, 18),
+		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 20),
 		14: TileData.new(14, 'Water', false, 0, 0, 0),
 		15: TileData.new(15, 'Blank', false, 0, 0, 0),
 	}
@@ -105,7 +106,7 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 
 	for x in range(vein_min_x, vein_max_x):
 		for y in range(vein_min_y, vein_max_y):
-			if randi() % 4 == 1:
+			if randi() % 5 == 1:
 				create_tile(Vector2(x, y), high_material)
 			elif randi() % 3 == 1:
 				create_tile(Vector2(x, y), low_material)
@@ -114,7 +115,7 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 
 func create_random_layer(world_size: Vector2) -> void:
 	var world_center = world_size / 2
-	var vein_avoid_size = 20
+	var vein_avoid_size = base_size.x * 2
 	var vein_avoid_min_x = int(world_center.x - vein_avoid_size)
 	var vein_avoid_min_y = int(world_center.y - vein_avoid_size)
 	var vein_avoid_max_x = int(world_center.x + vein_avoid_size)
@@ -128,11 +129,11 @@ func create_random_layer(world_size: Vector2) -> void:
 				if randi() % 2000 == 1:
 					create_vein(Vector2(x, y), 4, randi() % 8 + 4)
 				elif randi() % 1500 == 1:
-					create_vein(Vector2(x, y), 3, randi() % 10 + 5)
+					create_vein(Vector2(x, y), 3, randi() % 8 + 4)
 				elif randi() % 1000 == 1:
-					create_vein(Vector2(x, y), 2, randi() % 12 + 6)
+					create_vein(Vector2(x, y), 2, randi() % 10 + 4)
 				elif randi() % 500 == 1:
-					create_vein(Vector2(x, y), 1, randi() % 15 + 10)
+					create_vein(Vector2(x, y), 1, randi() % 10 + 6)
 
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data = tile_data_index[index]

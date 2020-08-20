@@ -13,8 +13,8 @@ func _ready():
 
 func _physics_process(delta):
 	if constructed < 100.0:
-		var num = 0.5 + (constructed / 100) / 2
-		$AnimatedSprite.modulate = Color(num,1.0,num,num)
+		var num = 0.0 + (constructed / 100)
+		$AnimatedSprite.modulate = Color(num,(1.5 - (num /2)),num,(0.5 + (num /2)))
 		$AnimatedSprite.playing = false
 	else:
 		$AnimatedSprite.modulate = Color(1.0,1.0,1.0,1.0)

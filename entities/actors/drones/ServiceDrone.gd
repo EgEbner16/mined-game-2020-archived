@@ -23,6 +23,7 @@ func _process(delta):
 #					print('Service Drone at Repair Point %s' % self.name)
 					var job = get_node(job_node_path)
 					repair_object.repair()
+					$ServiceParticles.restart()
 					clear_to_idle()
 				elif path.size() > 0 and state_manager.current_state == 'idle':
 #					print('tacos')

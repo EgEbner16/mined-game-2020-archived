@@ -13,13 +13,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.0784314, 0.0392157, 0.0196078, 1, 0.313726, 0.156863, 0.0784314, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=4]
 lifetime_randomness = 0.25
 emission_shape = 2
 emission_box_extents = Vector3( 3, 10, 1 )
@@ -35,9 +35,9 @@ angle = 360.0
 angle_random = 0.5
 scale = 6.0
 scale_random = 1.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=5]
 lifetime_randomness = 0.25
 emission_shape = 2
 emission_box_extents = Vector3( 3, 10, 1 )
@@ -53,7 +53,7 @@ angle = 360.0
 angle_random = 0.5
 scale = 4.0
 scale_random = 1.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
 [node name="Drone" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -68,7 +68,7 @@ stream = ExtResource( 4 )
 amount = 30
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 4 )
 
 [node name="DiggingBurstParticles" type="Particles2D" parent="." index="7"]
 emitting = false
@@ -76,4 +76,4 @@ amount = 80
 one_shot = true
 explosiveness = 0.8
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 5 )

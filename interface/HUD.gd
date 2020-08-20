@@ -78,7 +78,9 @@ func _process(delta):
 	if power_usage_value != 0 and power_display != 0:
 		var power_usage_percentage: int = int((power_usage_value / power_display) * 100)
 		power_hud_value.text = '%smw %s%%' % [number_format(int(power_display)), power_usage_percentage]
-		if power_usage_percentage >= 100:
+		if power_usage_percentage >= 100 and power_usage_percentage < 200:
+			power_hud_value.set("custom_colors/font_color",Color(0.8,0.8,0,1.0))
+		elif power_usage_percentage >= 200:
 			power_hud_value.set("custom_colors/font_color",Color(0.8,0,0,1.0))
 		else:
 			power_hud_value.set("custom_colors/font_color",Color(0,0.8,0,1.0))
@@ -92,7 +94,9 @@ func _process(delta):
 	if coolant_usage_value != 0 and coolant_display != 0:
 		var coolant_usage_percentage: int = int((coolant_usage_value / coolant_display) * 100)
 		coolant_hud_value.text = '%st %s%%' % [number_format(int(coolant_display)), coolant_usage_percentage]
-		if coolant_usage_percentage >= 100:
+		if coolant_usage_percentage >= 100 and coolant_usage_percentage < 200:
+			coolant_hud_value.set("custom_colors/font_color",Color(0.8,0.8,0,1.0))
+		elif coolant_usage_percentage >= 200:
 			coolant_hud_value.set("custom_colors/font_color",Color(0.8,0,0,1.0))
 		else:
 			coolant_hud_value.set("custom_colors/font_color",Color(0,0.8,0,1.0))

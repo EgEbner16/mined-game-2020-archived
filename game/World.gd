@@ -25,6 +25,10 @@ func _ready():
 		layer.name = str('Layer_%s' % i)
 		add_child(layer)
 	equipment_manager.create_equipment('mining_core', 0, get_node('Layer_%s' % 0).tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
+	drone_manager.create_drone('mining', 0)
+	drone_manager.create_drone('service', 0)
+	drone_manager.create_drone('construction', 0)
+	drone_manager.create_drone('logistic', 0)
 	# Connects the whistle to creating a new path
 
 func _process(delta):

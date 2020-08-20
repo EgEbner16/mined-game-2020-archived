@@ -5,8 +5,8 @@ const MAX_SPEED = 40.0
 const FRICTION = 10.0
 const ZOOM_SPEED = 10.0
 const ZOOM_MARGIN = 0.1
-const ZOOM_MIN = 1.0
-const ZOOM_MAX = 2.0
+const ZOOM_MIN = 0.5
+const ZOOM_MAX = 4.0
 
 var velocity = Vector2.ZERO
 var zoom_position = Vector2.ZERO
@@ -70,8 +70,9 @@ func _input(event):
 	if abs(zoom_position.y - get_global_mouse_position().y) > ZOOM_MARGIN:
 		zoom_factor = 1.0
 	if Input.is_action_pressed("zoom_in"):
-		zoom_level -= 0.20
-		position = get_global_mouse_position()
+		if zoom_level > ZOOM_MIN:
+			zoom_level -= 0.30
+			position = lerp(position, get_global_mouse_position(), 0.30)
 	if Input.is_action_pressed("zoom_out"):
-		zoom_level += 0.20
-		position = get_global_mouse_position()
+		if zoom_level < ZOOM_MAX:
+			zoom_level += 0.30

@@ -24,9 +24,9 @@ margin_bottom = 720.0
 alignment = 1
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer" index="0"]
-margin_top = 157.0
+margin_top = 47.0
 margin_right = 844.0
-margin_bottom = 562.0
+margin_bottom = 673.0
 text = "Tutorial Information
 
 - The goal of the game is to make as much Capital as possible.
@@ -50,4 +50,17 @@ text = "Tutorial Information
 - The harder the gem the more coolant it requires be carful when giving mining orders.
 
 - Watch your resources and make smart descisions on how to spend your Capital.
-"
+
+Controls
+
+- W S A D to move the camera around.
+
+- Mouse Wheel to zoom in and out.
+
+- Left click to assign digging command.
+
+- Right click to cancel digging command.
+
+- Q opens drone menu
+
+- E opens equipment menu"

@@ -80,7 +80,7 @@ func _on_Timer_timeout():
 		self.drone_distance_to_distributor = equipment_manager.get_distance_to_closest_equipment(self.position, layer, 'distributor')
 #		print('Updating Distance to Distributor %s' % drone_distance_to_distributor)
 		var multiplyer: float = 1.0
-		var free_distance: float = 200.0
+		var free_distance: float = 400.0
 		if drone_distance_to_distributor > free_distance:
 			multiplyer = 1.0 + ((drone_distance_to_distributor - free_distance) / free_distance)
 		resource_handler.power_usage = base_resource_handler.power_usage * multiplyer

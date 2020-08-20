@@ -12,6 +12,7 @@ func _init():
 
 func _ready():
 	self.drone = true
+	$BuildingParticles.set_emitting(false)
 
 func _process(delta):
 	position = state.position
@@ -21,11 +22,16 @@ func _process(delta):
 			if constructing:
 				var job = get_node(job_node_path)
 				var equipment = get_node(job.object_node_path)
+				if not $BuildingParticles.is_emitting():
+					$AnimatedSprite.look_at(self.state.looking_point)
+					$BuildingParticles.rotation_degrees = $AnimatedSprite.rotation_degrees
+					$BuildingParticles.set_emitting(true)
 				if equipment.constructed < 100.0:
 					var layer = get_parent()
 					equipment.constructed += (constructing_power * delta)
 				else:
 					equipment.constructed = 100.0
+					$BuildingParticles.set_emitting(false)
 #					print('Done!!!')
 					clear_to_idle()
 
@@ -56,4 +62,5 @@ func clear_to_idle() -> void:
 	job_position = null
 	constructing = false
 	working = false
+	$BuildingParticles.set_emitting(false)
 	change_state('idle')
