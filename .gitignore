@@ -2,5 +2,6 @@
 export.cfg
 export_presets.cfg
 *.translation
+*.import
 .mono/
 data_*/
