@@ -30,6 +30,14 @@ custom_colors/font_color = Color( 0, 0.784314, 0.0117647, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.784314, 0.0117647, 1 )
 text = "Equipment (E)"
 
+[node name="ResearchMenuButton" type="Button" parent="LeftHBoxContainer"]
+margin_left = 197.0
+margin_right = 287.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0, 0.784314, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.784314, 0, 1 )
+text = "Research (R)"
+
 [node name="RightHBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.96
@@ -49,4 +57,5 @@ custom_colors/font_color_pressed = Color( 0, 0.784314, 0.0117647, 1 )
 text = "Tutorial (T)"
 [connection signal="pressed" from="LeftHBoxContainer/DroneMenuButton" to="." method="_on_DroneMenuButton_pressed"]
 [connection signal="pressed" from="LeftHBoxContainer/EquipmentMenuButton" to="." method="_on_EquipmentMenuButton_pressed"]
+[connection signal="pressed" from="LeftHBoxContainer/ResearchMenuButton" to="." method="_on_ResearchMenuButton_pressed"]
 [connection signal="pressed" from="RightHBoxContainer/TutorialMenuButton" to="." method="_on_TutorialMenuButton_pressed"]

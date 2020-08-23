@@ -154,6 +154,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/equipment/Pump.gd"
 }, {
+"base": "Interface",
+"class": "ResearchInterface",
+"language": "GDScript",
+"path": "res://interface/ResearchInterface.gd"
+}, {
+"base": "Node",
+"class": "ResearchManager",
+"language": "GDScript",
+"path": "res://game/research/ResearchManager.gd"
+}, {
 "base": "Object",
 "class": "ResourceHandler",
 "language": "GDScript",
@@ -249,6 +259,8 @@ _global_script_class_icons={
 "MiningDrone": "",
 "OptionsMenus": "",
 "Pump": "",
+"ResearchInterface": "",
+"ResearchManager": "",
 "ResourceHandler": "",
 "ResourceManager": "",
 "Scanner": "",
@@ -358,6 +370,11 @@ display_drone_interface={
 display_equipment_interface={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+display_research_interface={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 display_tutorial_interface={
