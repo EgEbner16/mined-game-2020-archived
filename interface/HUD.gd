@@ -30,10 +30,6 @@ onready var material_hud_value = $Control/TopBar/RightSide/MaterialHUDItem/Value
 onready var power_hud_value = $Control/TopBar/RightSide/PowerHUDItem/Value
 onready var coolant_hud_value = $Control/TopBar/RightSide/CoolantHUDItem/Value
 
-onready var options_menu = $OptionsMenu
-onready var equipment_interface = $EquipmentInterface
-onready var drone_interface = $DroneInterface
-
 func number_format(number, currency=false):
 	number = str(number)
 	var size = number.length()
