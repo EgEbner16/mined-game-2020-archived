@@ -33,6 +33,9 @@ var credits = [
 	],[
 		"Art",
 		"Nathan Johnson",
+		"Felise Johnson",
+		"Grace Wilson",
+		"Sari Johnson",
 	],[
 		"Music",
 		"Not Sure",
