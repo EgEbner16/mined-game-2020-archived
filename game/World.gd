@@ -44,9 +44,9 @@ func _process(delta):
 
 #stop mouse clicks over the bottom bar buttons
 func mouse_check() -> bool:
-	if get_viewport().get_mouse_position().x < 300 and get_viewport().get_mouse_position().y > 680:
+	if get_viewport().get_mouse_position().x < 300 and get_viewport().get_mouse_position().y > 685:
 		return false
-	elif get_viewport().get_mouse_position().x > 1180 and get_viewport().get_mouse_position().y > 680:
+	elif get_viewport().get_mouse_position().x > 1180 and get_viewport().get_mouse_position().y > 685:
 		return false
 	else:
 		return true

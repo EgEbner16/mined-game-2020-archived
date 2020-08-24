@@ -17,30 +17,19 @@ __meta__ = {
 }
 
 [node name="Tier1VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="0"]
-margin_left = 498.0
-margin_right = 614.0
+margin_left = 538.0
+margin_right = 574.0
 margin_bottom = 576.0
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier1VBoxContainer" index="0"]
-margin_right = 116.0
+margin_right = 36.0
 margin_bottom = 14.0
 text = "Tier 1"
 align = 1
 
-[node name="GeneratorResearch1Button" type="Button" parent="ColorRect/HBoxContainer/Tier1VBoxContainer" index="1"]
-margin_top = 18.0
-margin_right = 116.0
-margin_bottom = 38.0
-text = "Generator Tier 1"
-
-[node name="GeneratorResearch1ProgressBar" type="ProgressBar" parent="ColorRect/HBoxContainer/Tier1VBoxContainer" index="2"]
-margin_top = 42.0
-margin_right = 116.0
-margin_bottom = 56.0
-
 [node name="Tier2VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="1"]
-margin_left = 634.0
-margin_right = 670.0
+margin_left = 594.0
+margin_right = 630.0
 margin_bottom = 576.0
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier2VBoxContainer" index="0"]
@@ -50,8 +39,8 @@ text = "Tier 2"
 align = 1
 
 [node name="Tier3VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="2"]
-margin_left = 690.0
-margin_right = 726.0
+margin_left = 650.0
+margin_right = 686.0
 margin_bottom = 576.0
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier3VBoxContainer" index="0"]
@@ -61,8 +50,8 @@ text = "Tier 3"
 align = 1
 
 [node name="Tier4VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="3"]
-margin_left = 746.0
-margin_right = 782.0
+margin_left = 706.0
+margin_right = 742.0
 margin_bottom = 576.0
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier4VBoxContainer" index="0"]
