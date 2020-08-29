@@ -17,6 +17,7 @@ func create_research_button(research: Research) -> void:
 	var research_button = RESEARCH_BUTTON.instance()
 	research_button.get_node("Button").text = research.research_name
 	research_button.get_node("Label").text = "Cost: $%s" % research.cost
+	research_button.research_node_path = research.get_path()
 
 	match research.tier:
 		1:

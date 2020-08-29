@@ -154,7 +154,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/equipment/Pump.gd"
 }, {
-"base": "Object",
+"base": "Node",
 "class": "Research",
 "language": "GDScript",
 "path": "res://game/research/Research.gd"

@@ -1,6 +1,8 @@
 extends Node
 
+
 class_name EquipmentManager
+
 
 const MINING_CORE = preload("res://entities/equipment/MiningCore.tscn")
 const GENERATOR = preload("res://entities/equipment/Generator.tscn")
@@ -10,9 +12,12 @@ const DISTRIBUTOR = preload("res://entities/equipment/Distributor.tscn")
 const PUMP  = preload("res://entities/equipment/Pump.tscn")
 const SCANNER = preload("res://entities/equipment/Scanner.tscn")
 
+
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
 onready var resource_handler: ResourceHandler = ResourceHandler.new()
 onready var job_manager: JobManager = get_node('/root/Game/World/JobManager')
+onready var research_manager: ResearchManager = get_node('/root/Game/ResearchManager')
+
 
 var equipment: Dictionary = {
 	'collector': Collector,
@@ -24,11 +29,14 @@ var equipment: Dictionary = {
 	'scanner': Scanner,
 }
 
+
 func _init():
 	pass
 
+
 func _ready():
 	pass
+
 
 func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
@@ -41,6 +49,7 @@ func get_closest_equipment(world_location: Vector2, layer, type: String, equipme
 		var equipment_closest: String
 		equipment_closest = equipment_distance_list[distance_array[0]]
 		return equipment_closest
+
 
 func get_closest_equipment_list(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
@@ -56,6 +65,7 @@ func get_closest_equipment_list(world_location: Vector2, layer, type: String, eq
 #			print(equipment_distance_list[distance])
 		return equipment_closest_list
 
+
 func get_distance_to_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true) -> float:
 	var distance: float = 2000.00
 	if self.equipment.has(type):
@@ -67,6 +77,7 @@ func get_distance_to_closest_equipment(world_location: Vector2, layer, type: Str
 		return distance
 	else:
 		return distance
+
 
 func create_equipment(equipment_name: String, layer: int, world_location: Vector2) -> bool:
 	var active_layer = get_parent().get_node('Layer_%s' % layer)
@@ -215,7 +226,13 @@ func _on_Timer_timeout():
 	resource_handler.reset()
 	for equipment in get_tree().get_nodes_in_group('equipment'):
 		if equipment.entity.on:
-			resource_handler.add_to_power_and_coolant_pool('equipment', equipment.resource_handler.power_usage, equipment.resource_handler.power_production, equipment.resource_handler.coolant_usage, equipment.resource_handler.coolant_production)
+			resource_handler.add_to_power_and_coolant_pool(
+				'equipment',
+				equipment.resource_handler.power_usage,
+				equipment.resource_handler.power_production * research_manager.research_affect_list['generator_power_multiplier'],
+				equipment.resource_handler.coolant_usage,
+				equipment.resource_handler.coolant_production
+				)
 			if resource_manager.use_material(equipment.resource_handler.material_usage):
 				resource_manager.gain_capital(equipment.resource_handler.capital_production)
 	resource_manager.resource_handler.merge(resource_handler)
