@@ -2,9 +2,15 @@ extends KinematicBody2D
 
 class_name Actor
 
+
 onready var entity = $Entity
+onready var research_manager: ResearchManager = get_node('/root/Game/ResearchManager')
+
 
 var working = false
+
+var speed: float
+var base_speed: float
 
 var job_node_path = null
 var job_position = null
@@ -39,7 +45,8 @@ func _physics_process(delta):
 	if state.new_state == 'moving':
 		change_state('moving')
 
-	$AnimatedSprite.look_at(state.looking_point)
+	if state_manager.current_state == 'moving':
+		$AnimatedSprite.look_at(state.looking_point)
 
 func _ready():
 	state_manager = StateManager.new()
@@ -79,12 +86,12 @@ func _on_Timer_timeout():
 	if drone:
 		self.drone_distance_to_distributor = equipment_manager.get_distance_to_closest_equipment(self.position, layer, 'distributor')
 #		print('Updating Distance to Distributor %s' % drone_distance_to_distributor)
-		var multiplyer: float = 1.0
-		var free_distance: float = 400.0
+		var multiplier: float = 1.0
+		var free_distance: float = 200.0 +  research_manager.research_affect_list['distributor_range_increase']
 		if drone_distance_to_distributor > free_distance:
-			multiplyer = 1.0 + ((drone_distance_to_distributor - free_distance) / free_distance)
-		resource_handler.power_usage = base_resource_handler.power_usage * multiplyer
-		resource_handler.coolant_usage = base_resource_handler.coolant_usage * multiplyer
+			multiplier = 1.0 + ((drone_distance_to_distributor - free_distance) / free_distance)
+		resource_handler.power_usage = base_resource_handler.power_usage * multiplier
+		resource_handler.coolant_usage = base_resource_handler.coolant_usage * multiplier
 		if self.entity.need_repair() and not being_repaired:
 			job_manager.create_job(self.position, self.layer, 'service', self.get_path())
 			being_repaired = true

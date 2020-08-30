@@ -3,12 +3,12 @@ extends State
 class_name StateMoving
 
 func _ready():
-	self.path = self.entity.path
+	self.path = self.actor.path
 
 func _physics_process(delta):
 	var move_distance: float = 0.0
-	if self.entity.resource_manager.resource_handler.power_usage_percentage > 100:
-		move_distance = (self.speed - (self.entity.resource_manager.resource_handler.power_usage_percentage - 100)) * delta
+	if self.actor.resource_manager.resource_handler.power_usage_percentage > 100:
+		move_distance = (self.speed - (self.actor.resource_manager.resource_handler.power_usage_percentage - 100)) * delta
 	else:
 		move_distance = self.speed * delta
 

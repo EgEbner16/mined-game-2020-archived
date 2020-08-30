@@ -25,6 +25,7 @@ onready var drone_hud_value = $Control/TopBar/LeftSide/DroneHUDItem/Value
 onready var job_hud_value = $Control/TopBar/LeftSide/JobHUDItem/Value
 onready var equipment_hud_value = $Control/TopBar/LeftSide/EquipmentHUDItem/Value
 onready var layer_hud_value = $Control/TopBar/LeftSide/LayerHUDItem/Value
+onready var game_speed_hud_value = $Control/TopBar/Center/GameSpeedHUDItem/Value
 onready var capital_hud_value = $Control/TopBar/RightSide/CapitalHUDItem/Value
 onready var material_hud_value = $Control/TopBar/RightSide/MaterialHUDItem/Value
 onready var power_hud_value = $Control/TopBar/RightSide/PowerHUDItem/Value

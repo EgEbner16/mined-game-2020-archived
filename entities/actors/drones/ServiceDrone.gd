@@ -2,8 +2,10 @@ extends Actor
 
 class_name ServiceDrone
 
+
 var moving_to_repair: bool = false
 var repair_object
+
 
 func _init():
 	resource_handler.capital_cost = 5000
@@ -12,6 +14,8 @@ func _init():
 
 func _ready():
 	self.drone = true
+	self.base_speed = 150
+	self.speed = 150
 
 func _process(delta):
 	position = state.position
@@ -32,6 +36,7 @@ func _process(delta):
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
+					self.speed = self.base_speed + research_manager.research_affect_list['service_drone_movement_speed_increase']
 					var job = get_node(job_node_path)
 					if job.layer_number == self.layer.number:
 						repair_object = get_node(job.object_node_path)

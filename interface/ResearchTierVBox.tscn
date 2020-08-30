@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="Tier1VBoxContainer" type="VBoxContainer"]
+custom_constants/separation = 48
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 36.0
+margin_bottom = 14.0
+text = "Tier 1"
+align = 1

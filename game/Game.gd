@@ -3,16 +3,26 @@ extends Node2D
 class_name Game
 
 onready var hud = $InterfaceManager/HUD
-
 onready var resource_manager: ResourceManager = $ResourceManager
 onready var world: GameWorld = $World
 
+var game_speed_minimum = 0.5
+var game_speed_maximum = 3.0
+var game_current_speed = 1.0
+var game_speed = 1.0
 
 func _ready():
 	pass
 #	$Camera.position = ProjectSettings.get_setting("game/config/world_size") / 2
 
 func _input(event):
+	if event.is_action_released("game_speed_pause"):
+		if get_tree().paused:
+			get_tree().paused = false
+			hud.game_speed_hud_value.text = 'Normal'
+		else:
+			get_tree().paused = true
+			hud.game_speed_hud_value.text = 'Paused'
 	if event is InputEventKey:
 		if event.scancode == KEY_M:
 			pass

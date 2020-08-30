@@ -10,52 +10,8 @@ script = ExtResource( 2 )
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.9
-custom_constants/separation = 20
+custom_constants/separation = 48
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Tier1VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="0"]
-margin_left = 538.0
-margin_right = 574.0
-margin_bottom = 576.0
-
-[node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier1VBoxContainer" index="0"]
-margin_right = 36.0
-margin_bottom = 14.0
-text = "Tier 1"
-align = 1
-
-[node name="Tier2VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="1"]
-margin_left = 594.0
-margin_right = 630.0
-margin_bottom = 576.0
-
-[node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier2VBoxContainer" index="0"]
-margin_right = 36.0
-margin_bottom = 14.0
-text = "Tier 2"
-align = 1
-
-[node name="Tier3VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="2"]
-margin_left = 650.0
-margin_right = 686.0
-margin_bottom = 576.0
-
-[node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier3VBoxContainer" index="0"]
-margin_right = 36.0
-margin_bottom = 14.0
-text = "Tier 3"
-align = 1
-
-[node name="Tier4VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer" index="3"]
-margin_left = 706.0
-margin_right = 742.0
-margin_bottom = 576.0
-
-[node name="Label" type="Label" parent="ColorRect/HBoxContainer/Tier4VBoxContainer" index="0"]
-margin_right = 36.0
-margin_bottom = 14.0
-text = "Tier 4"
-align = 1

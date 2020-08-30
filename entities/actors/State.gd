@@ -2,17 +2,18 @@ extends Node2D
 
 class_name State
 
-var speed = 150.0
+var speed: float
 var looking_point: Vector2
 var path: PoolVector2Array
 var change_state
-var entity
+var actor
 var new_state
 
 func _ready():
-	position = entity.position
+	position = actor.position
+	speed = actor.speed
 
 
-func setup(change_state, entity):
+func setup(change_state, actor):
 	self.change_state = change_state
-	self.entity = entity
+	self.actor = actor

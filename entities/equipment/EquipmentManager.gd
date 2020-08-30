@@ -231,8 +231,8 @@ func _on_Timer_timeout():
 				equipment.resource_handler.power_usage,
 				equipment.resource_handler.power_production * research_manager.research_affect_list['generator_power_multiplier'],
 				equipment.resource_handler.coolant_usage,
-				equipment.resource_handler.coolant_production
+				equipment.resource_handler.coolant_production * research_manager.research_affect_list['pump_coolant_multiplier']
 				)
-			if resource_manager.use_material(equipment.resource_handler.material_usage):
-				resource_manager.gain_capital(equipment.resource_handler.capital_production)
+			if resource_manager.use_material(equipment.resource_handler.material_usage * research_manager.research_affect_list['matter_reactor_processing_multiplier']):
+				resource_manager.gain_capital(equipment.resource_handler.capital_production * research_manager.research_affect_list['matter_reactor_processing_multiplier'])
 	resource_manager.resource_handler.merge(resource_handler)

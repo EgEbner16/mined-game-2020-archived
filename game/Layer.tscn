@@ -7,13 +7,13 @@
 [ext_resource path="res://game/tiles/TileManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/old mined/Tilemaps/mined_alpha_graphics_digging.png" type="Texture" id=6]
 
-[sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 8, 0, 0, 8, 0, 24, 8, 32, 24, 32, 32, 24, 32, 8, 24, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
 
-[sub_resource type="NavigationPolygon" id=2]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 8, 0, 0, 8, 0, 24, 8, 32, 24, 32, 32, 24, 32, 8, 24, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
 
 [sub_resource type="NavigationPolygon" id=3]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -32,7 +32,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
-0/navigation = SubResource( 1 )
+0/navigation = SubResource( 9 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 0/shape_one_way = false
@@ -47,7 +47,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
-1/navigation = SubResource( 2 )
+1/navigation = SubResource( 10 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape_one_way = false

@@ -16,6 +16,9 @@ func _process(delta):
 	var progress = self.research.get_progress_percentage()
 	$ProgressBar.value = progress
 	if progress >= 100.0:
+		$Button.modulate = Color(0.0, 1.0, 0.0)
+		$Label.modulate = Color(0.0, 1.0, 0.0)
+		$ProgressBar.modulate = Color(0.0, 1.0, 0.0)
 		self.set_process(false)
 
 
@@ -23,4 +26,5 @@ func _input(event):
 	if $Button.pressed:
 		if not self.research.in_progress and self.resource_manager.use_capital(research.cost):
 			research.start_progress()
+			$ProgressBar.modulate = Color(1.0, 1.0, 0.0)
 			self.set_process(true)

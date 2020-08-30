@@ -2,6 +2,7 @@ extends Actor
 
 class_name ConstructionDrone
 
+
 var constructing = false
 var constructing_power = 1.0
 
@@ -12,6 +13,8 @@ func _init():
 
 func _ready():
 	self.drone = true
+	self.base_speed = 50
+	self.speed = 50
 	$BuildingParticles.set_emitting(false)
 
 func _process(delta):
@@ -28,7 +31,7 @@ func _process(delta):
 					$BuildingParticles.set_emitting(true)
 				if equipment.constructed < 100.0:
 					var layer = get_parent()
-					equipment.constructed += (constructing_power * delta)
+					equipment.constructed += ((constructing_power + research_manager.research_affect_list['construction_drone_build_power_increase']) * delta)
 				else:
 					equipment.constructed = 100.0
 					$BuildingParticles.set_emitting(false)

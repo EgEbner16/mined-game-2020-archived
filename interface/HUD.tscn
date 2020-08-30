@@ -62,6 +62,26 @@ margin_left = 40.0
 margin_right = 77.0
 text = "Layer"
 
+[node name="Center" type="HBoxContainer" parent="Control/TopBar"]
+anchor_right = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameSpeedHUDItem" parent="Control/TopBar/Center" instance=ExtResource( 5 )]
+margin_left = 585.0
+margin_right = 695.0
+
+[node name="Title" parent="Control/TopBar/Center/GameSpeedHUDItem" index="0"]
+margin_left = 15.0
+margin_right = 95.0
+text = "Game Speed"
+
+[node name="Value" parent="Control/TopBar/Center/GameSpeedHUDItem" index="1"]
+margin_right = 110.0
+text = "Normal"
+
 [node name="RightSide" type="HBoxContainer" parent="Control/TopBar"]
 anchor_right = 1.0
 custom_constants/separation = 16
@@ -113,6 +133,8 @@ text = "Coolant"
 [editable path="Control/TopBar/LeftSide/EquipmentHUDItem"]
 
 [editable path="Control/TopBar/LeftSide/LayerHUDItem"]
+
+[editable path="Control/TopBar/Center/GameSpeedHUDItem"]
 
 [editable path="Control/TopBar/RightSide/CapitalHUDItem"]
 
