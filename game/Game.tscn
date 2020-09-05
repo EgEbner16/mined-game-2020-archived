@@ -19,7 +19,6 @@ pause_mode = 1
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera"]
 stream = ExtResource( 4 )
-autoplay = true
 
 [node name="ResourceManager" parent="." instance=ExtResource( 5 )]
 pause_mode = 1

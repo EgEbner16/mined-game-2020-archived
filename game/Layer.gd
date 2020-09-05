@@ -15,6 +15,7 @@ onready var navigation_2d: Navigation2D = $Navigation2D
 onready var terrain_tile_map: TileMap = $Navigation2D/TerrainTileMap
 onready var shadow_tile_map: TileMap = $ShadowTileMap
 onready var dig_tile_map: TileMap = $DigTileMap
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
 onready var drone_manager: DroneManager = get_node('/root/Game/World/DroneManager')
 

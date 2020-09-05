@@ -15,6 +15,8 @@ var world_size = ProjectSettings.get_setting('game/config/world_size')
 var world_tile_size = ProjectSettings.get_setting('game/config/tile_size')
 var world_layers = ProjectSettings.get_setting('game/config/world_layers')
 var world_center = world_size / 2
+var top_layer = 0
+var bottom_layer = world_layers - 1
 
 # Performed when added to scene
 func _ready():
@@ -23,6 +25,8 @@ func _ready():
 		layer.add_to_group('layers')
 		layer.number = i
 		layer.name = str('Layer_%s' % i)
+		if i != 0:
+			layer.visible = false
 		add_child(layer)
 	equipment_manager.create_equipment('mining_core', 0, get_node('Layer_%s' % 0).tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
 	drone_manager.create_drone('mining', 0)
@@ -30,6 +34,33 @@ func _ready():
 	drone_manager.create_drone('construction', 0)
 	drone_manager.create_drone('logistic', 0)
 	# Connects the whistle to creating a new path
+
+
+func _input(event):
+	if event.is_action_released('previous_layer') and current_active_layer > 0:
+		previous_layer()
+	if event.is_action_released('next_layer') and current_active_layer < bottom_layer:
+		next_layer()
+
+func switch_layer(number: int):
+	pass
+
+
+func previous_layer():
+	print('Going from %s to Previous Layer %s' % [self.current_active_layer, (self.current_active_layer - 1)])
+	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
+	var previous_layer: WorldLayer = get_node('Layer_%s' % (current_active_layer - 1))
+	active_layer.animation_player.play('fade_out_down')
+	previous_layer.animation_player.play('fade_in_up')
+	self.current_active_layer = previous_layer.number
+
+func next_layer():
+	print('Going from %s to Next Layer %s' % [self.current_active_layer, (self.current_active_layer + 1)])
+	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
+	var next_layer: WorldLayer = get_node('Layer_%s' % (current_active_layer + 1))
+	active_layer.animation_player.play('fade_out_up')
+	next_layer.animation_player.play('fade_in_down')
+	self.current_active_layer = next_layer.number
 
 func _process(delta):
 	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
