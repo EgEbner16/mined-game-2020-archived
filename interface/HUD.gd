@@ -106,6 +106,6 @@ func _process(delta):
 	if layer_number == 0:
 		layer_hud_value.text = 'Surface'
 	else:
-		layer_hud_value.text = str(layer_number)
+		layer_hud_value.text = str(layer_number + 1)
 	pass
 

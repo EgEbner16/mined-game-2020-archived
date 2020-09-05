@@ -41,26 +41,46 @@ func _input(event):
 		previous_layer()
 	if event.is_action_released('next_layer') and current_active_layer < bottom_layer:
 		next_layer()
+	if event.is_action_released('go_to_layer_0'):
+		switch_layer(0)
+	if event.is_action_released('go_to_layer_1'):
+		switch_layer(1)
+	if event.is_action_released('go_to_layer_2'):
+		switch_layer(2)
+	if event.is_action_released('go_to_layer_3'):
+		switch_layer(3)
+	if event.is_action_released('go_to_layer_4'):
+		switch_layer(4)
+	if event.is_action_released('go_to_layer_5'):
+		switch_layer(5)
+	if event.is_action_released('go_to_layer_6'):
+		switch_layer(6)
+	if event.is_action_released('go_to_layer_7'):
+		switch_layer(7)
+	if event.is_action_released('go_to_layer_8'):
+		switch_layer(8)
+	if event.is_action_released('go_to_layer_9'):
+		switch_layer(9)
 
 func switch_layer(number: int):
-	pass
+	if number <= self.bottom_layer:
+		print('Going from Layer %s to Layer %s' % [self.current_active_layer, (self.current_active_layer - 1)])
+		var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
+		var switch_layer: WorldLayer = get_node('Layer_%s' % number)
+		if switch_layer.number > active_layer.number:
+			active_layer.animation_player.play('fade_out_up')
+			switch_layer.animation_player.play('fade_in_up')
+		elif switch_layer.number < active_layer.number:
+			active_layer.animation_player.play('fade_out_down')
+			switch_layer.animation_player.play('fade_in_down')
+		self.current_active_layer = switch_layer.number
 
 
 func previous_layer():
-	print('Going from %s to Previous Layer %s' % [self.current_active_layer, (self.current_active_layer - 1)])
-	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
-	var previous_layer: WorldLayer = get_node('Layer_%s' % (current_active_layer - 1))
-	active_layer.animation_player.play('fade_out_down')
-	previous_layer.animation_player.play('fade_in_up')
-	self.current_active_layer = previous_layer.number
+	switch_layer(self.current_active_layer - 1)
 
 func next_layer():
-	print('Going from %s to Next Layer %s' % [self.current_active_layer, (self.current_active_layer + 1)])
-	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
-	var next_layer: WorldLayer = get_node('Layer_%s' % (current_active_layer + 1))
-	active_layer.animation_player.play('fade_out_up')
-	next_layer.animation_player.play('fade_in_down')
-	self.current_active_layer = next_layer.number
+	switch_layer(self.current_active_layer + 1)
 
 func _process(delta):
 	var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)

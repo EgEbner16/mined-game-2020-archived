@@ -2,6 +2,12 @@ extends Node2D
 
 class_name WorldLayer
 
+
+export var zoom: float = 1.0
+var zoom_current: float = 1.0
+var zoom_default: float = 1.0
+
+
 var world_size = ProjectSettings.get_setting("game/config/world_size")
 var world_center = world_size / 2
 var base_size = ProjectSettings.get_setting("game/config/base_size")
@@ -31,6 +37,13 @@ func _ready():
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
 
+func _physics_process(delta):
+	if zoom != zoom_current:
+		var map_size: float = self.world_size.x * self.tile_size
+		var zoom_location: float = (map_size - map_size * self.zoom) / 2
+		self.scale = Vector2(self.zoom, self.zoom)
+		self.position = Vector2(zoom_location, zoom_location)
+		self.zoom_current = zoom
 
 func get_navigation_path(start: Vector2, end: Vector2):
 	var path = navigation_2d.get_simple_path(start, end)
