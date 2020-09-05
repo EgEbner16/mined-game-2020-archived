@@ -13,8 +13,8 @@ var zoom_position = Vector2.ZERO
 var zoom_factor = 1.0
 var zoom_level = 1.0
 
-onready var viewport_x_limit = get_viewport().size.x / 2
-onready var viewport_y_limit = get_viewport().size.y / 2
+onready var base_viewport_x_limit = get_viewport().size.x / 2
+onready var base_viewport_y_limit = get_viewport().size.y / 2
 
 var world_width_px = ProjectSettings.get_setting('game/config/world_size').x * ProjectSettings.get_setting('game/config/tile_size')
 var world_height_px = ProjectSettings.get_setting('game/config/world_size').y * ProjectSettings.get_setting('game/config/tile_size')
@@ -34,6 +34,9 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
+
+	var viewport_x_limit = self.base_viewport_x_limit * self.zoom_level
+	var viewport_y_limit = self.base_viewport_y_limit * self.zoom_level
 
 	if position.x <  viewport_x_limit:
 		position.x =  viewport_x_limit

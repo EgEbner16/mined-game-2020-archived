@@ -24,6 +24,7 @@ onready var dig_tile_map: TileMap = $DigTileMap
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
 onready var drone_manager: DroneManager = get_node('/root/Game/World/DroneManager')
+onready var camera: KinematicBody2D = get_node('/root/Game/Camera')
 
 
 func _ready():
@@ -37,17 +38,21 @@ func _ready():
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
 
+
 func _physics_process(delta):
 	if zoom != zoom_current:
 		var map_size: float = self.world_size.x * self.tile_size
-		var zoom_location: float = (map_size - map_size * self.zoom) / 2
+		var zoom_location_x: float = ((map_size - map_size * self.zoom) / 2) * (camera.position.x / (map_size / 2))
+		var zoom_location_y: float = ((map_size - map_size * self.zoom) / 2) * (camera.position.y / (map_size / 2))
 		self.scale = Vector2(self.zoom, self.zoom)
-		self.position = Vector2(zoom_location, zoom_location)
+		self.position = Vector2(zoom_location_x, zoom_location_y)
 		self.zoom_current = zoom
+
 
 func get_navigation_path(start: Vector2, end: Vector2):
 	var path = navigation_2d.get_simple_path(start, end)
 	return path
+
 
 func set_dig_tile(world_location: Vector2) -> bool:
 	var tile = dig_tile_map.world_to_map(world_location)
@@ -58,6 +63,7 @@ func set_dig_tile(world_location: Vector2) -> bool:
 		return true
 	else:
 		return false
+
 
 func unset_dig_tile(world_location: Vector2) -> bool:
 	var tile = dig_tile_map.world_to_map(world_location)

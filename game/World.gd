@@ -25,7 +25,9 @@ func _ready():
 		layer.add_to_group('layers')
 		layer.number = i
 		layer.name = str('Layer_%s' % i)
-		if i != 0:
+		if i == 0:
+			layer.visible = true
+		else:
 			layer.visible = false
 		add_child(layer)
 	equipment_manager.create_equipment('mining_core', 0, get_node('Layer_%s' % 0).tile_manager.map_to_world(Vector2(world_center.x - 1, world_center.y - 1)))
@@ -64,7 +66,7 @@ func _input(event):
 
 func switch_layer(number: int):
 	if number <= self.bottom_layer:
-		print('Going from Layer %s to Layer %s' % [self.current_active_layer, (self.current_active_layer - 1)])
+		print('Going from Layer %s to Layer %s' % [self.current_active_layer, number])
 		var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
 		var switch_layer: WorldLayer = get_node('Layer_%s' % number)
 		if switch_layer.number > active_layer.number:
