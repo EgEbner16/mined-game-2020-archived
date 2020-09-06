@@ -12,7 +12,7 @@ var game_current_speed = 1.0
 var game_speed = 1.0
 
 func _ready():
-	pass
+	VisualServer.set_default_clear_color(Color(0.0,0.0,0.0,1.0))
 #	$Camera.position = ProjectSettings.get_setting("game/config/world_size") / 2
 
 func _input(event):
