@@ -122,18 +122,19 @@ func create_random_layer(world_size: Vector2) -> void:
 	var vein_avoid_max_y = int(world_center.y + vein_avoid_size)
 	for x in range(world_size.x):
 		for y in range(world_size.y):
-			create_random_mass_tile(Vector2(x, y))
-			if x in range(vein_avoid_min_x, vein_avoid_max_x) and y in range(vein_avoid_min_y, vein_avoid_max_y):
+			if get_parent().terrain_tile_map.get_cell(x,y) == -1:
 				create_random_mass_tile(Vector2(x, y))
-			else:
-				if randi() % 2000 == 1:
-					create_vein(Vector2(x, y), 4, randi() % 8 + 4)
-				elif randi() % 1500 == 1:
-					create_vein(Vector2(x, y), 3, randi() % 8 + 4)
-				elif randi() % 1000 == 1:
-					create_vein(Vector2(x, y), 2, randi() % 10 + 4)
-				elif randi() % 500 == 1:
-					create_vein(Vector2(x, y), 1, randi() % 10 + 6)
+				if x in range(vein_avoid_min_x, vein_avoid_max_x) and y in range(vein_avoid_min_y, vein_avoid_max_y):
+					create_random_mass_tile(Vector2(x, y))
+				else:
+					if randi() % 2000 == 1:
+						create_vein(Vector2(x, y), 4, randi() % 8 + 4)
+					elif randi() % 1500 == 1:
+						create_vein(Vector2(x, y), 3, randi() % 8 + 4)
+					elif randi() % 1000 == 1:
+						create_vein(Vector2(x, y), 2, randi() % 10 + 4)
+					elif randi() % 500 == 1:
+						create_vein(Vector2(x, y), 1, randi() % 10 + 6)
 
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data = tile_data_index[index]
