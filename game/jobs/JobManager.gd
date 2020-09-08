@@ -8,7 +8,7 @@ var job_location_list: Dictionary
 
 var job_search_delay: float = 0.1
 var job_search_timer: float = 0.0
-var job_success_limit: int = 30
+var job_success_limit: int = 100
 
 func _init():
 	self.job_location_list['digging'] = Dictionary()
@@ -91,6 +91,7 @@ func _process(delta):
 		job_search_timer = 0.0
 
 		if get_tree().get_nodes_in_group("digging_jobs").size() > 0:
+			job_success = 0
 			for mining_drone in get_tree().get_nodes_in_group('mining_drones'):
 				if not mining_drone.working and mining_drone.check_map_key():
 					job_found = false
@@ -102,10 +103,11 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-#					print('Mining Success %s' % job_success)
+					print('Mining Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("material_jobs").size() > 0:
+			job_success = 0
 			for logistic_drone in get_tree().get_nodes_in_group('logistic_drones'):
 				if not logistic_drone.working:
 					job_found = false
@@ -121,10 +123,11 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-#					print('Logistic Success %s' % job_success)
+					print('Logistic Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("equipment_jobs").size() > 0:
+			job_success = 0
 			for construction_drone in get_tree().get_nodes_in_group('construction_drones'):
 				if not construction_drone.working:
 					job_found = false
@@ -136,10 +139,11 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-#					print('Construction Success %s' % job_success)
+					print('Construction Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("service_jobs").size() > 0:
+			job_success = 0
 			for service_drone in get_tree().get_nodes_in_group('service_drones'):
 				if not service_drone.working:
 					job_found = false
@@ -155,5 +159,5 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-#					print('Service Success %s' % job_success)
+					print('Service Success %s' % job_success)
 					break

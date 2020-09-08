@@ -31,7 +31,7 @@ func _process(delta):
 					$BuildingParticles.set_emitting(true)
 				if equipment.constructed < 100.0:
 					var layer = get_parent()
-					equipment.constructed += ((constructing_power + research_manager.research_affect_list['construction_drone_build_power_increase']) * delta)
+					equipment.constructed += ((constructing_power + research_manager.research_affect_list['construction_drone_build_power_increase']) * self.entity.get_durability_percentage() * delta)
 				else:
 					equipment.constructed = 100.0
 					$BuildingParticles.set_emitting(false)

@@ -31,7 +31,7 @@ __meta__ = {
 }
 
 [node name="CreditsContainer" type="Control" parent="."]
-anchor_left = 0.68
+anchor_left = 0.64
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -39,9 +39,13 @@ __meta__ = {
 }
 
 [node name="Line" type="Label" parent="CreditsContainer"]
-anchor_right = 1.0
-margin_top = 1080.0
+anchor_right = 0.5
+margin_top = 720.0
 margin_bottom = 1094.0
+rect_scale = Vector2( 2, 2 )
 size_flags_horizontal = 3
 text = "Credits line"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

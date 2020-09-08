@@ -10,14 +10,21 @@ export var durability_decay_amount: float = 1.0
 
 export var on: bool = false
 
+
 func _ready():
 	pass
+
 
 func need_repair() -> bool:
 	if self.durability <= self.durability_repair_threshold:
 		return true
 	else:
 		return false
+
+
+func get_durability_percentage() -> float:
+	return durability * 0.01
+
 
 func _physics_process(delta):
 	if self.durability > 0.0:

@@ -26,15 +26,14 @@ var credits = [
 	],[
 		"Programming",
 		"Nathan Johnson",
-		"Scott Wilson",
 	],[
 		"Code Reviewer",
 		"Scott Wilson",
 	],[
 		"Art",
-		"Nathan Johnson",
 		"Felise Johnson",
 		"Grace Wilson",
+		"Nathan Johnson",
 		"Sari Johnson",
 	],[
 		"Music",
@@ -49,6 +48,7 @@ var credits = [
 		"Testers",
 		"Grace Wilson",
 		"Nathan Johnson",
+		"Sari Johnson",
 		"Scott Wilson",
 	],[
 		"Tools used",

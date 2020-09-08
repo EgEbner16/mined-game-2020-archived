@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://interface/EquipmentPlacement.gd" type="Script" id=1]
-[ext_resource path="res://assets/old mined/Tilemaps/mined_equipment_placement_nine_patch.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/tilesets/mined_equipment_placement_nine_patch.png" type="Texture" id=2]
+
 
 [node name="EquipmentPlacement" type="Node2D"]
 script = ExtResource( 1 )

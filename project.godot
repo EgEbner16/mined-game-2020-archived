@@ -287,7 +287,6 @@ _global_script_class_icons={
 config/name="Mined"
 config/description="Planetary mining game."
 run/main_scene="res://Splash.tscn"
-config/icon="res://icon.png"
 
 [display]
 

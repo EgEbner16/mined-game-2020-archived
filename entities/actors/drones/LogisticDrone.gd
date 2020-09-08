@@ -4,8 +4,8 @@ class_name LogisticDrone
 
 
 var carrying_load = false
-var base_storage_capacity = 2
-var storage_capacity = 2
+var base_storage_capacity = 3
+var storage_capacity = 3
 var storage = 0
 var drop_off_location: Vector2
 
@@ -25,7 +25,7 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if carrying_load:
-				if position.distance_to(drop_off_location) <= 8.0:
+				if position.distance_to(drop_off_location) <= 24.0:
 #					print('Logistic Drone at Drop off Point %s' % self.name)
 					var job = get_node(job_node_path)
 					get_node('/root/Game/ResourceManager').gain_material(self.resource_handler.material * research_manager.research_affect_list['collector_efficiency_multiplier'])

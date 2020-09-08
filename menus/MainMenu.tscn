@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/old mined/Junk/maxresdefault.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/art/menus/main_menu_background.jpg" type="Texture" id=1]
 [ext_resource path="res://resources/menu_item_styleboxflat.tres" type="StyleBox" id=2]
 [ext_resource path="res://resources/mainfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://resources/menu_item_font.tres" type="DynamicFont" id=4]
@@ -9,6 +9,8 @@
 [ext_resource path="res://resources/menu_item_pressed_styleboxflat.tres" type="StyleBox" id=7]
 [ext_resource path="res://resources/menu_item_focus_styleboxflat.tres" type="StyleBox" id=8]
 [ext_resource path="res://resources/menu_item_disabled_styleboxflat.tres" type="StyleBox" id=9]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"

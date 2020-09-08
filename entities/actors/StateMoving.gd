@@ -8,9 +8,9 @@ func _ready():
 func _physics_process(delta):
 	var move_distance: float = 0.0
 	if self.actor.resource_manager.resource_handler.power_usage_percentage > 100:
-		move_distance = (self.speed - (self.actor.resource_manager.resource_handler.power_usage_percentage - 100)) * delta
+		move_distance = ((self.speed - (self.actor.resource_manager.resource_handler.power_usage_percentage - 100)) * self.actor.entity.get_durability_percentage()) * delta
 	else:
-		move_distance = self.speed * delta
+		move_distance = self.speed * self.actor.entity.get_durability_percentage() * delta
 
 	if move_distance < (self.speed * delta * 0.2):
 		move_distance = self.speed * delta * 0.2

@@ -32,9 +32,9 @@ func _process(delta):
 					$DiggingParticles.rotation_degrees = $AnimatedSprite.rotation_degrees
 					$DiggingParticles.set_emitting(true)
 				if self.resource_manager.resource_handler.coolant_usage_percentage > 100:
-					self.digging_speed = (self.base_digging_speed * (self.resource_manager.resource_handler.coolant_usage_percentage / 100)) - research_manager.research_affect_list['mining_drone_dig_speed_reduction']
+					self.digging_speed = ((self.base_digging_speed * (self.resource_manager.resource_handler.coolant_usage_percentage / 100)) - research_manager.research_affect_list['mining_drone_dig_speed_reduction']) * (2.0 - self.entity.get_durability_percentage())
 				else:
-					self.digging_speed = self.base_digging_speed - research_manager.research_affect_list['mining_drone_dig_speed_reduction']
+					self.digging_speed = (self.base_digging_speed - research_manager.research_affect_list['mining_drone_dig_speed_reduction'])  * (2.0 - self.entity.get_durability_percentage())
 				var job = get_node(job_node_path)
 				digging_timer += delta
 #				print($AnimatedSprite.rotation_degrees)

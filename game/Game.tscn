@@ -3,7 +3,7 @@
 [ext_resource path="res://game/Game.gd" type="Script" id=1]
 [ext_resource path="res://game/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/World.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/old mined/Music/main_menu_music.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/music/main_menu_music.ogg" type="AudioStream" id=4]
 [ext_resource path="res://game/ResourceManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/InterfaceManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/research/ResearchManager.tscn" type="PackedScene" id=7]
