@@ -3,7 +3,9 @@ extends Node2D
 class_name Equipment
 
 var constructed: float = 0.0
-
+var type: String = ''
+var verbose_name: String = ''
+var verbose_description: String = ''
 var resource_handler: ResourceHandler = ResourceHandler.new()
 
 onready var entity: Entity = $Entity

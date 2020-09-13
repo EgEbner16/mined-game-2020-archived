@@ -140,18 +140,29 @@ func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data = tile_data_index[index]
 	update_tile(tile_location)
 
+
 func set_tile_to_blank(tile_location: Vector2) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data = tile_data_index[15]
 	update_tile(tile_location)
 
+
 func get_tile_index(tile_location: Vector2) -> int:
 	return tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data.tile_index
+
 
 func tile_is_empty(tile_location: Vector2) -> bool:
 	if tile_data_index[get_tile_index(tile_location)].navigation:
 		return true
 	else:
 		return false
+
+
+func tile_is_elevator_safe(tile_location: Vector2) -> bool:
+	if tile_data_index[get_tile_index(tile_location)].tile_index != 15:
+		return true
+	else:
+		return false
+
 
 func update_tile(tile_location: Vector2, update_area: bool = true) -> void:
 	get_parent().terrain_tile_map.set_cellv(tile_location, tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data.tile_index)

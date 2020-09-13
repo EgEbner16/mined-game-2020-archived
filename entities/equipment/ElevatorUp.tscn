@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/equipment/Equipment.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/equipment/Generator.gd" type="Script" id=2]
-[ext_resource path="res://assets/art/equipment/equipment_beta_Generator.png" type="Texture" id=3]
+[ext_resource path="res://entities/equipment/ElevatorUp.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/equipment/equipment_beta_Elevator Up.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -32,7 +32,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Generator" instance=ExtResource( 1 )]
+[node name="ElevatorUp" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="1"]

@@ -11,6 +11,8 @@ const MATTER_REACTOR = preload("res://entities/equipment/MatterReactor.tscn")
 const DISTRIBUTOR = preload("res://entities/equipment/Distributor.tscn")
 const PUMP  = preload("res://entities/equipment/Pump.tscn")
 const SCANNER = preload("res://entities/equipment/Scanner.tscn")
+const ELEVATOR_DOWN = preload("res://entities/equipment/ElevatorDown.tscn")
+const ELEVATOR_UP = preload("res://entities/equipment/ElevatorUp.tscn")
 
 
 onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceManager')
@@ -27,6 +29,7 @@ var equipment: Dictionary = {
 	'matter_reactor': MatterReactor,
 	'pump': Pump,
 	'scanner': Scanner,
+	'elevator': ElevatorDown,
 }
 
 
@@ -120,6 +123,12 @@ func create_equipment(equipment_name: String, layer: int, world_location: Vector
 				return false
 		elif equipment_name == 'scanner':
 			if create_scanner(world_location, active_layer):
+				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				return true
+			else:
+				return false
+		elif equipment_name == 'elevator':
+			if create_elevator(world_location, active_layer):
 				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
 				return true
 			else:
@@ -221,6 +230,32 @@ func create_scanner(world_location: Vector2, layer) -> bool:
 		return true
 	else:
 		return false
+
+
+# Need code for linking the two elevators together
+func create_elevator(world_location: Vector2, layer) -> bool:
+	var build_elevator_down = build_equipment(ELEVATOR_DOWN.instance(), 'elevator', world_location, layer.number, ['equipment', 'elevator_equipment', 'elevator_down'])
+	var build_elevator_up = build_equipment(ELEVATOR_UP.instance(), 'elevator', world_location, layer.number + 1, ['equipment', 'elevator_equipment', 'elevator_up'], false)
+	if build_elevator_down and build_elevator_up:
+		return true
+	else:
+		return false
+
+
+func build_equipment(equipment_instance: Equipment, type: String, world_location: Vector2, layer_number, group_list: Array, create_job := true) -> bool:
+	if resource_manager.use_capital(equipment_instance.resource_handler.capital_cost):
+		var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
+		for group in group_list:
+			equipment_instance.add_to_group(group)
+		equipment_instance.name = type
+		equipment_instance.position = world_location
+		layer.add_child(equipment_instance)
+		if create_job:
+			job_manager.create_job(equipment_instance.position, layer, 'equipment', equipment_instance.get_path())
+		return true
+	else:
+		return false
+
 
 func _on_Timer_timeout():
 	resource_handler.reset()

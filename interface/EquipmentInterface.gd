@@ -2,6 +2,9 @@ extends Interface
 
 class_name EquipmentInterface
 
+const EQUIPMENT_BUTTON = preload("res://interface/EquipmentButton.tscn")
+const ELEVATOR_DOWN = preload("res://entities/equipment/ElevatorDown.tscn")
+
 onready var equipment_placement: EquipmentPlacement = get_node('/root/Game/InterfaceManager/EquipmentPlacement')
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
 onready var interface_manager: InterfaceManager = get_parent()
@@ -9,10 +12,22 @@ onready var interface_manager: InterfaceManager = get_parent()
 var equipment_name_selected = 'none'
 
 func _ready():
-	pass
+	create_equipment_button(ELEVATOR_DOWN.instance())
 
-func place_equipment():
-	equipment_placement.show()
+
+func create_equipment_button(equipment: Equipment):
+	var equipment_button = EQUIPMENT_BUTTON.instance()
+	equipment_button.equipment_type = equipment.type
+	equipment_button.get_node("Button").text = equipment.verbose_name
+	equipment_button.get_node("Description").text = "%s" % equipment.verbose_description
+	equipment_button.get_node("Cost").text = "Cost: $%s" % equipment.resource_handler.capital_cost
+	$ColorRect/HBoxContainer/VBoxContainer.add_child(equipment_button)
+
+func place_equipment(elevator_placement := false):
+	equipment_placement.show(elevator_placement)
+
+func place_elevator_equipment():
+	place_equipment(true)
 
 func _on_BuyCollectorEquipment_pressed():
 	equipment_name_selected = 'collector'

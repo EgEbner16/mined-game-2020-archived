@@ -1,6 +1,8 @@
 extends Equipment
 
+
 class_name Generator
+
 
 func _init():
 	resource_handler.power_production = 280

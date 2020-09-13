@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://interface/EquipmentButton.gd" type="Script" id=1]
+
+[node name="EquipmentButton" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_right = 40.0
+margin_bottom = 20.0
+
+[node name="Description" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 40.0
+margin_bottom = 38.0
+align = 1
+
+[node name="Cost" type="Label" parent="."]
+margin_top = 42.0
+margin_right = 40.0
+margin_bottom = 56.0
+align = 1
