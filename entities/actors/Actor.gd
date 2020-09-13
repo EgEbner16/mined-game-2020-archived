@@ -92,6 +92,9 @@ func _on_Timer_timeout():
 			multiplier = 1.0 + ((drone_distance_to_distributor - free_distance) / free_distance)
 		resource_handler.power_usage = base_resource_handler.power_usage * multiplier
 		resource_handler.coolant_usage = base_resource_handler.coolant_usage * multiplier
+
+		var durability_color: float = (self.entity.get_durability_percentage() * 0.8) + 0.2
+		$AnimatedSprite.modulate = Color(durability_color, durability_color, durability_color, 1.0)
 		if self.entity.need_repair() and not being_repaired:
 			job_manager.create_job(self.position, self.layer, 'service', self.get_path())
 			being_repaired = true
