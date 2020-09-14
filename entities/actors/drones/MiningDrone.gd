@@ -70,6 +70,7 @@ func _process(delta):
 							move_to_layer(job.layer_number)
 						else:
 							use_elevator()
+
 		else:
 			clear_to_idle()
 

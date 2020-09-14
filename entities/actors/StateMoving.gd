@@ -31,6 +31,8 @@ func move_along_path(distance):
 			elif distance < 0.0:
 				position = path[0]
 				break
+			else:
+				position = path[0]
 
 			if distance_to_next_point > distance:
 				distance -= distance_to_next_point
