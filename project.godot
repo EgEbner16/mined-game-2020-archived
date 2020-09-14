@@ -318,7 +318,7 @@ window/stretch/aspect="keep"
 config/tile_size=32
 config/base_size=Vector2( 7, 7 )
 config/world_size=Vector2( 240, 240 )
-config/world_layers=4
+config/world_layers=2
 config/starting_capital=100000
 
 [input]

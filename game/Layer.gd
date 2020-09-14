@@ -53,6 +53,11 @@ func get_navigation_path(start: Vector2, end: Vector2):
 	var path = navigation_2d.get_simple_path(start, end)
 	return path
 
+func move_node_to_layer(node_path, layer):
+	var node = get_node(node_path)
+	self.remove_child(node)
+	layer.add_child(node)
+	node.layer = node.get_parent()
 
 func set_dig_tile(world_location: Vector2) -> bool:
 	var tile = dig_tile_map.world_to_map(world_location)

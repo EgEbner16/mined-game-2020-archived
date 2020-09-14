@@ -29,7 +29,8 @@ var equipment: Dictionary = {
 	'matter_reactor': MatterReactor,
 	'pump': Pump,
 	'scanner': Scanner,
-	'elevator': ElevatorDown,
+	'elevator_down': ElevatorDown,
+	'elevator_up': ElevatorUp,
 }
 
 
@@ -40,13 +41,23 @@ func _init():
 func _ready():
 	pass
 
+func is_equipment(layer, type: String, equipment_is_on: bool = true):
+	var available := false
+	if self.equipment.has(type):
+		if get_tree().get_nodes_in_group('%s_equipment' % type).size() > 0:
+			for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
+				if equipment.layer.number == layer.number:
+					if equipment.entity.on or not equipment_is_on:
+						available = true
+	return available
 
 func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			if equipment.entity.on or not equipment_is_on:
-				equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
+			if equipment.layer.number == layer.number:
+				if equipment.entity.on or not equipment_is_on:
+					equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
 		distance_array.sort()
 		var equipment_closest: String
@@ -127,9 +138,15 @@ func create_equipment(equipment_name: String, layer: int, world_location: Vector
 				return true
 			else:
 				return false
-		elif equipment_name == 'elevator':
+		elif equipment_name == 'elevator_down':
 			if create_elevator(world_location, active_layer):
-				active_layer.tile_manager.set_tile_to_blank(active_layer.tile_manager.world_to_map(world_location))
+				var next_layer = get_node('/root/Game/World/Layer_%s' % (active_layer.number + 1))
+				var tile_location = active_layer.tile_manager.world_to_map(world_location)
+				active_layer.tile_manager.set_tile_to_blank(tile_location)
+				for pos_x in range(-1, 2):
+					for pos_y in range(-1, 2):
+						next_layer.tile_manager.set_tile_index(Vector2(tile_location.x + pos_x, tile_location.y + pos_y), 1)
+				next_layer.tile_manager.set_tile_to_blank(tile_location)
 				return true
 			else:
 				return false
@@ -146,6 +163,7 @@ func create_mining_core(world_location: Vector2, layer) ->  bool:
 		mining_core.add_to_group('distributor_equipment')
 		mining_core.add_to_group('collector_equipment')
 		mining_core.name = 'mining_core'
+		mining_core.layer = layer
 		mining_core.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(mining_core)
 		mining_core.set_constructed()
@@ -159,6 +177,7 @@ func create_generator(world_location: Vector2, layer) -> bool:
 		generator.add_to_group('equipment')
 		generator.add_to_group('power_equipment')
 		generator.name = 'generator'
+		generator.layer = layer
 		generator.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(generator)
 		job_manager.create_job(generator.position, layer, 'equipment', generator.get_path())
@@ -172,6 +191,7 @@ func create_collector(world_location: Vector2, layer) -> bool:
 		collector.add_to_group('equipment')
 		collector.add_to_group('collector_equipment')
 		collector.name = 'collector'
+		collector.layer = layer
 		collector.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(collector)
 		job_manager.create_job(collector.position, layer, 'equipment', collector.get_path())
@@ -185,6 +205,7 @@ func create_distributor(world_location: Vector2, layer) -> bool:
 		distributor.add_to_group('equipment')
 		distributor.add_to_group('distributor_equipment')
 		distributor.name = 'distributor'
+		distributor.layer = layer
 		distributor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(distributor)
 		job_manager.create_job(distributor.position, layer, 'equipment', distributor.get_path())
@@ -198,6 +219,7 @@ func create_matter_reactor(world_location: Vector2, layer) -> bool:
 		matter_reactor.add_to_group('equipment')
 		matter_reactor.add_to_group('power_equipment')
 		matter_reactor.name = 'matter_reactor'
+		matter_reactor.layer = layer
 		matter_reactor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(matter_reactor)
 		job_manager.create_job(matter_reactor.position, layer, 'equipment', matter_reactor.get_path())
@@ -211,6 +233,7 @@ func create_pump(world_location: Vector2, layer) -> bool:
 		pump.add_to_group('equipment')
 		pump.add_to_group('coolant_equipment')
 		pump.name = 'pump'
+		pump.layer = layer
 		pump.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(pump)
 		job_manager.create_job(pump.position, layer, 'equipment', pump.get_path())
@@ -224,6 +247,7 @@ func create_scanner(world_location: Vector2, layer) -> bool:
 		scanner.add_to_group('equipment')
 		scanner.add_to_group('power_equipment')
 		scanner.name = 'scanner'
+		scanner.layer = layer
 		scanner.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(scanner)
 		job_manager.create_job(scanner.position, layer, 'equipment', scanner.get_path())
@@ -234,22 +258,35 @@ func create_scanner(world_location: Vector2, layer) -> bool:
 
 # Need code for linking the two elevators together
 func create_elevator(world_location: Vector2, layer) -> bool:
-	var build_elevator_down = build_equipment(ELEVATOR_DOWN.instance(), 'elevator', world_location, layer.number, ['equipment', 'elevator_equipment', 'elevator_down'])
-	var build_elevator_up = build_equipment(ELEVATOR_UP.instance(), 'elevator', world_location, layer.number + 1, ['equipment', 'elevator_equipment', 'elevator_up'], false)
-	if build_elevator_down and build_elevator_up:
+	if build_equipment(ELEVATOR_DOWN.instance(), 'elevator', world_location, layer.number, ['equipment', 'elevator_equipment', 'elevator_down_equipment']):
 		return true
 	else:
 		return false
 
 
-func build_equipment(equipment_instance: Equipment, type: String, world_location: Vector2, layer_number, group_list: Array, create_job := true) -> bool:
+func build_equipment(equipment_instance: Equipment, type: String, world_location: Vector2, layer_number: int, group_list: Array, create_job := true) -> bool:
 	if resource_manager.use_capital(equipment_instance.resource_handler.capital_cost):
 		var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
 		for group in group_list:
 			equipment_instance.add_to_group(group)
 		equipment_instance.name = type
+		equipment_instance.layer = layer
 		equipment_instance.position = world_location
 		layer.add_child(equipment_instance)
+		if type == 'elevator':
+			var elevator_up = ELEVATOR_UP.instance()
+			for group in group_list:
+				if group == 'elevator_down_equipment':
+					elevator_up.add_to_group('elevator_up_equipment')
+				else:
+					elevator_up.add_to_group(group)
+			elevator_up.name = type
+			var next_layer = get_node('/root/Game/World/Layer_%s' % (layer_number + 1))
+			elevator_up.layer = next_layer
+			elevator_up.position = world_location
+			next_layer.add_child(elevator_up)
+			elevator_up.linked_elevator_down_node_path = equipment_instance.get_path()
+			equipment_instance.linked_elevator_up_node_path = elevator_up.get_path()
 		if create_job:
 			job_manager.create_job(equipment_instance.position, layer, 'equipment', equipment_instance.get_path())
 		return true

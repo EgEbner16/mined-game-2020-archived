@@ -4,7 +4,6 @@
 [ext_resource path="res://entities/equipment/Distributor.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/equipment/equipment_beta_Distributor.png" type="Texture" id=3]
 
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 3 )
@@ -39,5 +38,3 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 5 )
 frame = 2
-playing = true
-centered = false

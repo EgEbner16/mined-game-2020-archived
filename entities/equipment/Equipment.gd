@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Equipment
 
+var layer
 var constructed: float = 0.0
 var type: String = ''
 var verbose_name: String = ''
@@ -26,4 +27,5 @@ func _physics_process(delta):
 func set_constructed():
 	constructed = 100.0
 	entity.on = true
+	$AnimatedSprite.playing = true
 

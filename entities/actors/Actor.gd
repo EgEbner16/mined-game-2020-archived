@@ -16,6 +16,8 @@ var job_node_path = null
 var job_position = null
 var job_map_key: int = 0
 
+var elevator_node_path = null
+
 var being_repaired: bool = false
 
 var power_usage_percentage = 0.0
@@ -75,12 +77,41 @@ func change_state(new_state_name):
 	state.name = "current_state"
 	add_child(state)
 
-func change_layer(layer_number: int):
-	pass
+
+func move_to_layer(layer_number: int):
+	var nearest_elevator
+	if layer_number < layer.number:
+		if equipment_manager.is_equipment(layer, 'elevator_up'):
+			print('up')
+			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_up'))
+			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
+			elevator_node_path = nearest_elevator.get_path()
+
+	elif layer_number > layer.number:
+		if equipment_manager.is_equipment(layer, 'elevator_down'):
+			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_down'))
+			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
+			elevator_node_path = nearest_elevator.get_path()
+
+func use_elevator():
+	var elevator = get_node(elevator_node_path)
+	if elevator.type == 'elevator_down':
+		var new_layer = get_node(elevator.linked_elevator_up_node_path).get_parent()
+		get_parent().move_node_to_layer(self.get_path(), new_layer)
+		elevator_node_path = null
+		print ('GOING DOWN')
+		pass
+	if elevator.type == 'elevator_up':
+		var new_layer = get_node(elevator.linked_elevator_down_node_path).get_parent()
+		get_parent().move_node_to_layer(self.get_path(), new_layer)
+		elevator_node_path = null
+		print ('GOING UP')
+		pass
 
 func repair():
 	self.entity.durability = 100.0
 	self.being_repaired = false
+
 
 func _on_Timer_timeout():
 	if drone:

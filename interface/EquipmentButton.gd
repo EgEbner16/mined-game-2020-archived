@@ -14,7 +14,7 @@ var equipment_type: String
 func _input(event):
 	if $Button.pressed:
 		equipment_interface.equipment_name_selected = self.equipment_type
-		if equipment_type == 'elevator':
+		if equipment_type == 'elevator_down':
 			equipment_interface.place_elevator_equipment()
 		else:
 			equipment_interface.place_equipment()
