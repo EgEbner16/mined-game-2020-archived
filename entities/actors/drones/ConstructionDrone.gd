@@ -52,11 +52,8 @@ func _process(delta):
 #							print('Need to Move to Job')
 							set_path(layer.get_navigation_path(position, job.get_work_world_location(job_position)))
 					else:
-						if elevator_node_path == null:
-							print(job.layer_number)
-							move_to_layer(job.layer_number)
-						else:
-							use_elevator()
+						pass
+#						print('Job is on another layer')
 		else:
 			clear_to_idle()
 

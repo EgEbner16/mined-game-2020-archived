@@ -18,8 +18,6 @@ var job_map_key: int = 0
 
 var elevator_node_path = null
 
-var destination: Destination
-
 var being_repaired: bool = false
 
 var power_usage_percentage = 0.0
@@ -41,7 +39,6 @@ var state_manager: StateManager
 
 var path = PoolVector2Array() setget set_path
 
-
 func _physics_process(delta):
 
 	if state.new_state == 'idle':
@@ -53,12 +50,10 @@ func _physics_process(delta):
 	if state_manager.current_state == 'moving':
 		$AnimatedSprite.look_at(state.looking_point)
 
-
 func _ready():
 	state_manager = StateManager.new()
 	change_state("idle")
 #	print('Actor Ready')
-
 
 func check_map_key() -> bool:
 	if layer.tile_manager.map_key != job_map_key:
@@ -68,13 +63,11 @@ func check_map_key() -> bool:
 		job_map_key = layer.tile_manager.map_key
 		return false
 
-
 func set_path(value):
 	path = value
 	if value.size() == 0:
 		return
 	change_state("moving")
-
 
 func change_state(new_state_name):
 	if state:
@@ -83,11 +76,6 @@ func change_state(new_state_name):
 	state.setup(funcref(self, "change_state"), self)
 	state.name = "current_state"
 	add_child(state)
-
-
-func set_destination(start_position: Vector2, start_layer_number: int, end_position: Vector2, end_layer_number: int):
-	self.destination = Destination.new()
-	self.destination.generate_steps(start_position, start_layer_number, end_position, end_layer_number)
 
 
 func move_to_layer(layer_number: int):
@@ -105,7 +93,6 @@ func move_to_layer(layer_number: int):
 			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
 			elevator_node_path = nearest_elevator.get_path()
 
-
 func use_elevator():
 	var elevator = get_node(elevator_node_path)
 	if elevator.type == 'elevator_down':
@@ -120,7 +107,6 @@ func use_elevator():
 		elevator_node_path = null
 		print ('GOING UP')
 		pass
-
 
 func repair():
 	self.entity.durability = 100.0
