@@ -52,8 +52,11 @@ func _process(delta):
 							moving_to_repair = true
 #							print('%s Need to Move to Job %s' % [self.name, path])
 					else:
-						pass
-#						print('Job is on another layer')
+						if elevator_node_path == null:
+							print(job.layer_number)
+							move_to_layer(job.layer_number)
+						else:
+							use_elevator()
 		else:
 			clear_to_idle()
 
