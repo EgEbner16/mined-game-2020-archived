@@ -51,11 +51,11 @@ func is_equipment(layer, type: String, equipment_is_on: bool = true):
 						available = true
 	return available
 
-func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true):
+func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true, layer_only: bool = true):
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			if equipment.layer.number == layer.number:
+			if equipment.layer.number == layer.number or not layer_only:
 				if equipment.entity.on or not equipment_is_on:
 					equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()

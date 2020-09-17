@@ -16,9 +16,7 @@ var job_node_path = null
 var job_position = null
 var job_map_key: int = 0
 
-var elevator_node_path = null
-
-var destination: Destination
+var destination: Destination = Destination.new()
 
 var being_repaired: bool = false
 
@@ -85,28 +83,35 @@ func change_state(new_state_name):
 	add_child(state)
 
 
-func set_destination(start_position: Vector2, start_layer_number: int, end_position: Vector2, end_layer_number: int):
-	self.destination = Destination.new()
-	self.destination.generate_steps(start_position, start_layer_number, end_position, end_layer_number)
+func go_to_destination(end_position: Vector2, end_layer_number: int):
+	if $Destination.has_step():
+		var step = $Destination.get_step()
+		if step['action'] == 'path':
+			set_path(step['data'])
+		if step['action'] == 'elevator':
+			print('using elevator %s' % step['data'])
+			use_elevator(step['data'])
+	else:
+		$Destination.generate_steps(self.position, self.layer.number, end_position, end_layer_number)
 
 
-func move_to_layer(layer_number: int):
-	var nearest_elevator
-	if layer_number < layer.number:
-		if equipment_manager.is_equipment(layer, 'elevator_up'):
-			print('up')
-			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_up'))
-			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
-			elevator_node_path = nearest_elevator.get_path()
+#func move_to_layer(layer_number: int):
+#	var nearest_elevator
+#	if layer_number < layer.number:
+#		if equipment_manager.is_equipment(layer, 'elevator_up'):
+#			print('up')
+#			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_up'))
+#			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
+#			elevator_node_path = nearest_elevator.get_path()
+#
+#	elif layer_number > layer.number:
+#		if equipment_manager.is_equipment(layer, 'elevator_down'):
+#			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_down'))
+#			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
+#			elevator_node_path = nearest_elevator.get_path()
 
-	elif layer_number > layer.number:
-		if equipment_manager.is_equipment(layer, 'elevator_down'):
-			nearest_elevator = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'elevator_down'))
-			set_path(layer.get_navigation_path(self.position, nearest_elevator.position))
-			elevator_node_path = nearest_elevator.get_path()
 
-
-func use_elevator():
+func use_elevator(elevator_node_path):
 	var elevator = get_node(elevator_node_path)
 	if elevator.type == 'elevator_down':
 		var new_layer = get_node(elevator.linked_elevator_up_node_path).get_parent()

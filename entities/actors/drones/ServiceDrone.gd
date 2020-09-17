@@ -23,7 +23,7 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if moving_to_repair:
-				if position.distance_to(repair_object.position) <= 10.0:
+				if position.distance_to(repair_object.position) <= 10.0 and self.layer.number == repair_object.layer.number:
 #					print('Service Drone at Repair Point %s' % self.name)
 					var job = get_node(job_node_path)
 					repair_object.repair()
@@ -32,7 +32,7 @@ func _process(delta):
 				elif path.size() > 0 and state_manager.current_state == 'idle':
 #					print('tacos')
 					moving_to_repair = true
-					set_path(layer.get_navigation_path(position, repair_object.position))
+					go_to_destination(repair_object.position, repair_object.layer.number)
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
@@ -46,17 +46,14 @@ func _process(delta):
 							self.state.looking_point = repair_object.position
 							if job.type == 'service':
 								moving_to_repair = true
-								set_path(layer.get_navigation_path(position, repair_object.position))
+								go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 						else:
-							set_path(layer.get_navigation_path(position, repair_object.position))
 							moving_to_repair = true
+							go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 #							print('%s Need to Move to Job %s' % [self.name, path])
 					else:
-						if elevator_node_path == null:
-							print(job.layer_number)
-							move_to_layer(job.layer_number)
-						else:
-							use_elevator()
+						moving_to_repair = true
+						go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 		else:
 			clear_to_idle()
 

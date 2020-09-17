@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/actors/Actor.gd" type="Script" id=1]
 [ext_resource path="res://entities/Entity.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/actors/Destination.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.00338983, 0.8, 1 )
@@ -46,4 +47,6 @@ process_material = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
+
+[node name="Destination" parent="." instance=ExtResource( 3 )]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

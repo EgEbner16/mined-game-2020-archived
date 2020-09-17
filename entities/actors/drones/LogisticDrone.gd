@@ -8,6 +8,7 @@ var base_storage_capacity = 3
 var storage_capacity = 3
 var storage = 0
 var drop_off_location: Vector2
+var drop_off_layer_number: int
 
 func _init():
 	resource_handler.capital_cost = 2000
@@ -25,13 +26,19 @@ func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if carrying_load:
-				if position.distance_to(drop_off_location) <= 24.0:
+				if position.distance_to(drop_off_location) <= 24.0 and self.layer.number == drop_off_layer_number:
 #					print('Logistic Drone at Drop off Point %s' % self.name)
 					var job = get_node(job_node_path)
 					get_node('/root/Game/ResourceManager').gain_material(self.resource_handler.material * research_manager.research_affect_list['collector_efficiency_multiplier'])
 					resource_handler.material = 0
 					storage = 0
 					clear_to_idle()
+				elif state_manager.current_state == 'idle':
+					var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector', true, false))
+					drop_off_location = Vector2(closest_collector.position.x + 16, closest_collector.position.y)
+					drop_off_layer_number = closest_collector.layer.number
+					go_to_destination(Vector2(closest_collector.position.x + 16, closest_collector.position.y), closest_collector.layer.number)
+					print('going home! %s' % closest_collector.layer.number)
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
@@ -49,22 +56,16 @@ func _process(delta):
 								material.queue_free()
 								storage += 1
 								if storage >= storage_capacity:
-									var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector'))
+#									var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector', true, false))
 	#								print(closest_collector.name)
-									drop_off_location = Vector2(closest_collector.position.x + 16, closest_collector.position.y)
-									set_path(layer.get_navigation_path(position, drop_off_location))
+#									go_to_destination(Vector2(closest_collector.position.x + 16, closest_collector.position.y), closest_collector.layer.number)
 									carrying_load = true
 								else:
 									clear_to_idle()
 						else:
-							set_path(layer.get_navigation_path(position, job.get_work_world_location(job_position)))
-#							print('%s Need to Move to Job %s' % [self.name, path])
+							go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 					else:
-						if elevator_node_path == null:
-							print(job.layer_number)
-							move_to_layer(job.layer_number)
-						else:
-							use_elevator()
+						go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 		else:
 			clear_to_idle()
 
