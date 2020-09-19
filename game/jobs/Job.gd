@@ -26,6 +26,7 @@ var tile_size: int = ProjectSettings.get_setting('game/config/tile_size')
 var tile_offset: int = tile_size / 2
 var layer_number: int
 var object_node_path: String
+var object_node_id: int
 
 var type_choices: Dictionary = {
 		'digging': 'Digging Material',

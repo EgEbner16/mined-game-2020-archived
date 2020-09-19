@@ -24,6 +24,7 @@ func create_job(world_location: Vector2, layer , job_type: String, job_object_no
 	job.setup(world_location, layer, job_type)
 	if job_object_node_path != 'null':
 		job.object_node_path = job_object_node_path
+		job.object_node_id = get_node(job_object_node_path).get_instance_id()
 	add_child(job)
 	job_location_list[job_type][job.get_path()] = job.world_location_offset
 
@@ -56,8 +57,9 @@ func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Di
 	return job_closest_list
 
 func job_accessibility(job, drone):
+	var job_layer = get_node('/root/Game/World/Layer_%s' % job.layer_number)
 #	print('%s Accessibility Check' % drone.name)
-	job.accessibility = drone.layer.tile_manager.get_accessibility(job.tile_location)
+	job.accessibility = job_layer.tile_manager.get_accessibility(job.tile_location)
 	if job.accessibility['north']:
 		if job_direction(job, drone, 'north'):
 			return true

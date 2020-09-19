@@ -18,42 +18,32 @@ func _ready():
 	self.speed = 150
 
 func _process(delta):
-	position = state.position
+	self.position = state.position
 
 	if job_node_path:
 		if has_node(job_node_path):
 			if moving_to_repair:
-				if position.distance_to(repair_object.position) <= 10.0 and self.layer.number == repair_object.layer.number:
+#				print('Distance to Repair: %s' % self.position.distance_to(repair_object.position))
+				if self.position.distance_to(repair_object.position) <= 16.0 and self.layer.number == repair_object.layer.number:
 #					print('Service Drone at Repair Point %s' % self.name)
-					var job = get_node(job_node_path)
 					repair_object.repair()
 					$ServiceParticles.restart()
 					clear_to_idle()
-				elif path.size() > 0 and state_manager.current_state == 'idle':
-#					print('tacos')
-					moving_to_repair = true
-					go_to_destination(repair_object.position, repair_object.layer.number)
+				else:
+					moving_to_repair = false
+##					print('tacos')
+#					self.state.looking_point = repair_object.position
+#					go_to_destination(repair_object.position, repair_object.layer.number)
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
 					self.speed = self.base_speed + research_manager.research_affect_list['service_drone_movement_speed_increase']
 					var job = get_node(job_node_path)
-					if job.layer_number == self.layer.number:
-						repair_object = get_node(job.object_node_path)
-#						print ('Job is on same layer %s' % position.distance_to(job.get_work_world_location(job_position)))
-						if position.distance_to(repair_object.position) <= 10.0:
-#							print('Service Drone Arrived at Job')
-							self.state.looking_point = repair_object.position
-							if job.type == 'service':
-								moving_to_repair = true
-								go_to_destination(job.get_work_world_location(job_position), job.layer_number)
-						else:
-							moving_to_repair = true
-							go_to_destination(job.get_work_world_location(job_position), job.layer_number)
-#							print('%s Need to Move to Job %s' % [self.name, path])
-					else:
+					repair_object = instance_from_id(job.object_node_id)
+					if job.type == 'service':
+						self.state.looking_point = repair_object.position
+						go_to_destination(repair_object.position, repair_object.layer.number)
 						moving_to_repair = true
-						go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 		else:
 			clear_to_idle()
 
@@ -65,5 +55,5 @@ func clear_to_idle() -> void:
 	job_position = null
 	moving_to_repair = false
 	working = false
-#	print('Service Idle')
+	print('Service Idle')
 	change_state('idle')
