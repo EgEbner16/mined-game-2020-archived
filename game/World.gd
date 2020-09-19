@@ -24,6 +24,7 @@ func _ready():
 		var layer = LAYER.instance()
 		layer.add_to_group('layers')
 		layer.number = i
+		layer.number_max = ProjectSettings.get_setting('game/config/world_layers')
 		layer.name = str('Layer_%s' % i)
 		if i == 0:
 			layer.visible = true

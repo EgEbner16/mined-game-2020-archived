@@ -24,9 +24,9 @@ margin_bottom = 720.0
 alignment = 1
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer" index="0"]
-margin_top = 149.0
+margin_top = 115.0
 margin_right = 844.0
-margin_bottom = 571.0
+margin_bottom = 605.0
 text = "Tutorial Information
 
 - The goal of the game is to make as much Capital as possible.
@@ -41,14 +41,18 @@ text = "Tutorial Information
 - The harder the gem the more coolant it requires be carful when giving mining orders.
 - Watch your resources and make smart descisions on how to spend your Capital.
 - Research upgrades that match you overall mine needs and make sure to balance against equipment.
+- The further down you go the harder it is to mine.
 
 Controls
 
 - W S A D to move the camera around.
+- C goes down a layer.
+- F goes up a layer.
 - Spacebar pauses and unpauses the game.
 - Mouse Wheel to zoom in and out.
 - Left click to assign digging command.
 - Right click to cancel digging command.
 - Q opens drone menu
 - E opens equipment menu
-- R opens research menu"
+- R opens research menu
+- T opens this tutorial menu"

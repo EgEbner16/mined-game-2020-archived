@@ -45,8 +45,8 @@ func _input(event):
 
 	if event is InputEventKey:
 		if event.scancode == KEY_M:
+			resource_manager.gain_capital(10000)
 			pass
-#			resource_manager.gain_capital(1000)
 
 func _process(delta):
 	hud.capital_value = resource_manager.resource_handler.capital

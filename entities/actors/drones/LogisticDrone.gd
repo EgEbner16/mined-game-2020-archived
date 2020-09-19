@@ -38,7 +38,7 @@ func _process(delta):
 					drop_off_location = Vector2(closest_collector.position.x + 16, closest_collector.position.y)
 					drop_off_layer_number = closest_collector.layer.number
 					go_to_destination(Vector2(closest_collector.position.x + 16, closest_collector.position.y), closest_collector.layer.number)
-					print('going home! %s' % closest_collector.layer.number)
+#					print('going home! %s' % closest_collector.layer.number)
 
 			elif working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):

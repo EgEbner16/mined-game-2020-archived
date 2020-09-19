@@ -15,6 +15,8 @@ var tile_size = ProjectSettings.get_setting("game/config/tile_size")
 var base_left_x = int(world_center.x - base_size.x / 2)
 var base_top_y = int(world_center.y - base_size.y / 2)
 var number: int = 0
+var number_max: int = 0
+
 
 onready var tile_manager: TileManager = $TileManager
 onready var navigation_2d: Navigation2D = $Navigation2D
@@ -28,7 +30,8 @@ onready var camera: KinematicBody2D = get_node('/root/Game/Camera')
 
 
 func _ready():
-	tile_manager.create_random_layer(world_size)
+	var difficulty = float(number) / float(number_max)
+	tile_manager.create_random_layer(world_size, difficulty)
 	for x in range(world_size.x):
 		for y in range(world_size.y):
 			tile_manager.update_tile(Vector2(x, y), false)
@@ -37,6 +40,8 @@ func _ready():
 			for y in range(base_top_y, base_top_y + base_size.y):
 				tile_manager.set_tile_index(Vector2(x, y), 0)
 		tile_manager.set_tile_index(Vector2(world_center.x - 1, world_center.y - 1), 15)
+	var terrain_color = 1.0 - (0.5 * difficulty)
+	terrain_tile_map.modulate = Color(1.0, terrain_color, terrain_color)
 
 
 func _physics_process(delta):

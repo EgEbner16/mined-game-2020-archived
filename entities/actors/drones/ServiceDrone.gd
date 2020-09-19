@@ -29,13 +29,8 @@ func _process(delta):
 					repair_object.repair()
 					$ServiceParticles.restart()
 					clear_to_idle()
-				else:
-					moving_to_repair = false
-##					print('tacos')
-#					self.state.looking_point = repair_object.position
-#					go_to_destination(repair_object.position, repair_object.layer.number)
 
-			elif working and state_manager.current_state == 'idle':
+			if working and state_manager.current_state == 'idle':
 				if has_node(job_node_path):
 					self.speed = self.base_speed + research_manager.research_affect_list['service_drone_movement_speed_increase']
 					var job = get_node(job_node_path)
@@ -55,5 +50,4 @@ func clear_to_idle() -> void:
 	job_position = null
 	moving_to_repair = false
 	working = false
-	print('Service Idle')
 	change_state('idle')

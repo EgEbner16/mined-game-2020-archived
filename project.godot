@@ -312,6 +312,10 @@ config/name="Mined"
 config/description="Planetary mining game."
 run/main_scene="res://Splash.tscn"
 
+[autoload]
+
+GlobalSceneLoader="*res://global/GlobalSceneLoader.gd"
+
 [display]
 
 window/size/width=1280
@@ -324,7 +328,7 @@ window/stretch/aspect="keep"
 config/tile_size=32
 config/base_size=Vector2( 7, 7 )
 config/world_size=Vector2( 240, 240 )
-config/world_layers=2
+config/world_layers=4
 config/starting_capital=100000
 
 [input]

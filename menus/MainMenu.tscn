@@ -10,8 +10,6 @@
 [ext_resource path="res://resources/menu_item_focus_styleboxflat.tres" type="StyleBox" id=8]
 [ext_resource path="res://resources/menu_item_disabled_styleboxflat.tres" type="StyleBox" id=9]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
 length = 2.0

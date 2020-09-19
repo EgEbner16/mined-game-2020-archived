@@ -10,8 +10,11 @@ var base_size: Vector2 = ProjectSettings.get_setting('game/config/base_size')
 
 var map_key: int
 
+# Determines how hard the layer is from 0.0 to 1.0
+var difficulty: float
+
 func _ready():
-	print(map_key)
+#	print(map_key)
 	tile_data_index = {
 		0: TileData.new(0, 'Ground', true, 0, 0, 0),
 		1: TileData.new(1, 'Mined Ground', true, 0, 0, 0),
@@ -69,7 +72,11 @@ func create_random_tile(tile_location: Vector2) -> void:
 	create_tile(tile_location, randi() % 10 + 4)
 
 func create_random_mass_tile(tile_location: Vector2) -> void:
-	if randi() % 4 == 1:
+	var layer_number = get_parent().number
+	var rock_chance = ceil(20 / (layer_number + 1))
+	if rock_chance < 1:
+		rock_chance = 1
+	if randi() % int(rock_chance) == 1:
 		create_tile(tile_location, 5)
 	else:
 		create_tile(tile_location, 4)
@@ -113,7 +120,8 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 			elif randi() % 2 == 1:
 				create_tile(Vector2(x, y), 5)
 
-func create_random_layer(world_size: Vector2) -> void:
+func create_random_layer(world_size: Vector2, difficulty : float) -> void:
+	self.difficulty = difficulty
 	var world_center = world_size / 2
 	var vein_avoid_size = base_size.x * 2
 	var vein_avoid_min_x = int(world_center.x - vein_avoid_size)

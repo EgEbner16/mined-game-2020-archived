@@ -72,7 +72,7 @@ func get_step():
 		step = {'action': self.steps_action[0], 'data': self.steps_data[0]}
 		self.steps_action.remove(0)
 		self.steps_data.remove(0)
-		print('Size: %s' % self.steps_action.size())
+#		print('Size: %s' % self.steps_action.size())
 	else:
 		step =  {'action': 'arrived', 'data': true}
 	return step
