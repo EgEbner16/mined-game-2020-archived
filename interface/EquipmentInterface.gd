@@ -1,18 +1,39 @@
 extends Interface
 
+
 class_name EquipmentInterface
 
+
 const EQUIPMENT_BUTTON = preload("res://interface/EquipmentButton.tscn")
+
+
+const MINING_CORE = preload("res://entities/equipment/MiningCore.tscn")
 const ELEVATOR_DOWN = preload("res://entities/equipment/ElevatorDown.tscn")
+const ELEVATOR_UP = preload("res://entities/equipment/ElevatorUp.tscn")
+const COLLECTOR = preload("res://entities/equipment/Collector.tscn")
+const DISTRIBUTOR = preload("res://entities/equipment/Distributor.tscn")
+const GENERATOR = preload("res://entities/equipment/Generator.tscn")
+const MATTER_REACTOR = preload("res://entities/equipment/MatterReactor.tscn")
+const PUMP = preload("res://entities/equipment/Pump.tscn")
+const SCANNER = preload("res://entities/equipment/Scanner.tscn")
+
 
 onready var equipment_placement: EquipmentPlacement = get_node('/root/Game/InterfaceManager/EquipmentPlacement')
 onready var equipment_manager: EquipmentManager = get_node('/root/Game/World/EquipmentManager')
 onready var interface_manager: InterfaceManager = get_parent()
 
+
 var equipment_name_selected = 'none'
 
+
 func _ready():
+	create_equipment_button(GENERATOR.instance())
+	create_equipment_button(PUMP.instance())
+	create_equipment_button(MATTER_REACTOR.instance())
+	create_equipment_button(COLLECTOR.instance())
+	create_equipment_button(DISTRIBUTOR.instance())
 	create_equipment_button(ELEVATOR_DOWN.instance())
+	create_equipment_button(SCANNER.instance())
 
 
 func create_equipment_button(equipment: Equipment):
@@ -23,40 +44,14 @@ func create_equipment_button(equipment: Equipment):
 	equipment_button.get_node("Cost").text = "Cost: $%s" % equipment.resource_handler.capital_cost
 	$ColorRect/HBoxContainer/VBoxContainer.add_child(equipment_button)
 
+
 func place_equipment(elevator_placement := false):
 	equipment_placement.show(elevator_placement)
+
 
 func place_elevator_equipment():
 	place_equipment(true)
 
-func _on_BuyCollectorEquipment_pressed():
-	equipment_name_selected = 'collector'
-	place_equipment()
-
-
-func _on_BuyDistributorEquipment_pressed():
-	equipment_name_selected = 'distributor'
-	place_equipment()
-
-
-func _on_BuyGeneratorEquipment_pressed():
-	equipment_name_selected = 'generator'
-	place_equipment()
-
-
-func _on_BuyMatterReactorEquipment_pressed():
-	equipment_name_selected = 'matter_reactor'
-	place_equipment()
-
-
-func _on_BuyPumpEquipment_pressed():
-	equipment_name_selected = 'pump'
-	place_equipment()
-
-
-func _on_BuyScannerEquipment_pressed():
-	equipment_name_selected = 'scanner'
-	place_equipment()
 
 func _input(event):
 	if Input.is_action_just_released("action_primary") and interface_manager.interface_state == 'equipment' and equipment_placement.is_valid():

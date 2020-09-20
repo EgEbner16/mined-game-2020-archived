@@ -57,7 +57,7 @@ func placement_area_valid(layer_number: int, tile_location: Vector2) -> bool:
 			if not layer.tile_manager.tile_is_empty(Vector2(tile_location.x + pos_x, tile_location.y + pos_y)):
 				valid = false
 			if self.elevator_placement:
-				if layer_number + 1 > world_layers:
+				if layer_number + 1 < world_layers:
 					var next_layer = world.get_node('Layer_%s' % (layer_number + 1))
 					if not next_layer.tile_manager.tile_is_elevator_safe(Vector2(tile_location.x + pos_x, tile_location.y + pos_y)):
 						valid = false

@@ -9,7 +9,7 @@ var linked_elevator_up_node_path: String
 
 func _init():
 	self.type = 'elevator_down'
-	self.verbose_name = 'Elevator'
+	self.verbose_name = 'Elevator Down'
 	self.verbose_description = 'Allows drones to go between layers'
 	resource_handler.power_usage = 50
 	resource_handler.coolant_usage = 10
