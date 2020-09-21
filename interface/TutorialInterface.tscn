@@ -24,9 +24,9 @@ margin_bottom = 720.0
 alignment = 1
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer" index="0"]
-margin_top = 115.0
+margin_top = 106.0
 margin_right = 844.0
-margin_bottom = 605.0
+margin_bottom = 613.0
 text = "Tutorial Information
 
 - The goal of the game is to make as much Capital as possible.
@@ -46,8 +46,9 @@ text = "Tutorial Information
 Controls
 
 - W S A D to move the camera around.
-- C goes down a layer.
-- F goes up a layer.
+- F C goes up and down a layers.
+- 1 to 0 switch between layers 1 to 10
+- Plus and Minus increase and decrease game speed
 - Spacebar pauses and unpauses the game.
 - Mouse Wheel to zoom in and out.
 - Left click to assign digging command.

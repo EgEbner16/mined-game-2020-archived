@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const ACCELERATION = 2.0
 const MAX_SPEED = 40.0
-const FRICTION = 10.0
+const FRICTION = 6.0
 const ZOOM_SPEED = 10.0
 const ZOOM_MARGIN = 0.1
 const ZOOM_MIN = 0.5
@@ -29,9 +29,6 @@ func _ready():
 	$Camera2D.limit_bottom = world_height_px
 	position = Vector2(world_width_px / 2, world_height_px /2)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _physics_process(delta):
 
@@ -56,16 +53,21 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, (ACCELERATION / Engine.time_scale))
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
+		velocity = velocity.move_toward(Vector2.ZERO, (FRICTION / Engine.time_scale))
+	print(velocity)
+	print(delta)
 
-	camera.zoom.x = lerp(camera.zoom.x, zoom_level, ZOOM_SPEED * delta)
-	camera.zoom.y = lerp(camera.zoom.y, zoom_level, ZOOM_SPEED * delta)
+	# May need to hold on to an old vector and change it using it a delta
+
+	move_and_collide(velocity * (delta / Engine.time_scale) * 60)
+
+	camera.zoom.x = lerp(camera.zoom.x, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))
+	camera.zoom.y = lerp(camera.zoom.y, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))
 
 	zoom_level = clamp(zoom_level, ZOOM_MIN, ZOOM_MAX)
 
-	move_and_collide(velocity)
 
 func _input(event):
 	if abs(zoom_position.x - get_global_mouse_position().x) > ZOOM_MARGIN:

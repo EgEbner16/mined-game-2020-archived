@@ -8,7 +8,7 @@ var job_location_list: Dictionary
 
 var job_search_delay: float = 0.1
 var job_search_timer: float = 0.0
-var job_success_limit: int = 100
+var job_success_limit: int = 300
 
 func _init():
 	self.job_location_list['digging'] = Dictionary()
