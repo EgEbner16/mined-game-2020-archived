@@ -61,7 +61,10 @@ func _physics_process(delta):
 
 	# May need to hold on to an old vector and change it using it a delta
 
-	move_and_collide(velocity * (delta / Engine.time_scale) * 60)
+	$Camera2D.smoothing_speed = 5 / Engine.time_scale
+
+	move_and_collide(velocity)
+	print(position)
 
 	camera.zoom.x = lerp(camera.zoom.x, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))
 	camera.zoom.y = lerp(camera.zoom.y, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))
