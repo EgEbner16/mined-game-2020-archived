@@ -53,18 +53,15 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, (ACCELERATION / Engine.time_scale))
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, (FRICTION / Engine.time_scale))
-	print(velocity)
-	print(delta)
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 
 	# May need to hold on to an old vector and change it using it a delta
 
 	$Camera2D.smoothing_speed = 5 / Engine.time_scale
 
 	move_and_collide(velocity)
-	print(position)
 
 	camera.zoom.x = lerp(camera.zoom.x, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))
 	camera.zoom.y = lerp(camera.zoom.y, zoom_level, ZOOM_SPEED * (delta / Engine.time_scale))

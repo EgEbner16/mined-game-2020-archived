@@ -25,11 +25,11 @@ func _ready():
 		6: TileData.new(6, 'Low Value Tier 1', false, 2000, 4, 6),
 		7: TileData.new(7, 'High Value Tier 1', false, 4000, 6, 8),
 		8: TileData.new(8, 'Low Value Tier 2', false, 6000, 8, 10),
-		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 12),
-		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 14),
-		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 16),
-		12: TileData.new(12, 'Low Value Tier 4', false, 20000, 24, 18),
-		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 20),
+		9: TileData.new(9, 'High Value Tier 2', false, 10000, 12, 14),
+		10: TileData.new(10, 'Low Value Tier 3', false, 12000, 14, 16),
+		11: TileData.new(11, 'High Value Tier 3', false, 16000, 20, 22),
+		12: TileData.new(12, 'Low Value Tier 4', false, 20000, 24, 26),
+		13: TileData.new(13, 'High Value Tier 4', false, 28000, 36, 40),
 		14: TileData.new(14, 'Water', false, 0, 0, 0),
 		15: TileData.new(15, 'Blank', false, 0, 0, 0),
 	}
@@ -122,6 +122,8 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 
 func create_random_layer(world_size: Vector2, difficulty : float) -> void:
 	self.difficulty = difficulty
+	var modifier = int(10 * difficulty) + 1
+	print('Modifier: %s' % modifier)
 	var world_center = world_size / 2
 	var vein_avoid_size = base_size.x * 2
 	var vein_avoid_min_x = int(world_center.x - vein_avoid_size)
@@ -135,13 +137,13 @@ func create_random_layer(world_size: Vector2, difficulty : float) -> void:
 				if x in range(vein_avoid_min_x, vein_avoid_max_x) and y in range(vein_avoid_min_y, vein_avoid_max_y):
 					create_random_mass_tile(Vector2(x, y))
 				else:
-					if randi() % 2000 == 1:
+					if randi() % 10000 <= modifier:
 						create_vein(Vector2(x, y), 4, randi() % 8 + 4)
-					elif randi() % 1500 == 1:
+					elif randi() % 7500 <= modifier:
 						create_vein(Vector2(x, y), 3, randi() % 8 + 4)
-					elif randi() % 1000 == 1:
+					elif randi() % 5000 <= modifier:
 						create_vein(Vector2(x, y), 2, randi() % 10 + 4)
-					elif randi() % 500 == 1:
+					elif randi() % 2500 <= modifier:
 						create_vein(Vector2(x, y), 1, randi() % 10 + 6)
 
 func set_tile_index(tile_location: Vector2, index) -> void:

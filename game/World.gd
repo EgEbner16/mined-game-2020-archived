@@ -67,9 +67,11 @@ func _input(event):
 
 func switch_layer(number: int):
 	if number <= self.bottom_layer:
-		print('Going from Layer %s to Layer %s' % [self.current_active_layer, number])
+#		print('Going from Layer %s to Layer %s' % [self.current_active_layer, number])
 		var active_layer: WorldLayer = get_node('Layer_%s' % current_active_layer)
+		active_layer.animation_player.playback_speed = 1 / Engine.time_scale
 		var switch_layer: WorldLayer = get_node('Layer_%s' % number)
+		switch_layer.animation_player.playback_speed = 1 / Engine.time_scale
 		if switch_layer.number > active_layer.number:
 			active_layer.animation_player.play('fade_out_up')
 			switch_layer.animation_player.play('fade_in_up')

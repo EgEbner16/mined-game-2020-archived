@@ -105,7 +105,7 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Mining Success %s' % job_success)
+#					print('Mining Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("material_jobs").size() > 0:
@@ -125,7 +125,7 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Logistic Success %s' % job_success)
+#					print('Logistic Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("equipment_jobs").size() > 0:
@@ -141,7 +141,7 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Construction Success %s' % job_success)
+#					print('Construction Success %s' % job_success)
 					break
 
 		if get_tree().get_nodes_in_group("service_jobs").size() > 0:
@@ -161,5 +161,5 @@ func _process(delta):
 							job_success += 1
 							break
 				if not job_found or job_success >= job_success_limit:
-					print('Service Success %s' % job_success)
+#					print('Service Success %s' % job_success)
 					break
