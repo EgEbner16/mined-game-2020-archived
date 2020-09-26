@@ -1,8 +1,11 @@
 extends Node
 
+
 class_name JobManager
 
+
 const JOB = preload("res://game/jobs/Job.tscn")
+
 
 var job_location_list: Dictionary
 
@@ -10,14 +13,17 @@ var job_search_delay: float = 0.1
 var job_search_timer: float = 0.0
 var job_success_limit: int = 300
 
+
 func _init():
 	self.job_location_list['digging'] = Dictionary()
 	self.job_location_list['material'] = Dictionary()
 	self.job_location_list['equipment'] = Dictionary()
 	self.job_location_list['service'] = Dictionary()
 
+
 func _ready():
 	pass # Replace with function body.
+
 
 func create_job(world_location: Vector2, layer , job_type: String, job_object_node_path: String = 'null'):
 	var job: Job = JOB.instance()
@@ -26,6 +32,7 @@ func create_job(world_location: Vector2, layer , job_type: String, job_object_no
 		job.object_node_path = job_object_node_path
 		job.object_node_id = get_node(job_object_node_path).get_instance_id()
 	add_child(job)
+
 
 func remove_job(world_location: Vector2, layer, job_type: String, job_object_node_path: String = 'null'):
 	if job_type == 'digging':
@@ -39,8 +46,10 @@ func remove_job(world_location: Vector2, layer, job_type: String, job_object_nod
 	if job_type == 'service':
 		get_node(job_object_node_path).queue_free()
 
+
 func clean_up_jobs():
 	pass
+
 
 func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Dictionary:
 	var job_distance_list: Dictionary
@@ -54,6 +63,7 @@ func get_closest_job_node_paths(world_location: Vector2, job_type: String) -> Di
 		job_closest_list[distance] = job_distance_list[distance]
 #		print(job_distance_list[distance])
 	return job_closest_list
+
 
 func job_accessibility(job, drone):
 	var job_layer = get_node('/root/Game/World/Layer_%s' % job.layer_number)
@@ -71,6 +81,7 @@ func job_accessibility(job, drone):
 	if job.accessibility['west']:
 		if job_direction(job, drone, 'west'):
 			return true
+
 
 func job_direction(job, drone, direction: String) -> bool:
 	if job.accessibility[direction] and not job.assigned_units[direction]:

@@ -1,6 +1,8 @@
 extends Node
 
+
 class_name Job
+
 
 var accessibility: Dictionary = {
 	'north': false,
@@ -10,7 +12,6 @@ var accessibility: Dictionary = {
 	'center': false,
 }
 
-
 var assigned_units: Dictionary = {
 	'north': null,
 	'east': null,
@@ -19,9 +20,7 @@ var assigned_units: Dictionary = {
 	'center': null,
 }
 
-
 var accessible_location: Vector2 = Vector2.ZERO
-
 
 var tile_location: Vector2 = Vector2.ZERO
 var world_location: Vector2 = Vector2.ZERO
@@ -44,7 +43,7 @@ var type_choices: Dictionary = {
 var type: String
 
 
-func save():
+func save_object():
 	var save_dict = {
 		'filename' : get_filename(),
 		'parent' : get_parent().get_path(),
@@ -58,15 +57,17 @@ func save():
 	}
 	return save_dict
 
+func load_object():
+	pass
 
 func _ready():
+	self.add_to_group('jobs')
 	self.add_to_group('Persist')
 	world_location_offset = Vector2(world_location.x + tile_offset, world_location.y + tile_offset)
 	get_parent().job_location_list[type][get_path()] = world_location_offset
 
 
 func setup(world_location: Vector2, layer, type: String) -> void:
-	self.add_to_group('jobs')
 	self.add_to_group('%s_jobs' % type)
 	self.set_type(type)
 	self.tile_location = layer.dig_tile_map.world_to_map(world_location)

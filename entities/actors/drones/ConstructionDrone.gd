@@ -7,7 +7,7 @@ var constructing = false
 var constructing_power = 1.0
 
 
-func save():
+func save_object():
 	var save_dict = {
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),

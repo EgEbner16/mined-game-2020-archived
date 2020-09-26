@@ -10,7 +10,7 @@ var storage = 0
 var drop_off_location: Vector2
 var drop_off_layer_number: int
 
-func save():
+func save_object():
 	var save_dict = {
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),

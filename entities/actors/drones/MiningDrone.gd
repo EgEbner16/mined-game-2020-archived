@@ -14,7 +14,7 @@ var digging_speed = 2.0
 var base_digging_speed = 2.0
 
 
-func save():
+func save_object():
 	var save_dict = {
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),
