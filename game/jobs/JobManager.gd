@@ -26,7 +26,6 @@ func create_job(world_location: Vector2, layer , job_type: String, job_object_no
 		job.object_node_path = job_object_node_path
 		job.object_node_id = get_node(job_object_node_path).get_instance_id()
 	add_child(job)
-	job_location_list[job_type][job.get_path()] = job.world_location_offset
 
 func remove_job(world_location: Vector2, layer, job_type: String, job_object_node_path: String = 'null'):
 	if job_type == 'digging':

@@ -45,7 +45,7 @@ func _input(event):
 
 	if event is InputEventKey:
 		if event.scancode == KEY_M:
-			resource_manager.gain_capital(10000)
+#			resource_manager.gain_capital(10000)
 			pass
 
 func _process(delta):

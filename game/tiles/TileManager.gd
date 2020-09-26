@@ -123,7 +123,7 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 func create_random_layer(world_size: Vector2, difficulty : float) -> void:
 	self.difficulty = difficulty
 	var modifier = int(10 * difficulty) + 1
-	print('Modifier: %s' % modifier)
+#	print('Modifier: %s' % modifier)
 	var world_center = world_size / 2
 	var vein_avoid_size = base_size.x * 2
 	var vein_avoid_min_x = int(world_center.x - vein_avoid_size)

@@ -41,3 +41,11 @@ func _on_ExitGame_pressed():
 func _input(event):
 	if event.is_action_released("display_options"):
 		self.change_state()
+
+
+func _on_SaveGame_pressed():
+	GlobalSaveManager.save_game()
+
+
+func _on_LoadGame_pressed():
+	GlobalSaveManager.load_game()

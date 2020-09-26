@@ -6,20 +6,32 @@ class_name ConstructionDrone
 var constructing = false
 var constructing_power = 1.0
 
+
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position" : GlobalSaveManager.save_vector2(self.position),
+	}
+	return save_dict
+
+
 func _init():
 	resource_handler.capital_cost = 3000
 	base_resource_handler.power_usage = 5
 	base_resource_handler.coolant_usage = 2
 
+
 func _ready():
+	self.add_to_group('drones')
+	self.add_to_group('construction_drones')
 	self.drone = true
 	self.base_speed = 50
 	self.speed = 50
 	$BuildingParticles.set_emitting(false)
 
-func _process(delta):
-	position = state.position
 
+func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if constructing:
@@ -54,6 +66,7 @@ func _process(delta):
 						go_to_destination(job.get_work_world_location(job_position), job.layer_number)
 		else:
 			clear_to_idle()
+
 
 func clear_to_idle() -> void:
 	if has_node(job_node_path):

@@ -1,5 +1,6 @@
 extends Actor
 
+
 class_name ServiceDrone
 
 
@@ -7,19 +8,30 @@ var moving_to_repair: bool = false
 var repair_object
 
 
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position" : GlobalSaveManager.save_vector2(self.position),
+	}
+	return save_dict
+
+
 func _init():
 	resource_handler.capital_cost = 5000
 	base_resource_handler.power_usage = 5
 	base_resource_handler.coolant_usage = 2
 
+
 func _ready():
+	self.add_to_group('drones')
+	self.add_to_group('service_drones')
 	self.drone = true
 	self.base_speed = 150
 	self.speed = 150
 
-func _process(delta):
-	self.position = state.position
 
+func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if moving_to_repair:
@@ -41,6 +53,7 @@ func _process(delta):
 						moving_to_repair = true
 		else:
 			clear_to_idle()
+
 
 func clear_to_idle() -> void:
 	if has_node(job_node_path):

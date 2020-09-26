@@ -1,8 +1,11 @@
 extends Actor
 
+
 class_name MiningDrone
 
+
 onready var material_manager: MaterialManager = get_node('/root/Game/World/MaterialManager')
+
 
 var digging = false
 var digging_power = 100.00
@@ -10,20 +13,32 @@ var digging_timer = 0.0
 var digging_speed = 2.0
 var base_digging_speed = 2.0
 
+
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position" : GlobalSaveManager.save_vector2(self.position),
+	}
+	return save_dict
+
+
 func _init():
 	self.resource_handler.capital_cost = 4000
 	self.base_resource_handler.power_usage = 5
 	self.base_resource_handler.coolant_usage = 2
 
+
 func _ready():
+	self.add_to_group('drones')
+	self.add_to_group('mining_drones')
 	self.base_speed = 100
 	self.speed = 100
 	self.drone = true
 	$DiggingParticles.set_emitting(false)
 
-func _process(delta):
-	position = state.position
 
+func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if digging:
@@ -68,6 +83,7 @@ func _process(delta):
 
 		else:
 			clear_to_idle()
+
 
 func clear_to_idle() -> void:
 	if has_node(job_node_path):

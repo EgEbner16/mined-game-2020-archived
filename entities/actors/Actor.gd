@@ -40,8 +40,13 @@ var state_manager: StateManager
 var path = PoolVector2Array() setget set_path
 
 
-func _physics_process(delta):
+func _ready():
+	state_manager = StateManager.new()
+	change_state("idle")
+	add_to_group('Persist')
 
+
+func _physics_process(delta):
 	if state.new_state == 'idle':
 		change_state('idle')
 
@@ -52,10 +57,9 @@ func _physics_process(delta):
 		$AnimatedSprite.look_at(state.looking_point)
 
 
-func _ready():
-	state_manager = StateManager.new()
-	change_state("idle")
-#	print('Actor Ready')
+func _process(delta):
+	self.position = self.state.position
+
 
 
 func check_map_key() -> bool:

@@ -10,19 +10,29 @@ var storage = 0
 var drop_off_location: Vector2
 var drop_off_layer_number: int
 
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"position" : GlobalSaveManager.save_vector2(self.position),
+	}
+	return save_dict
+
 func _init():
 	resource_handler.capital_cost = 2000
 	base_resource_handler.power_usage = 5
 	base_resource_handler.coolant_usage = 2
 
+
 func _ready():
+	self.add_to_group('drones')
+	self.add_to_group('logistic_drones')
 	self.drone = true
 	self.base_speed = 125
 	self.speed = 125
 
-func _process(delta):
-	position = state.position
 
+func _process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if carrying_load:

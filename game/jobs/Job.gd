@@ -9,6 +9,8 @@ var accessibility: Dictionary = {
 	'west': false,
 	'center': false,
 }
+
+
 var assigned_units: Dictionary = {
 	'north': null,
 	'east': null,
@@ -17,7 +19,9 @@ var assigned_units: Dictionary = {
 	'center': null,
 }
 
+
 var accessible_location: Vector2 = Vector2.ZERO
+
 
 var tile_location: Vector2 = Vector2.ZERO
 var world_location: Vector2 = Vector2.ZERO
@@ -28,6 +32,7 @@ var layer_number: int
 var object_node_path: String
 var object_node_id: int
 
+
 var type_choices: Dictionary = {
 		'digging': 'Digging Material',
 		'material': 'Transport Material',
@@ -35,10 +40,30 @@ var type_choices: Dictionary = {
 		'service': 'Service Equipmet or Drone',
 	}
 
+
 var type: String
 
+
+func save():
+	var save_dict = {
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'accessibility': self.accessibility,
+		'accessible_location': GlobalSaveManager.save_vector2(accessible_location),
+		'tile_location': GlobalSaveManager.save_vector2(tile_location),
+		'world_location': GlobalSaveManager.save_vector2(world_location),
+		'world_location_offset': GlobalSaveManager.save_vector2(world_location_offset),
+		'layer_number': layer_number,
+		'type': type,
+	}
+	return save_dict
+
+
 func _ready():
+	self.add_to_group('Persist')
 	world_location_offset = Vector2(world_location.x + tile_offset, world_location.y + tile_offset)
+	get_parent().job_location_list[type][get_path()] = world_location_offset
+
 
 func setup(world_location: Vector2, layer, type: String) -> void:
 	self.add_to_group('jobs')
