@@ -8,10 +8,10 @@ var zoom_current: float = 1.0
 var zoom_default: float = 1.0
 
 
-var world_size = ProjectSettings.get_setting("game/config/world_size")
+var world_size = ProjectSettings.get_setting('game/config/world_size')
 var world_center = world_size / 2
-var base_size = ProjectSettings.get_setting("game/config/base_size")
-var tile_size = ProjectSettings.get_setting("game/config/tile_size")
+var base_size = ProjectSettings.get_setting('game/config/base_size')
+var tile_size = ProjectSettings.get_setting('game/config/tile_size')
 var base_left_x = int(world_center.x - base_size.x / 2)
 var base_top_y = int(world_center.y - base_size.y / 2)
 var number: int = 0
@@ -29,7 +29,24 @@ onready var drone_manager: DroneManager = get_node('/root/Game/World/DroneManage
 onready var camera: KinematicBody2D = get_node('/root/Game/Camera')
 
 
+func save_object():
+	var save_dict = {
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'position' : GlobalSaveManager.save_vector2(self.position),
+		'zoom': self.zoom,
+		'zoom_current': self.zoom_current,
+		'zoom_default': self.zoom_default,
+		'number': self.number,
+		'number_max': self.number_max,
+	}
+	return save_dict
+
+func load_object():
+	self.name = 'Layer_%s' % number
+
 func _ready():
+	self.add_to_group('Persist_0')
 	var difficulty = float(number) / float(number_max)
 	tile_manager.create_random_layer(world_size, difficulty)
 	for x in range(world_size.x):

@@ -9,9 +9,9 @@ var constructing_power = 1.0
 
 func save_object():
 	var save_dict = {
-		"filename" : get_filename(),
-		"parent" : get_parent().get_path(),
-		"position" : GlobalSaveManager.save_vector2(self.position),
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'position' : GlobalSaveManager.save_vector2(self.position),
 	}
 	return save_dict
 

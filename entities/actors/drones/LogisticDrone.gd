@@ -12,9 +12,9 @@ var drop_off_layer_number: int
 
 func save_object():
 	var save_dict = {
-		"filename" : get_filename(),
-		"parent" : get_parent().get_path(),
-		"position" : GlobalSaveManager.save_vector2(self.position),
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'position' : GlobalSaveManager.save_vector2(self.position),
 	}
 	return save_dict
 
@@ -46,8 +46,8 @@ func _process(delta):
 				elif state_manager.current_state == 'idle':
 					var closest_collector = get_node(equipment_manager.get_closest_equipment(self.position, layer, 'collector', true, false))
 					drop_off_location = Vector2(closest_collector.position.x + 16, closest_collector.position.y)
-					drop_off_layer_number = closest_collector.layer.number
-					go_to_destination(Vector2(closest_collector.position.x + 16, closest_collector.position.y), closest_collector.layer.number)
+					drop_off_layer_number = closest_collector.layer_number
+					go_to_destination(Vector2(closest_collector.position.x + 16, closest_collector.position.y), closest_collector.layer_number)
 #					print('going home! %s' % closest_collector.layer.number)
 
 			elif working and state_manager.current_state == 'idle':

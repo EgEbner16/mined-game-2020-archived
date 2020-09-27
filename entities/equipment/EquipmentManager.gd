@@ -46,7 +46,7 @@ func is_equipment(layer, type: String, equipment_is_on: bool = true):
 	if self.equipment.has(type):
 		if get_tree().get_nodes_in_group('%s_equipment' % type).size() > 0:
 			for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-				if equipment.layer.number == layer.number:
+				if equipment.layer_number == layer.number:
 					if equipment.entity.on or not equipment_is_on:
 						available = true
 	return available
@@ -55,7 +55,7 @@ func get_closest_equipment(world_location: Vector2, layer, type: String, equipme
 	if self.equipment.has(type):
 		var equipment_distance_list: Dictionary
 		for equipment in get_tree().get_nodes_in_group('%s_equipment' % type):
-			if equipment.layer.number == layer.number or not layer_only:
+			if equipment.layer_number == layer.number or not layer_only:
 				if equipment.entity.on or not equipment_is_on:
 					equipment_distance_list[world_location.distance_squared_to(equipment.position)] = equipment.get_path()
 		var distance_array: Array = equipment_distance_list.keys()
@@ -158,12 +158,7 @@ func create_equipment(equipment_name: String, layer: int, world_location: Vector
 func create_mining_core(world_location: Vector2, layer) ->  bool:
 	var mining_core = MINING_CORE.instance()
 	if resource_manager.use_capital(mining_core.resource_handler.capital_cost):
-		mining_core.add_to_group('equipment')
-		mining_core.add_to_group('core_equipment')
-		mining_core.add_to_group('distributor_equipment')
-		mining_core.add_to_group('collector_equipment')
-		mining_core.name = 'mining_core'
-		mining_core.layer = layer
+		mining_core.layer_number = layer.number
 		mining_core.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(mining_core)
 		mining_core.set_constructed()
@@ -177,7 +172,7 @@ func create_generator(world_location: Vector2, layer) -> bool:
 		generator.add_to_group('equipment')
 		generator.add_to_group('power_equipment')
 		generator.name = 'generator'
-		generator.layer = layer
+		generator.layer_number = layer.number
 		generator.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(generator)
 		job_manager.create_job(generator.position, layer, 'equipment', generator.get_path())
@@ -188,10 +183,7 @@ func create_generator(world_location: Vector2, layer) -> bool:
 func create_collector(world_location: Vector2, layer) -> bool:
 	var collector = COLLECTOR.instance()
 	if resource_manager.use_capital(collector.resource_handler.capital_cost):
-		collector.add_to_group('equipment')
-		collector.add_to_group('collector_equipment')
-		collector.name = 'collector'
-		collector.layer = layer
+		collector.layer_number = layer.number
 		collector.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(collector)
 		job_manager.create_job(collector.position, layer, 'equipment', collector.get_path())
@@ -202,10 +194,7 @@ func create_collector(world_location: Vector2, layer) -> bool:
 func create_distributor(world_location: Vector2, layer) -> bool:
 	var distributor = DISTRIBUTOR.instance()
 	if resource_manager.use_capital(distributor.resource_handler.capital_cost):
-		distributor.add_to_group('equipment')
-		distributor.add_to_group('distributor_equipment')
-		distributor.name = 'distributor'
-		distributor.layer = layer
+		distributor.layer_number = layer.number
 		distributor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(distributor)
 		job_manager.create_job(distributor.position, layer, 'equipment', distributor.get_path())
@@ -216,10 +205,7 @@ func create_distributor(world_location: Vector2, layer) -> bool:
 func create_matter_reactor(world_location: Vector2, layer) -> bool:
 	var matter_reactor = MATTER_REACTOR.instance()
 	if resource_manager.use_capital(matter_reactor.resource_handler.capital_cost):
-		matter_reactor.add_to_group('equipment')
-		matter_reactor.add_to_group('power_equipment')
-		matter_reactor.name = 'matter_reactor'
-		matter_reactor.layer = layer
+		matter_reactor.layer_number = layer.number
 		matter_reactor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(matter_reactor)
 		job_manager.create_job(matter_reactor.position, layer, 'equipment', matter_reactor.get_path())
@@ -230,10 +216,7 @@ func create_matter_reactor(world_location: Vector2, layer) -> bool:
 func create_pump(world_location: Vector2, layer) -> bool:
 	var pump = PUMP.instance()
 	if resource_manager.use_capital(pump.resource_handler.capital_cost):
-		pump.add_to_group('equipment')
-		pump.add_to_group('coolant_equipment')
-		pump.name = 'pump'
-		pump.layer = layer
+		pump.layer_number = layer.number
 		pump.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(pump)
 		job_manager.create_job(pump.position, layer, 'equipment', pump.get_path())
@@ -244,10 +227,7 @@ func create_pump(world_location: Vector2, layer) -> bool:
 func create_scanner(world_location: Vector2, layer) -> bool:
 	var scanner = SCANNER.instance()
 	if resource_manager.use_capital(scanner.resource_handler.capital_cost):
-		scanner.add_to_group('equipment')
-		scanner.add_to_group('power_equipment')
-		scanner.name = 'scanner'
-		scanner.layer = layer
+		scanner.layer_number = layer.number
 		scanner.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(scanner)
 		job_manager.create_job(scanner.position, layer, 'equipment', scanner.get_path())
@@ -270,7 +250,7 @@ func build_equipment(equipment_instance: Equipment, type: String, world_location
 		for group in group_list:
 			equipment_instance.add_to_group(group)
 		equipment_instance.name = type
-		equipment_instance.layer = layer
+		equipment_instance.layer_number = layer.number
 		equipment_instance.position = world_location
 		layer.add_child(equipment_instance)
 		if type == 'elevator':
@@ -282,7 +262,7 @@ func build_equipment(equipment_instance: Equipment, type: String, world_location
 					elevator_up.add_to_group(group)
 			elevator_up.name = type
 			var next_layer = get_node('/root/Game/World/Layer_%s' % (layer_number + 1))
-			elevator_up.layer = next_layer
+			elevator_up.layer_number = next_layer
 			elevator_up.position = world_location
 			next_layer.add_child(elevator_up)
 			elevator_up.linked_elevator_down_node_path = equipment_instance.get_path()

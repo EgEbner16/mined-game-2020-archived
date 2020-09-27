@@ -4,6 +4,22 @@ extends Equipment
 class_name Distributor
 
 
+func save_object():
+	var save_dict = {
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'position' : GlobalSaveManager.save_vector2(self.position),
+		'constructed': self.constructed,
+		'layer_number': self.layer_number,
+	}
+	return save_dict
+
+
+func _ready():
+	self.add_to_group('distributor_equipment')
+	self.name = 'distributor'
+
+
 func _init():
 	self.type = 'distributor'
 	self.verbose_name = 'Distributor'

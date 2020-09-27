@@ -4,6 +4,17 @@ extends Equipment
 class_name Generator
 
 
+func save_object():
+	var save_dict = {
+		'filename' : get_filename(),
+		'parent' : get_parent().get_path(),
+		'position' : GlobalSaveManager.save_vector2(self.position),
+		'constructed': self.constructed,
+		'layer_number': self.layer_number,
+	}
+	return save_dict
+
+
 func _init():
 	self.type = 'generator'
 	self.verbose_name = 'Generator'

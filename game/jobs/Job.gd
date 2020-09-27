@@ -57,8 +57,12 @@ func save_object():
 	}
 	return save_dict
 
+
 func load_object():
-	pass
+	self.set_job_name()
+	var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
+	layer.set_dig_tile(world_location)
+
 
 func _ready():
 	self.add_to_group('jobs')
@@ -68,22 +72,31 @@ func _ready():
 
 
 func setup(world_location: Vector2, layer, type: String) -> void:
-	self.add_to_group('%s_jobs' % type)
-	self.set_type(type)
 	self.tile_location = layer.dig_tile_map.world_to_map(world_location)
 	self.layer_number = layer.number
+	self.set_job_name()
 	if self.type == 'digging':
 		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
-		self.name = 'digging_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
 	if self.type == 'material':
 		self.world_location = world_location
-		self.name = 'material_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
 	if self.type == 'equipment':
 		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
-		self.name = 'equipment_l%s_x%s_y%s' % [layer.number, self.tile_location.x, self.tile_location.y]
 	if self.type == 'service':
 		self.world_location = world_location
-		self.name = 'service_l%s_x%s_y%s' % [layer.number, self.world_location.x, self.world_location.y]
+
+
+func set_job_name():
+	self.set_type(type)
+	self.add_to_group('%s_jobs' % type)
+	if self.type == 'digging':
+		self.name = 'digging_l%s_x%s_y%s' % [layer_number, self.tile_location.x, self.tile_location.y]
+	if self.type == 'material':
+		self.name = 'material_l%s_x%s_y%s' % [layer_number, self.world_location.x, self.world_location.y]
+	if self.type == 'equipment':
+		self.name = 'equipment_l%s_x%s_y%s' % [layer_number, self.tile_location.x, self.tile_location.y]
+	if self.type == 'service':
+		self.name = 'service_l%s_x%s_y%s' % [layer_number, self.world_location.x, self.world_location.y]
+
 
 func set_type(type: String):
 	if type_choices.has(type):

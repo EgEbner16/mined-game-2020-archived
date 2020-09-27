@@ -14,15 +14,22 @@ var job_search_timer: float = 0.0
 var job_success_limit: int = 300
 
 
+func on_load_game():
+	job_location_list.clear()
+	setup_job_location_list()
+
 func _init():
+	setup_job_location_list()
+
+func _ready():
+	pass # Replace with function body.
+
+
+func setup_job_location_list():
 	self.job_location_list['digging'] = Dictionary()
 	self.job_location_list['material'] = Dictionary()
 	self.job_location_list['equipment'] = Dictionary()
 	self.job_location_list['service'] = Dictionary()
-
-
-func _ready():
-	pass # Replace with function body.
 
 
 func create_job(world_location: Vector2, layer , job_type: String, job_object_node_path: String = 'null'):
@@ -37,6 +44,7 @@ func create_job(world_location: Vector2, layer , job_type: String, job_object_no
 func remove_job(world_location: Vector2, layer, job_type: String, job_object_node_path: String = 'null'):
 	if job_type == 'digging':
 		var tile_location = layer.dig_tile_map.world_to_map(world_location)
+		print('digging_l%s_x%s_y%s' % [layer.number, tile_location.x, tile_location.y])
 		get_node('digging_l%s_x%s_y%s' % [layer.number, tile_location.x, tile_location.y]).queue_free()
 	#This naming will create problems later when there is lots of these objects.
 	if job_type == 'material':
