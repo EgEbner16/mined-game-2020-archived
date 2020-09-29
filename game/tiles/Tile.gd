@@ -1,6 +1,8 @@
 extends Object
 
+
 class_name Tile
+
 
 var tile_data: TileData = TileData.new()
 
@@ -17,12 +19,35 @@ var accessibility: Dictionary = {
 	'center': false,
 }
 
-func _init(tile_location: Vector2, tile_data: TileData):
-	self.location = tile_location
-	self.tile_data.copy(tile_data)
+
+func save_object():
+	var save_dict = {
+		'location': GlobalSaveManager.save_vector2(location),
+		'health': self.health,
+		'mass': self.mass,
+		'index': self.index,
+		'accessibility': self.accessibility,
+		'tile_data': self.tile_data.save_object(),
+	}
+	return save_dict
+
+
+func load_object(object_dict):
+	pass
+
+
+func _init():
+	pass
+	
 
 func _ready():
 	pass
+
+
+func setup(tile_location: Vector2, tile_data: TileData):
+	self.location = tile_location
+	self.tile_data.copy(tile_data)
+
 
 func remove_health(amount: float):
 	self.tile_data.health -= amount

@@ -58,20 +58,23 @@ func save_object():
 	return save_dict
 
 
-func load_object():
+func after_load_object():
 	self.set_job_name()
-	var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
-	layer.set_dig_tile(world_location)
+	if self.type == 'digging':
+		var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
+		layer.set_dig_tile(world_location)
 
 
 func _ready():
 	self.add_to_group('jobs')
 	self.add_to_group('Persist')
 	world_location_offset = Vector2(world_location.x + tile_offset, world_location.y + tile_offset)
-	get_parent().job_location_list[type][get_path()] = world_location_offset
+	print('Type %s' % self.type)
+	get_parent().job_location_list[self.type][self.get_path()] = world_location_offset
 
 
 func setup(world_location: Vector2, layer, type: String) -> void:
+	self.type = type
 	self.tile_location = layer.dig_tile_map.world_to_map(world_location)
 	self.layer_number = layer.number
 	self.set_job_name()

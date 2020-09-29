@@ -19,10 +19,10 @@ func on_load_game():
 	setup_job_location_list()
 
 func _init():
-	setup_job_location_list()
+	pass
 
 func _ready():
-	pass # Replace with function body.
+	setup_job_location_list()
 
 
 func setup_job_location_list():

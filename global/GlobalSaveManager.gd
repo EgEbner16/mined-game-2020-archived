@@ -47,8 +47,11 @@ func load_game():
 
 		var new_object = load(node_data['filename']).instance()
 
+		if new_object.has_method('load_object'):
+			new_object.load_object(node_data['object_dict'])
+
 		for i in node_data.keys():
-			if i == 'filename' or i == 'parent':
+			if i == 'filename' or i == 'parent' or i == 'object_dict':
 				continue
 			if typeof(node_data[i]) == 18:
 				if 'type' in node_data[i]:
@@ -61,8 +64,8 @@ func load_game():
 
 		get_node(node_data['parent']).add_child(new_object)
 
-		if new_object.has_method('load_object'):
-			new_object.call('load_object')
+		if new_object.has_method('after_load_object'):
+			new_object.after_load_object()
 
 
 	save_game.close()

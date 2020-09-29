@@ -13,6 +13,36 @@ var map_key: int
 # Determines how hard the layer is from 0.0 to 1.0
 var difficulty: float
 
+
+func save_object():
+	var object_dict = {
+		'tile_map_dict': self.save_tile_map()
+	}
+	var save_dict = {
+		'filename': get_filename(),
+		'parent': get_parent().get_path(),
+		'object_dict': object_dict,
+		'map_key': self.map_key,
+		'difficulty': self.difficulty,
+	}
+	return save_dict
+
+
+func save_tile_map():
+	var tile_map_dict = Dictionary()
+	for tile in self.tile_map:
+		tile_map_dict[tile] = self.tile_map[tile].save_object()
+	
+
+func load_object(object_dict):
+	pass
+
+func load_tile_map(tile_map_dict):
+	self.tile_map.clear()
+	for tile in tile_map_dict:
+		tile_map[tile] = tile_map_dict
+	
+
 func _ready():
 #	print(map_key)
 	tile_data_index = {
@@ -33,30 +63,15 @@ func _ready():
 		14: TileData.new(14, 'Water', false, 0, 0, 0),
 		15: TileData.new(15, 'Blank', false, 0, 0, 0),
 	}
-#	index_information = {
-#		0: {'type': 'Ground', 'navigation': true, 'health': 0},
-#		1: {'type': 'Mined Ground', 'navigation': true, 'health': 0},
-#		2: {'type': 'Compacted Ground', 'navigation': true, 'health': 0},
-#		3: {'type': 'Renforced Ground', 'navigation': true, 'health': 0},
-#		4: {'type': 'Mass', 'navigation': false, 'health': 200},
-#		5: {'type': 'Solid Mass', 'navigation': false, 'health': 1000},
-#		6: {'type': 'Low Value Tier 1', 'navigation': false, 'health': 0},
-#		7: {'type': 'High Value Tier 1', 'navigation': false, 'health': 0},
-#		8: {'type': 'Low Value Tier 2', 'navigation': false, 'health': 0},
-#		9: {'type': 'High Value Tier 2', 'navigation': false, 'health': 0},
-#		10: {'type': 'Low Value Tier 3', 'navigation': false, 'health': 0},
-#		11: {'type': 'High Value Tier 3', 'navigation': false, 'health': 0},
-#		12: {'type': 'Low Value Tier 4', 'navigation': false, 'health': 0},
-#		13: {'type': 'High Value Tier 4', 'navigation': false, 'health': 0},
-#		14: {'type': 'Water', 'navigation': false, 'health': 0},
-#		15: {'type': 'Blank', 'navigation': false, 'health': 0},
-#	}
+
 
 func get_tile_data(tile_location: Vector2) -> TileData:
 	return tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data
 
+
 func damage_tile(tile_location: Vector2, amount) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].remove_health(amount)
+
 
 func destroy_tile(tile_location: Vector2) -> bool:
 	if tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data.health <= 0:
@@ -65,11 +80,15 @@ func destroy_tile(tile_location: Vector2) -> bool:
 	else:
 		return false
 
+
 func create_tile(tile_location: Vector2, index) -> void:
-	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]] = Tile.new(tile_location, tile_data_index[index])
+	var tile_index = 'x%s_y%s' % [tile_location.x, tile_location.y]
+	tile_map[tile_index] = Tile.new()
+	tile_map[tile_index].setup(tile_location, tile_data_index[index])
 
 func create_random_tile(tile_location: Vector2) -> void:
 	create_tile(tile_location, randi() % 10 + 4)
+
 
 func create_random_mass_tile(tile_location: Vector2) -> void:
 	var layer_number = get_parent().number
@@ -80,6 +99,7 @@ func create_random_mass_tile(tile_location: Vector2) -> void:
 		create_tile(tile_location, 5)
 	else:
 		create_tile(tile_location, 4)
+
 
 func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 	var low_material: int
@@ -120,6 +140,7 @@ func create_vein(tile_location: Vector2, tier: int, size: int) -> void:
 			elif randi() % 2 == 1:
 				create_tile(Vector2(x, y), 5)
 
+
 func create_random_layer(world_size: Vector2, difficulty : float) -> void:
 	self.difficulty = difficulty
 	var modifier = int(10 * difficulty) + 1
@@ -145,6 +166,7 @@ func create_random_layer(world_size: Vector2, difficulty : float) -> void:
 						create_vein(Vector2(x, y), 2, randi() % 10 + 4)
 					elif randi() % 2500 <= modifier:
 						create_vein(Vector2(x, y), 1, randi() % 10 + 6)
+
 
 func set_tile_index(tile_location: Vector2, index) -> void:
 	tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].tile_data = tile_data_index[index]
@@ -187,19 +209,24 @@ func update_tile(tile_location: Vector2, update_area: bool = true) -> void:
 		update_tile_accessibility(tile_location)
 	change_map_key()
 
+
 func change_map_key() -> void:
 	self.map_key = randi()
+
 
 func world_to_map(world_location: Vector2) -> Vector2:
 	return get_parent().terrain_tile_map.world_to_map(world_location)
 
+
 func map_to_world(map_location: Vector2) -> Vector2:
 	return get_parent().terrain_tile_map.map_to_world(map_location)
+
 
 func update_map_accessibility() -> void:
 	for x in range(world_size.x):
 		for y in range(world_size.y):
 			update_tile_accessibility(Vector2(x, y))
+
 
 func update_tile_area_accessibility(tile_location: Vector2) -> void:
 	#North
@@ -216,6 +243,7 @@ func update_tile_area_accessibility(tile_location: Vector2) -> void:
 		update_tile_accessibility(Vector2(tile_location.x - 1, tile_location.y))
 	#Center
 	update_tile_accessibility(tile_location)
+
 
 func update_tile_accessibility(tile_location: Vector2) -> void:
 	#North Check
@@ -252,8 +280,10 @@ func update_tile_accessibility(tile_location: Vector2) -> void:
 	else:
 		tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility['center'] = false
 
+
 func get_accessibility(tile_location: Vector2) -> Dictionary:
 	return tile_map['x%s_y%s' % [tile_location.x, tile_location.y]].accessibility
+
 
 #func get_accessibility(tile_location: Vector2) -> Dictionary:
 #	var accessibility: Dictionary = {
