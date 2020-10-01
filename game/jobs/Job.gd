@@ -52,32 +52,36 @@ func save_object():
 		'tile_location': GlobalSaveManager.save_vector2(tile_location),
 		'world_location': GlobalSaveManager.save_vector2(world_location),
 		'world_location_offset': GlobalSaveManager.save_vector2(world_location_offset),
-		'layer_number': layer_number,
-		'type': type,
+		'layer_number': self.layer_number,
+		'type': self.type,
 	}
 	return save_dict
 
 
+func load_object():
+	pass
+
+
 func after_load_object():
-	self.set_job_name()
 	if self.type == 'digging':
 		var layer = get_node('/root/Game/World/Layer_%s' % layer_number)
 		layer.set_dig_tile(world_location)
 
 
 func _ready():
+	if self.type == 'digging':
+		self.add_to_group('Persist')
+	else:
+		self.add_to_group('Purge')
 	self.add_to_group('jobs')
-	self.add_to_group('Persist')
+	self.set_job_name()
 	world_location_offset = Vector2(world_location.x + tile_offset, world_location.y + tile_offset)
-	print('Type %s' % self.type)
 	get_parent().job_location_list[self.type][self.get_path()] = world_location_offset
 
 
-func setup(world_location: Vector2, layer, type: String) -> void:
-	self.type = type
+func setup(world_location: Vector2, layer) -> void:
 	self.tile_location = layer.dig_tile_map.world_to_map(world_location)
 	self.layer_number = layer.number
-	self.set_job_name()
 	if self.type == 'digging':
 		self.world_location = layer.dig_tile_map.map_to_world(self.tile_location)
 	if self.type == 'material':

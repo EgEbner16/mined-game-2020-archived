@@ -27,8 +27,39 @@ var coolant_production: float = 0.0
 var coolant_usage_pool: Dictionary
 var coolant_production_pool: Dictionary
 
+
+func save_object():
+	var save_dict = {
+		'capital': self.capital,
+		'capital_usage': self.capital_usage,
+		'capital_production': self.capital_production,
+		'capital_cost': self.capital_cost,
+		'material': self.material,
+		'material_usage': self.material_usage,
+		'material_production': self.material_production,
+		'power': self.power,
+		'power_usage': self.power_usage,
+		'power_usage_percentage': self.power_usage_percentage,
+		'power_production': self.power_production,
+		'power_usage_pool': self.power_usage_pool,
+		'power_production_pool': self.power_production_pool,
+		'coolant': self.coolant,
+		'coolant_usage': self.coolant_usage,
+		'coolant_usage_percentage': self.coolant_usage_percentage,
+		'coolant_production': self.coolant_production,
+		'coolant_usage_pool': self.coolant_usage_pool,
+		'coolant_production_pool': self.coolant_production_pool,
+	}
+	return save_dict
+
+func load_object(object_dict):
+	for object in object_dict:
+		self.set(object, object_dict[object])
+
+
 func _init():
 	pass
+
 
 func add_to_coolant_pool(key: String, usage: float, production: float) -> void:
 	if key in coolant_usage_pool:
@@ -38,6 +69,7 @@ func add_to_coolant_pool(key: String, usage: float, production: float) -> void:
 		coolant_usage_pool[key] = usage
 		coolant_production_pool[key] = production
 
+
 func add_to_power_pool(key: String, usage: float, production: float) -> void:
 	if key in power_usage_pool:
 		power_usage_pool[key] += usage
@@ -46,9 +78,11 @@ func add_to_power_pool(key: String, usage: float, production: float) -> void:
 		power_usage_pool[key] = usage
 		power_production_pool[key] = production
 
+
 func add_to_power_and_coolant_pool(key: String, power_usage: float, power_production: float, coolant_usage: float, coolant_production: float) -> void:
 	add_to_power_pool(key, power_usage, power_production)
 	add_to_coolant_pool(key, coolant_usage, coolant_production)
+
 
 func merge(resource_handler: ResourceHandler) -> void:
 	capital += resource_handler.capital
@@ -79,8 +113,8 @@ func merge(resource_handler: ResourceHandler) -> void:
 	for key in resource_handler.coolant_production_pool:
 		coolant_production_pool[key] = resource_handler.coolant_production_pool[key]
 
-func calculate_power_and_coolant():
 
+func calculate_power_and_coolant():
 	power = 0.0
 	power_usage = 0.0
 	power_usage_percentage = 0.0
@@ -108,6 +142,7 @@ func calculate_power_and_coolant():
 		coolant_production += coolant_production_pool[key]
 
 	coolant_usage_percentage = (coolant_usage / coolant) * 100
+
 
 func reset():
 	capital = 0.0

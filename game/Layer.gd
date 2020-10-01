@@ -45,13 +45,14 @@ func save_object():
 func load_object():
 	self.name = 'Layer_%s' % number
 
+func after_load_object():
+	tile_manager.free()
+
 func _ready():
 	self.add_to_group('Persist_0')
 	var difficulty = float(number) / float(number_max)
 	tile_manager.create_random_layer(world_size, difficulty)
-	for x in range(world_size.x):
-		for y in range(world_size.y):
-			tile_manager.update_tile(Vector2(x, y), false)
+	tile_manager.update_layer()
 	if number == 0:
 		for x in range(base_left_x, base_left_x + base_size.x):
 			for y in range(base_top_y, base_top_y + base_size.y):

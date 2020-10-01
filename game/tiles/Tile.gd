@@ -33,12 +33,20 @@ func save_object():
 
 
 func load_object(object_dict):
-	pass
+	for object in object_dict:
+		if object == 'location':
+			self.location = GlobalSaveManager.load_vector2(object_dict[object])
+		elif object == 'tile_data':
+			self.tile_data = TileData.new()
+			self.tile_data.load_object(object_dict[object])
+		else:
+			self.set(object, object_dict[object])
 
 
-func _init():
-	pass
-	
+func _init(tile_location:= Vector2.ZERO, tile_data:= TileData.new()):
+	self.location = tile_location
+	self.tile_data.copy(tile_data)
+
 
 func _ready():
 	pass

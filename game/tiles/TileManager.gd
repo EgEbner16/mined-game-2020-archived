@@ -32,19 +32,27 @@ func save_tile_map():
 	var tile_map_dict = Dictionary()
 	for tile in self.tile_map:
 		tile_map_dict[tile] = self.tile_map[tile].save_object()
-	
+	return tile_map_dict
+
 
 func load_object(object_dict):
-	pass
+	self.load_tile_map(object_dict['tile_map_dict'])
+
+
+func after_load_object():
+	self.update_layer()
+	self.get_parent().tile_manager = self
+
 
 func load_tile_map(tile_map_dict):
 	self.tile_map.clear()
 	for tile in tile_map_dict:
-		tile_map[tile] = tile_map_dict
-	
+		tile_map[tile] = Tile.new()
+		tile_map[tile].load_object(tile_map_dict[tile])
+
 
 func _ready():
-#	print(map_key)
+	self.add_to_group('Persist_1')
 	tile_data_index = {
 		0: TileData.new(0, 'Ground', true, 0, 0, 0),
 		1: TileData.new(1, 'Mined Ground', true, 0, 0, 0),
@@ -85,6 +93,7 @@ func create_tile(tile_location: Vector2, index) -> void:
 	var tile_index = 'x%s_y%s' % [tile_location.x, tile_location.y]
 	tile_map[tile_index] = Tile.new()
 	tile_map[tile_index].setup(tile_location, tile_data_index[index])
+
 
 func create_random_tile(tile_location: Vector2) -> void:
 	create_tile(tile_location, randi() % 10 + 4)
@@ -208,6 +217,12 @@ func update_tile(tile_location: Vector2, update_area: bool = true) -> void:
 	else:
 		update_tile_accessibility(tile_location)
 	change_map_key()
+
+
+func update_layer():
+	for x in range(world_size.x):
+		for y in range(world_size.y):
+			update_tile(Vector2(x, y), false)
 
 
 func change_map_key() -> void:

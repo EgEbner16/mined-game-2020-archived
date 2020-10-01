@@ -25,10 +25,11 @@ func save_object():
 
 
 func load_object(object_dict):
-	pass
+	for object in object_dict:
+		self.set(object, object_dict[object])
 
 
-func _init(tile_index: int = 0, type: String = '', navigation: bool = false, health: float = 0.0, material_per_health: float = 0.0, digging_coolant_required: float = 0.0):
+func _init(tile_index:= 0, type:= '', navigation:= false, health:= 0.0, material_per_health:= 0.0, digging_coolant_required:= 0.0):
 	self.tile_index = tile_index
 	self.type = type
 	self.navigation = navigation

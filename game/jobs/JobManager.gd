@@ -18,6 +18,7 @@ func on_load_game():
 	job_location_list.clear()
 	setup_job_location_list()
 
+
 func _init():
 	pass
 
@@ -34,7 +35,8 @@ func setup_job_location_list():
 
 func create_job(world_location: Vector2, layer , job_type: String, job_object_node_path: String = 'null'):
 	var job: Job = JOB.instance()
-	job.setup(world_location, layer, job_type)
+	job.type = job_type
+	job.setup(world_location, layer)
 	if job_object_node_path != 'null':
 		job.object_node_path = job_object_node_path
 		job.object_node_id = get_node(job_object_node_path).get_instance_id()
