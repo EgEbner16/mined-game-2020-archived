@@ -14,6 +14,10 @@ onready var resource_manager: ResourceManager = get_node('/root/Game/ResourceMan
 onready var resource_handler: ResourceHandler = ResourceHandler.new()
 
 
+func on_after_load_game():
+	resource_manager = get_node('/root/Game/ResourceManager')
+
+
 func _ready():
 	pass # Replace with function body.
 

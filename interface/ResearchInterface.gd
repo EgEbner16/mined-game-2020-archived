@@ -21,6 +21,10 @@ func create_research_button(research: Research) -> void:
 	var research_button = RESEARCH_BUTTON.instance()
 	research_button.get_node("Button").text = research.research_name
 	research_button.get_node("Label").text = "Cost: $%s" % research.cost
+	if research.in_progress:
+		research_button.set_process(true)
+	else:
+		research_button.set_process(false)
 	research_button.research_node_path = research.get_path()
 	var tier_box = $ColorRect/HBoxContainer.get_node('Tier%sVboxContainer' % research.tier).add_child(research_button)
 

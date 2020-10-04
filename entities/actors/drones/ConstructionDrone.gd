@@ -31,7 +31,7 @@ func _ready():
 	$BuildingParticles.set_emitting(false)
 
 
-func _process(delta):
+func _physics_process(delta):
 	if job_node_path:
 		if has_node(job_node_path):
 			if constructing:

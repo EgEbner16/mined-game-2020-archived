@@ -15,11 +15,6 @@ func save_object():
 	return save_dict
 
 
-func _ready():
-	self.add_to_group('distributor_equipment')
-	self.name = 'distributor'
-
-
 func _init():
 	self.type = 'distributor'
 	self.verbose_name = 'Distributor'

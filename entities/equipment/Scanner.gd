@@ -17,7 +17,6 @@ func save_object():
 
 func _ready():
 	self.add_to_group('power_equipment')
-	self.name = 'scanner'
 
 
 func _init():

@@ -1,19 +1,28 @@
 extends Node2D
 
+
 class_name Game
+
 
 onready var hud = $InterfaceManager/HUD
 onready var resource_manager: ResourceManager = $ResourceManager
 onready var world: GameWorld = $World
+
 
 var game_speed_minimum = 0.5
 var game_speed_maximum = 3.0
 var game_current_speed = 1.0
 var game_speed = 1.0
 
+
+func on_after_load_game():
+	resource_manager = get_node('/root/Game/ResourceManager')
+
+
 func _ready():
 	VisualServer.set_default_clear_color(Color(0.0,0.0,0.0,1.0))
 #	$Camera.position = ProjectSettings.get_setting("game/config/world_size") / 2
+
 
 func _input(event):
 	if event.is_action_released("game_speed_pause"):
@@ -45,10 +54,11 @@ func _input(event):
 
 	if event is InputEventKey:
 		if event.scancode == KEY_M:
-#			resource_manager.gain_capital(10000)
+			resource_manager.gain_capital(10000)
 			pass
 
-func _process(delta):
+
+func _physics_process(delta):
 	hud.capital_value = resource_manager.resource_handler.capital
 	hud.material_value = resource_manager.resource_handler.material
 	hud.power_value = resource_manager.resource_handler.power

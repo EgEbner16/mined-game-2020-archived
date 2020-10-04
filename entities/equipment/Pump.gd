@@ -17,7 +17,6 @@ func save_object():
 
 func _ready():
 	self.add_to_group('coolant_equipment')
-	self.name = 'pump'
 
 
 func _init():

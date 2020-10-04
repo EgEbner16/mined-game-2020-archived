@@ -4,6 +4,9 @@ extends Node
 class_name ResearchManager
 
 
+const RESEARCH = preload("res://game/research/Research.tscn")
+
+
 onready var research_interface := get_node('/root/Game/InterfaceManager/ResearchInterface')
 
 
@@ -34,9 +37,9 @@ func _ready():
 
 func create_research(research_name: String, tier: int, cost: int, progress_required: float, affect_type: String, affect_upgrade: float, affect_default: float):
 	# Need to create a node that is attached to the research manager so we can navigate the Node Tree from the button.
-	var research = Research.new(research_name, tier, cost, progress_required, affect_type, affect_upgrade, affect_default)
+	var research = RESEARCH.instance()
+	research.setup(research_name, tier, cost, progress_required, affect_type, affect_upgrade, affect_default)
 	self.add_child(research)
-	research_interface.create_research_button(research)
 
 
 func update_research_affect():

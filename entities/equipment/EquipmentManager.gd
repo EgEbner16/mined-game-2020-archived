@@ -34,12 +34,17 @@ var equipment: Dictionary = {
 }
 
 
+func on_after_load_game():
+	resource_manager = get_node('/root/Game/ResourceManager')
+
+
 func _init():
 	pass
 
 
 func _ready():
 	pass
+
 
 func is_equipment(layer, type: String, equipment_is_on: bool = true):
 	var available := false
@@ -50,6 +55,7 @@ func is_equipment(layer, type: String, equipment_is_on: bool = true):
 					if equipment.entity.on or not equipment_is_on:
 						available = true
 	return available
+
 
 func get_closest_equipment(world_location: Vector2, layer, type: String, equipment_is_on: bool = true, layer_only: bool = true):
 	if self.equipment.has(type):
@@ -155,6 +161,7 @@ func create_equipment(equipment_name: String, layer: int, world_location: Vector
 	else:
 		return false
 
+
 func create_mining_core(world_location: Vector2, layer) ->  bool:
 	var mining_core = MINING_CORE.instance()
 	if resource_manager.use_capital(mining_core.resource_handler.capital_cost):
@@ -166,19 +173,17 @@ func create_mining_core(world_location: Vector2, layer) ->  bool:
 	else:
 		return false
 
+
 func create_generator(world_location: Vector2, layer) -> bool:
 	var generator = GENERATOR.instance()
 	if resource_manager.use_capital(generator.resource_handler.capital_cost):
-		generator.add_to_group('equipment')
-		generator.add_to_group('power_equipment')
-		generator.name = 'generator'
 		generator.layer_number = layer.number
 		generator.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(generator)
-		job_manager.create_job(generator.position, layer, 'equipment', generator.get_path())
 		return true
 	else:
 		return false
+
 
 func create_collector(world_location: Vector2, layer) -> bool:
 	var collector = COLLECTOR.instance()
@@ -186,10 +191,10 @@ func create_collector(world_location: Vector2, layer) -> bool:
 		collector.layer_number = layer.number
 		collector.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(collector)
-		job_manager.create_job(collector.position, layer, 'equipment', collector.get_path())
 		return true
 	else:
 		return false
+
 
 func create_distributor(world_location: Vector2, layer) -> bool:
 	var distributor = DISTRIBUTOR.instance()
@@ -197,10 +202,10 @@ func create_distributor(world_location: Vector2, layer) -> bool:
 		distributor.layer_number = layer.number
 		distributor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(distributor)
-		job_manager.create_job(distributor.position, layer, 'equipment', distributor.get_path())
 		return true
 	else:
 		return false
+
 
 func create_matter_reactor(world_location: Vector2, layer) -> bool:
 	var matter_reactor = MATTER_REACTOR.instance()
@@ -208,10 +213,10 @@ func create_matter_reactor(world_location: Vector2, layer) -> bool:
 		matter_reactor.layer_number = layer.number
 		matter_reactor.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(matter_reactor)
-		job_manager.create_job(matter_reactor.position, layer, 'equipment', matter_reactor.get_path())
 		return true
 	else:
 		return false
+
 
 func create_pump(world_location: Vector2, layer) -> bool:
 	var pump = PUMP.instance()
@@ -219,10 +224,10 @@ func create_pump(world_location: Vector2, layer) -> bool:
 		pump.layer_number = layer.number
 		pump.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(pump)
-		job_manager.create_job(pump.position, layer, 'equipment', pump.get_path())
 		return true
 	else:
 		return false
+
 
 func create_scanner(world_location: Vector2, layer) -> bool:
 	var scanner = SCANNER.instance()
@@ -230,7 +235,6 @@ func create_scanner(world_location: Vector2, layer) -> bool:
 		scanner.layer_number = layer.number
 		scanner.position = world_location
 		get_node('/root/Game/World/Layer_%s' % layer.number).add_child(scanner)
-		job_manager.create_job(scanner.position, layer, 'equipment', scanner.get_path())
 		return true
 	else:
 		return false
@@ -268,7 +272,7 @@ func build_equipment(equipment_instance: Equipment, type: String, world_location
 			elevator_up.linked_elevator_down_node_path = equipment_instance.get_path()
 			equipment_instance.linked_elevator_up_node_path = elevator_up.get_path()
 		if create_job:
-			job_manager.create_job(equipment_instance.position, layer, 'equipment', equipment_instance.get_path())
+			pass
 		return true
 	else:
 		return false

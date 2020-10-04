@@ -76,8 +76,12 @@ func _input(event):
 		zoom_factor = 1.0
 	if Input.is_action_pressed("zoom_in"):
 		if zoom_level > ZOOM_MIN:
+			base_viewport_x_limit = get_viewport().size.x / 2
+			base_viewport_y_limit = get_viewport().size.y / 2
 			zoom_level -= 0.30
 			position = lerp(position, get_global_mouse_position(), 0.30)
 	if Input.is_action_pressed("zoom_out"):
 		if zoom_level < ZOOM_MAX:
+			base_viewport_x_limit = get_viewport().size.x / 2
+			base_viewport_y_limit = get_viewport().size.y / 2
 			zoom_level += 0.30

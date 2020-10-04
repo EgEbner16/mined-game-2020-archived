@@ -33,7 +33,7 @@ func setup_job_location_list():
 	self.job_location_list['service'] = Dictionary()
 
 
-func create_job(world_location: Vector2, layer , job_type: String, job_object_node_path: String = 'null'):
+func create_job(world_location: Vector2, layer, job_type: String, job_object_node_path: String = 'null'):
 	var job: Job = JOB.instance()
 	job.type = job_type
 	job.setup(world_location, layer)

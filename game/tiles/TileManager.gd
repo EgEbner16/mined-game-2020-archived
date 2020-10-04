@@ -52,7 +52,7 @@ func load_tile_map(tile_map_dict):
 
 
 func _ready():
-	self.add_to_group('Persist_1')
+	self.add_to_group('Persist_20')
 	tile_data_index = {
 		0: TileData.new(0, 'Ground', true, 0, 0, 0),
 		1: TileData.new(1, 'Mined Ground', true, 0, 0, 0),

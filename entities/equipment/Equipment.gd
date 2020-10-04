@@ -13,11 +13,22 @@ var resource_handler: ResourceHandler = ResourceHandler.new()
 
 
 onready var entity: Entity = $Entity
+onready var job_manager: JobManager = get_node('/root/Game/World/JobManager')
 
 
 func _ready():
 	self.add_to_group('equipment')
-	self.add_to_group('Persist')
+	self.add_to_group('%s_equipment' % self.type)
+	self.name = self.type
+	print(self.name)
+	if self.type == 'elevator_up':
+		self.add_to_group('Persist_80')
+	else:
+		self.add_to_group('Persist')
+	if self.constructed < 100.0 and self.type != 'elevator_up':
+		var layer = get_node('/root/Game/World/Layer_%s' % self.layer_number)
+		job_manager.create_job(self.position, layer, 'equipment', self.get_path())
+
 
 
 func _physics_process(delta):

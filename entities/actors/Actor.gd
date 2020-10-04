@@ -41,9 +41,9 @@ var path = PoolVector2Array() setget set_path
 
 
 func _ready():
+	add_to_group('Persist')
 	state_manager = StateManager.new()
 	change_state("idle")
-	add_to_group('Persist')
 
 
 func _physics_process(delta):

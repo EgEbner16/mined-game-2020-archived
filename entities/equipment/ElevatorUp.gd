@@ -22,11 +22,6 @@ func load_object():
 	pass
 
 
-func _ready():
-	self.add_to_group('elevator_up_equipment')
-	self.name = 'elevator_up'
-
-
 func _init():
 	self.type = 'elevator_up'
 	self.verbose_name = 'Elevator Up'

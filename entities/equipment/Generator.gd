@@ -15,6 +15,10 @@ func save_object():
 	return save_dict
 
 
+func _ready():
+	self.add_to_group('power_equipment')
+
+
 func _init():
 	self.type = 'generator'
 	self.verbose_name = 'Generator'

@@ -1,5 +1,9 @@
 extends Node
 
+# Persist_# or Persist node group is both saved and loaded
+# Purge node group is removed when a game is loaded
+
+# Persist objects will load in numberical order then load all persist objects that are not in the group after.
 
 func save_game():
 	var save_game = File.new()
@@ -80,8 +84,11 @@ func load_game():
 
 		get_node(node_data['parent']).add_child(new_object)
 
+		# Method called after object enters the scene tree
 		if new_object.has_method('after_load_object'):
 			new_object.after_load_object()
+
+	call_method_on_all_nodes(get_node('/root'), 'on_after_load_game')
 
 	save_game.close()
 

@@ -18,13 +18,12 @@ func save_object():
 	return save_dict
 
 
-func load_object():
-	pass
-
-
-func _ready():
-	self.add_to_group('elevator_down_equipment')
-	self.name = 'elevator_down'
+func after_load_game():
+	for elevator_up in get_tree().get_nodes_in_group('elevator_up_equipment'):
+		if elevator_up.layer_number == self.layer_number - 1:
+			if elevator_up.position == self.position:
+				elevator_up.linked_elevator_down_node_path = self.get_path()
+				self.linked_elevator_up_node_path = elevator_up.get_path()
 
 
 func _init():

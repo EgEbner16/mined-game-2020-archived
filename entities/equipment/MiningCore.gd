@@ -19,13 +19,13 @@ func _ready():
 	self.add_to_group('core_equipment')
 	self.add_to_group('distributor_equipment')
 	self.add_to_group('collector_equipment')
-	self.name = 'mining_core'
 
 
 func _init():
 	self.type = 'mining_core'
 	self.verbose_name = 'Mining Core'
 	self.verbose_description = 'Center of your mining operation'
+	self.constructed = 100.0
 	resource_handler.power_production = 600
 	resource_handler.coolant_production = 400
 	resource_handler.material_usage = 300

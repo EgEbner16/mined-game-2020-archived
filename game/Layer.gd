@@ -49,7 +49,7 @@ func after_load_object():
 	tile_manager.free()
 
 func _ready():
-	self.add_to_group('Persist_0')
+	self.add_to_group('Persist_10')
 	var difficulty = float(number) / float(number_max)
 	tile_manager.create_random_layer(world_size, difficulty)
 	tile_manager.update_layer()
