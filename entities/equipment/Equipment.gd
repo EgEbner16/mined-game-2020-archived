@@ -4,7 +4,7 @@ extends Node2D
 class_name Equipment
 
 
-var layer_number
+var layer_number: int = 0
 var constructed: float = 0.0
 var type: String = ''
 var verbose_name: String = ''

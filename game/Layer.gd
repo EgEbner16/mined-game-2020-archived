@@ -43,9 +43,10 @@ func save_object():
 	return save_dict
 
 func load_object():
-	self.name = 'Layer_%s' % number
+	pass
 
 func after_load_object():
+	self.name = 'Layer_%s' % number
 	tile_manager.free()
 
 func _ready():

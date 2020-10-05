@@ -81,7 +81,7 @@ func load_game():
 					new_object.set(i, node_data[i])
 			else:
 				new_object.set(i, node_data[i])
-
+#		print('Loading: %s' % new_object.name)
 		get_node(node_data['parent']).add_child(new_object)
 
 		# Method called after object enters the scene tree

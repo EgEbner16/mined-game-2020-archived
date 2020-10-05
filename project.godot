@@ -316,6 +316,8 @@ run/main_scene="res://Splash.tscn"
 
 GlobalSceneLoader="*res://global/GlobalSceneLoader.gd"
 GlobalSaveManager="*res://global/GlobalSaveManager.gd"
+GlobalSeedManager="*res://global/GlobalSeedManager.gd"
+GlobalDebugManager="*res://global/GlobalDebugManager.tscn"
 
 [display]
 
@@ -329,7 +331,7 @@ window/stretch/aspect="keep"
 config/tile_size=32
 config/base_size=Vector2( 7, 7 )
 config/world_size=Vector2( 240, 240 )
-config/world_layers=1
+config/world_layers=3
 config/starting_capital=100000
 
 [input]

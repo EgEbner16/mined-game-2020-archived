@@ -52,11 +52,6 @@ func _input(event):
 		Engine.time_scale = game_speed
 		game_current_speed = game_speed
 
-	if event is InputEventKey:
-		if event.scancode == KEY_M:
-			resource_manager.gain_capital(10000)
-			pass
-
 
 func _physics_process(delta):
 	hud.capital_value = resource_manager.resource_handler.capital
