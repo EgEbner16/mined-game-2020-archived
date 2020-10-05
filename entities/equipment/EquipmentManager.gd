@@ -266,7 +266,7 @@ func build_equipment(equipment_instance: Equipment, type: String, world_location
 					elevator_up.add_to_group(group)
 			elevator_up.name = type
 			var next_layer = get_node('/root/Game/World/Layer_%s' % (layer_number + 1))
-			elevator_up.layer_number = next_layer
+			elevator_up.layer_number = next_layer.number
 			elevator_up.position = world_location
 			next_layer.add_child(elevator_up)
 			elevator_up.linked_elevator_down_node_path = equipment_instance.get_path()

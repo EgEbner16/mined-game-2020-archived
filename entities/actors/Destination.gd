@@ -44,7 +44,6 @@ func generate_navigation():
 			for i in range(start_layer_number, end_layer_number, -1):
 				step_layer = get_node('/root/Game/World/Layer_%s' % i)
 				if equipment_manager.is_equipment(step_layer, 'elevator_up'):
-					print('up')
 					nearest_elevator = get_node(equipment_manager.get_closest_equipment(step_position, step_layer, 'elevator_up'))
 					self.steps_action.append('path')
 					self.steps_data.append(step_layer.get_navigation_path(step_position, nearest_elevator.position))
@@ -57,7 +56,6 @@ func generate_navigation():
 			for i in range(start_layer_number, end_layer_number, 1):
 				step_layer = get_node('/root/Game/World/Layer_%s' % i)
 				if equipment_manager.is_equipment(step_layer, 'elevator_down'):
-					print('down')
 					nearest_elevator = get_node(equipment_manager.get_closest_equipment(step_position, step_layer, 'elevator_down'))
 					self.steps_action.append('path')
 					self.steps_data.append(step_layer.get_navigation_path(step_position, nearest_elevator.position))

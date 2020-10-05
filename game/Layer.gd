@@ -31,8 +31,9 @@ onready var camera: KinematicBody2D = get_node('/root/Game/Camera')
 
 func save_object():
 	var save_dict = {
-		'filename' : get_filename(),
-		'parent' : get_parent().get_path(),
+		'filename': get_filename(),
+		'parent': get_parent().get_path(),
+		'visible': self.visible, 
 		'position' : GlobalSaveManager.save_vector2(self.position),
 		'zoom': self.zoom,
 		'zoom_current': self.zoom_current,
